@@ -1,0 +1,85 @@
+/*--------Header Section----------*/
+header {
+  color: orange;
+  text-align: center;
+  background: #222;
+}
+
+header h1 {
+  font-size: 50px;
+}
+header h1 span{
+  color: white;
+}
+header p{
+  color: #85eaaa;
+  margin-bottom: 1.5%;
+}
+
+/* ---------Navigation Bar-------------- */
+.top-nav{
+  background: #19181880;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  padding: 1% 1%;
+}
+.top-nav ul{
+  list-style: none;
+  display: flex;
+}
+.top-nav li{
+  text-align: center;
+  padding: 5px 16px;
+}
+.top-nav a{
+  color: orange;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.top-nav li a:hover{
+  background: orange;
+  color: black;
+  padding: 5px;
+}
+.top-nav button{
+  background: rgb(24, 232, 138);
+  font-weight: 750;
+  font-size: 15px;
+  padding: 7%;
+  border-radius: 10px;
+}
+.top-nav button:hover{
+  background: rgb(148, 185, 168);
+}
+.top-nav .nv-button{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.top-nav .nv-button a{
+  text-align: center;
+  padding: 5px 16px;
+}
+
+/* ----------------- Media Query ---------------*/
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .top-nav{
+    display: inline-block;
+    padding: 0% 0%;
+    width: 100%;
+  }
+  .top-nav ul{
+    display: inline-block;
+    text-align: center;
+  }
+  .top-nav ul li{
+    text-align: center;
+  }
+  .top-nav ul li{
+    text-align: center;
+  }
+}

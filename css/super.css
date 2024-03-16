@@ -1,0 +1,15 @@
+body{
+    color: black;
+}
+.wrapper{
+    width: auto;
+    margin: 0 auto;
+    width: 60%;
+}
+h2{
+    text-align: center;
+}
+tr{
+    color: black;
+}
+</style>

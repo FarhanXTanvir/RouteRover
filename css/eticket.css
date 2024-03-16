@@ -1,0 +1,150 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background: #222;
+}
+
+/* --------- eTicket Section -------------- */
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.column {
+    width: 100%;
+    padding: 0 1em 1em 1em;
+    text-align: center;
+}
+.et h2{
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    padding-top: 2%;
+}
+.et .spane{
+    color: rgb(255, 0, 0);
+    margin-right: 3px;
+    font-size: 40px;
+}
+.et .spanT{
+    color: white;
+}
+
+.et form{
+    text-align: center;
+    margin-bottom: 3%;
+    width: 100%;
+}
+.et .from{
+    text-align: center;
+    margin: 2%;
+}
+.et .to{
+    text-align: center;
+    margin: 2%;
+}
+.et input{
+    text-align: center;
+    color: black;
+    font-size: 16px;
+}
+.et button{
+    background: #5cf393;
+    color: black;
+    margin-left: 10px; 
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px; padding: 5px; width: 70px;
+}
+.et button:hover{
+    background: rgb(115, 205, 148);
+    color: rgb(0, 0, 0);
+}
+.et button:active{
+    background: #5cf393;
+    opacity: 0.6;
+    color: rgb(0, 0, 0);
+}
+.card {
+    width: 100%;
+    height: 100%;
+    padding: 2em 1.5em;
+    background: #8bc182;
+    background-size: 100% 200%;
+    background-position: 0 2.5%;
+    border-radius: 5px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: 0.5s;
+}
+.card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    margin: 1em 0;
+}
+.card p {
+    color: #000000;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+}
+.card .icon-wrapper {
+    background-color: #740e74;
+    position: relative;
+    margin: auto;
+    font-size: 30px;
+    height: 2.5em;
+    width: 2.5em;
+    color: #ffffff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    transition: 0.5s;
+    }
+.card:hover {
+    background: black;
+}
+.card:hover .icon-wrapper {
+    background-color: #ffffff;
+    color: #2c7bfe;
+}
+.card:hover h3 {
+    color: #ffffff;
+}
+.card:hover p {
+    color: #f0f0f0;
+}
+.column a:link{
+    text-decoration: none;
+
+}
+
+
+/* ----------------- Media Query ---------------*/
+@media screen and (min-width: 768px) {
+section {
+    padding: 0 2em;
+}
+.column {
+    flex: 0 50%;
+    max-width: 50%;
+}
+}
+/* ----------------- Media Query ---------------*/
+@media screen and (min-width: 992px) {
+    section {
+      padding: 1em 3em;
+    }
+    .column {
+      flex: 0 0 33.33%;
+      max-width: 33.33%;
+    }
+  }
+  

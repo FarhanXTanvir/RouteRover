@@ -1,0 +1,148 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  background: #222;
+}
+/* ------Main Body------- */
+.main{
+  padding: 0.5%;
+}
+.nv-button button{
+  width: 140%;
+}
+.nv-button{
+  margin-right: 5%;
+}
+/* Left column */
+.leftcolumn {   
+  color: white;
+  float: left;
+  width: 60%;
+}
+
+/* Right column */
+.rightcolumn {
+  color: white;
+  float: left;
+  width: 40%;
+  padding-left: 2%;
+}
+.services h3{
+  color: black;
+  padding: 1%;
+  margin: 1%;
+  text-align: center;
+  background: orange;
+}
+.services li{
+  list-style: none;
+}
+.route-finder {
+  background: #222;
+  color: orange;
+  width: 100%;
+  padding: 20px;
+  text-align:center;
+}
+.route-finder h1{
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 2%;;
+}
+.route-finder h2{
+    text-align: center;
+}
+.route-finder .welcome{
+  color: white;
+  margin-bottom: 50px;
+  font-size: 15;
+}
+.route-finder .form{
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 15px;
+}
+
+.route-finder input{
+  margin-bottom: 5px;
+  text-align: center;
+  width: 90%;
+  font-size: 100%;
+  display: inline-block;
+}
+.route-finder button{
+  color: black;
+  background: rgb(78, 238, 163);
+  margin-left: 10px; 
+  font-size: 15px;
+  font-weight: 750;
+  border-radius: 10px; 
+  padding: 5px; 
+  width: 70px;
+}
+.route-finder button:hover{
+  background: rgb(148, 185, 168);
+}
+.route-finder button:active{
+  background: rgb(24, 232, 138);
+}
+
+/* Add a card effect for articles */
+.card {
+  background: #222;
+  border: white solid 1px;
+  padding: 5%;
+  margin-top: 20px;
+}
+
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Contact Form */
+#contact h3{
+  color: black;
+  padding: 1%;
+  margin: 1% auto;
+  margin-bottom: 2%;
+  text-align: center;
+  background: orange;
+}
+#contact{
+  padding: 3%;
+}
+#contact p{
+  margin-bottom: 2%;
+}
+textarea{
+  width: 65%;
+}
+
+/* ----------------- Media Query ---------------*/
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+  
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+

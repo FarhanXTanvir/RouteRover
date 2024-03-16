@@ -1,0 +1,171 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  background: #222;
+}
+/* ---------Main Body----------- */
+.main{
+  padding: 5%;
+  background: #222;
+}
+.main .row{
+  width: 98%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  margin-bottom: 1%;
+}
+.main .row .col{
+  display: flex;
+  margin: 1%;
+  padding: 1%;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  width: 70%;
+  color: white;
+  background: #222;
+}
+
+
+.route-finder {
+  background: #19181880;
+  color: orange;
+  width: 95%;
+  margin: 1%;
+  padding: 1%;
+  text-align:center;
+}
+.route-finder h1{
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 2%;;
+}
+.route-finder h2{
+    text-align: center;
+}
+.route-finder .welcome{
+  color: white;
+  margin-bottom: 50px;
+  font-size: 15;
+}
+.route-finder .form{
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 15px;
+}
+
+.route-finder input{
+  margin-bottom: 5px;
+  text-align: center;
+  width: 60%;
+  font-size: 100%;
+  display: inline-block;
+}
+.route-finder button{
+  color: black;
+  background: rgb(78, 238, 163);
+  margin-left: 10px; 
+  font-size: 15px;
+  font-weight: 750;
+  border-radius: 10px; 
+  padding: 5px; 
+  width: 70px;
+}
+.route-finder button:hover{
+  background: rgb(148, 185, 168);
+}
+.route-finder button:active{
+  background: rgb(24, 232, 138);
+}
+
+/* Add a card effect for articles */
+.card {
+  background: #222;
+  border: white solid 1px;
+  padding: 5%;
+  margin-top: 20px;
+}
+
+/* Contact Form */
+.contact{
+  width: 95%;
+  padding: 3%;
+  margin: 0.5%;
+  text-align: center;
+  color: white;
+  background: #000000;
+  box-shadow: 0 15px 35px rgba(0,0,0,9);
+}
+.contact h3{
+  background: orange; color: black;
+  text-align: center;
+}
+.contact p{
+  margin-bottom: 2%;
+  text-align: left;
+}
+.contact .form{
+  padding: 1% 5%;
+}
+.contact label[for="email"]{
+  display: inline-block;
+  text-align: left;
+}
+.contact input[type="email"]{
+  border: none;
+  width: 60%;
+  margin: 0% 0%;
+  padding: 1%;
+}
+.contact label[for="message"]{
+  display: block;
+  text-align: left;
+}
+.contact textarea{
+  width: 65%;
+  padding: 1%;
+}
+.contact input[type="submit"]{
+  background: orange;
+  border: none;
+  width: 60%;
+  margin: 0 0%;
+}
+.contact .input{
+  text-align: left;
+  width: 100%;
+}
+.contact .input-btn{
+  display: flex;
+  justify-content: left;
+  width: 100%;
+}
+
+
+/*------------- Media Query---------- */
+/* Responsive layout - when the screen is less than 600px wide*/
+@media screen and (max-width: 600px) {
+  .route-finder h1{
+    font-size: 150%;
+  }
+  .route-finder .welcome{
+    font-size: 80%;
+  }
+  .route-finder input{
+    font-size: 75%;
+  }
+}
+
+
+
+
