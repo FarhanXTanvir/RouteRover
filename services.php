@@ -23,7 +23,7 @@
 </head>
 <body>
 <?php include 'src/inc/header.php'; ?>
-  <section id="#services">
+  <section class="services">
     <h2>Our Services</h2>
     <div class="row">
       <div class="column">

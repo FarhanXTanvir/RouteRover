@@ -26,7 +26,7 @@
   <section id="#eticket" class="et">
     <h2><span class="spane">e</span><span class="spanT">Ticket</span></h2>
     <div class="row">
-      <form action="RRSearch.php" method="post">
+      <form action="search.php" method="post">
         <div class="from">
           <input type="search" name="fromplace" id="fromplace" placeholder="From">
           <input type="time" name="fromtime" id="fromtime"> 

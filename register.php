@@ -9,87 +9,36 @@
 ?>
 <!doctype html>
 <html lang="en"> 
- <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title> Register | RouteRover </title>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <!-- ----Script---- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <!-- Style Sheet -->
     <link rel="stylesheet" href="css/login.css">
     <?php include 'src/lib/lib.html'; ?>
-  
-   </head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+
+    <!-- Font Family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
 <body>
   <?php include 'src/inc/header.php'; ?>
   <section>
     <div class="signin">
         <div class="content"> 
             <h2>REGISTER</h2>
-            <?php
-                // print_r($_POST);
-                if (isset($_POST['submit'])) {
-                    $username = $_POST['username'];
-                    $email = $_POST['email'];
-                    $password = $_POST['password'];
-                    $cpassword = $_POST['cpassword'];
-
-                    $password_hash = password_hash($password, PASSWORD_DEFAULT);
-
-                    $errors = array();
-
-                    // Checking empty fields
-                    if(empty($username) || empty($email) || empty($password) || empty($cpassword)) {
-                        array_push($errors, "All fields are required");
-                    }
-                    //Validating email syntax
-                    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                        array_push($errors, "Email is not valid");
-                    }
-                    //Validating password rules
-                    if(strlen($password) < 8) {
-                        array_push($errors,"Password must be at least 8 characters long");
-                    }
-                    //Validating matching passwords
-                    if ($password !== $cpassword){
-                        array_push($errors,"Password does not match");
-                    }
-
-                    require_once 'connect.php';
-                    $sql = "SELECT * FROM users WHERE username = '$username'";
-                    $result = mysqli_query($con, $sql);
-                    $rowCount = mysqli_num_rows($result);
-                    if ($rowCount>0) {
-                        array_push($errors,"Username already exists!");
-                    }
-                    if(count($errors)>0){
-                        foreach($errors as $error){
-                            echo "<div class='alert alert-danger alert-dismissible'>
-                            <a href='#' class='close' data-dismiss='alert' aria-label='close'> &times;</a> $error
-                            </div>";
-                        }
-                    }
-                    else{
-                        $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-                        $stmt = mysqli_stmt_init($con);
-                        $preparestmt = mysqli_stmt_prepare($stmt, $sql);
-                        if($preparestmt){
-                            mysqli_stmt_bind_param($stmt, "sss", $username, $email, $password_hash);
-                            mysqli_stmt_execute($stmt);
-                            echo "<div class='alert alert-success alert-dismissible'>
-                            <a href='#' class='close' data-dismiss='alert' aria-label='close'> &times;</a> Registration Successful! You can now login.
-                            </div>";
-                        }
-                        else{
-                            die("Something went wrong");
-                        }
-                    }
-                }
-            ?> 
+            <?php require_once "entry.php"; ?> 
             <form action="register.php" method="post">
                 <div class="form">
                     <div class="inputBox"> 

@@ -1,13 +1,10 @@
-
-<!-- ----------------- Footer Section --------------- -->
-  <!-- ----------------- Footer Section --------------- -->
 <?php
 if(isset($_SESSION['user'])){
   echo "
+  <!-- ----------------- Footer Section --------------- -->
   <footer>
     <!-- ----------------- Footer Top --------------- -->
       <div class='ftop'>
-      <h2>Hi user</h2>
         <div class='footer-col'>
             <h4>Company</h4>
             <ul>
@@ -37,27 +34,27 @@ if(isset($_SESSION['user'])){
             </ul>
         </div>
         <div class='footer-col'>
-            <h4>Follow us</h4>
+            <h4 class='sl'>Follow us</h4>
             <div class ='social-links'>
               <ul>
-                <li><a href='https://www.facebook.com/RouteRover/' target='_blank'>
-                  <i class='fab fa-facebook' tabindex='0'></i>
-                </a></li>
-                <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
-                  <i class='fab fa-instagram' tabindex='0'></i>
-                </a></li>
-                <li><a href='#'>
-                  <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
-                </a></li>
-                <li><a href='#'>
-                  <i class='fab fa-youtube' tabindex='0' target='_blank'></i>
-                </a></li>
-                <li><a href='https://github.com/RouteRover' target='_blank'>
-                  <i class='fab fa-github' tabindex='0'></i>
-                </a></li>                                                      
-                <li><a href='https://codepen.io/RouteRover' target='_blank'>
-                  <i class='fab fa-codepen' tabindex='0'></i>
-                </a></li>
+                  <li><a href='https://www.facebook.com/RouteRover/' target='_blank'>
+                    <i class='fab fa-facebook' tabindex='0'></i>
+                  </a></li>
+                  <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
+                    <i class='fab fa-instagram' tabindex='0'></i>
+                  </a></li>
+                  <li><a href='#'>
+                    <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
+                  </a></li>
+                  <li><a href='#'>
+                    <i class='fab fa-youtube' tabindex='0' target='_blank'></i>
+                  </a></li>
+                  <li><a href='https://github.com/RouteRover' target='_blank'>
+                    <i class='fab fa-github' tabindex='0'></i>
+                  </a></li>                                                      
+                  <li><a href='https://codepen.io/RouteRover' target='_blank'>
+                    <i class='fab fa-codepen' tabindex='0'></i>
+                  </a></li>
               </ul>
             </div>
         </div>
@@ -82,10 +79,10 @@ if(isset($_SESSION['user'])){
 }
 elseif(isset($_SESSION['admin'])){
   echo "
+  <!-- ----------------- Footer Section --------------- -->
   <footer>
     <!-- ----------------- Footer Top --------------- -->
       <div class='ftop'>
-      <h2>Hi Admin</h2>
         <div class='footer-col'>
             <h4>Company</h4>
             <ul>
@@ -115,27 +112,27 @@ elseif(isset($_SESSION['admin'])){
             </ul>
         </div>
         <div class='footer-col'>
-            <h4>Follow us</h4>
+            <h4 class='sl'>Follow us</h4>
             <div class ='social-links'>
               <ul>
-                <li><a href='https://www.facebook.com/RouteRover/' target='_blank'>
-                  <i class='fab fa-facebook' tabindex='0'></i>
-                </a></li>
-                <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
-                  <i class='fab fa-instagram' tabindex='0'></i>
-                </a></li>
-                <li><a href='#'>
-                  <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
-                </a></li>
-                <li><a href='#'>
-                  <i class='fab fa-youtube' tabindex='0' target='_blank'></i>
-                </a></li>
-                <li><a href='https://github.com/RouteRover' target='_blank'>
-                  <i class='fab fa-github' tabindex='0'></i>
-                </a></li>                                                      
-                <li><a href='https://codepen.io/RouteRover' target='_blank'>
-                  <i class='fab fa-codepen' tabindex='0'></i>
-                </a></li>
+                  <li><a href='https://www.facebook.com/RouteRover/' target='_blank'>
+                    <i class='fab fa-facebook' tabindex='0'></i>
+                  </a></li>
+                  <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
+                    <i class='fab fa-instagram' tabindex='0'></i>
+                  </a></li>
+                  <li><a href='#'>
+                    <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
+                  </a></li>
+                  <li><a href='#'>
+                    <i class='fab fa-youtube' tabindex='0' target='_blank'></i>
+                  </a></li>
+                  <li><a href='https://github.com/RouteRover' target='_blank'>
+                    <i class='fab fa-github' tabindex='0'></i>
+                  </a></li>                                                      
+                  <li><a href='https://codepen.io/RouteRover' target='_blank'>
+                    <i class='fab fa-codepen' tabindex='0'></i>
+                  </a></li>
               </ul>
             </div>
         </div>
@@ -160,6 +157,7 @@ elseif(isset($_SESSION['admin'])){
 }
 else{
   echo "
+  <!-- ----------------- Footer Section --------------- -->
   <footer>
     <!-- ----------------- Footer Top --------------- -->
       <div class='ftop'>
