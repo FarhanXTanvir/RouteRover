@@ -31,6 +31,7 @@
 <?php include 'src/inc/header.php'; ?>
 <section class= "main">
     <div class="row">
+      <?php echo "<div> <p style='color: white;'> Hi</p></div>" ;?>
       <div class="col">
         <div class="route-finder" id="route-finder" style="height:auto;">
           <h1>Welcome to RouteRover!</h1>

@@ -26,7 +26,7 @@
                     </div>
                     <?php
                     // Include config file
-                    require_once "super/config.php";
+                    require_once "connect.php";
                     
                     // Attempt select query execution
                     $sql = "SELECT * FROM admin";

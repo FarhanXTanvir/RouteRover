@@ -1,11 +1,10 @@
 /*--------Header Section----------*/
 header {
-  color: orange;
   text-align: center;
-  background: #222;
 }
 
 header h1 {
+  color: orange;
   font-size: 50px;
 }
 header h1 span{

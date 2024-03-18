@@ -52,7 +52,7 @@
                             array_push($errors,"Password does not match");
                         }
 
-                        require_once 'config.php';
+                        require_once '../connect.php';
                         $sql = "SELECT * FROM admin WHERE username = '$username'";
                         $result = mysqli_query($con, $sql);
                         $rowCount = mysqli_num_rows($result);

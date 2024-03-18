@@ -1,53 +1,22 @@
 <?php
+    session_start();
 // Check existence of id parameter before processing further
-if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
-    // Connect Database
-    require_once 'connect.php';
-    
-    // Prepare a select statement
-    $sql = "SELECT * FROM users WHERE id = ?";
-    
-    if($stmt = mysqli_prepare($con, $sql)){
-        // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "i", $param_id);
-        
-        // Set parameters
-        $param_id = trim($_GET["id"]);
-        
-        // Attempt to execute the prepared statement
-        if(mysqli_stmt_execute($stmt)){
-            $result = mysqli_stmt_get_result($stmt);
-    
-            if(mysqli_num_rows($result) == 1){
-                /* Fetch result row as an associative array. Since the result set
-                contains only one row, we don't need to use while loop */
-                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                
-                // Retrieve individual field value
-                $username = $row["username"];
-                $email = $row["email"];
-                $password = $row["password"];
-            } else{
-                // URL doesn't contain valid id parameter. Redirect to error page
-                header("location: error.php");
-                exit();
-            }
-            
-        } else{
-            echo "Oops! Something went wrong. Please try again later.";
-        }
+    if(isset($_SESSION["admin"])){
+        $username = $_SESSION["admin"];
+        $role = "admin";
+    } 
+    elseif(isset($_SESSION["user"])){
+        $username = $_SESSION["user"];
+        $role = "user";
+    } 
+    else{
+        //URL doesn't contain id parameter. Redirect to error page
+        header("location: super/error.php");
+        exit("Please login first.");
+        // echo "Please login first.";
     }
-     
-    // Close statement
-    mysqli_stmt_close($stmt);
-    
-    // Close connection
-    mysqli_close($con);
-} else{
-    // URL doesn't contain id parameter. Redirect to error page
-    header("location: error.php");
-    exit();
-}
+    require_once 'server.php';
+    // Get user info using $user variable, and pass username in  $username variable
 ?>
 
 <!DOCTYPE html>
@@ -67,21 +36,21 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <h1 class="mt-5 mb-3">Profile</h1>
-                    <div class="form-group">
+                <div class="col-md-20 border p-1 mt-5 p-5">
+                    <h1 class="mt-5 mb-3 text-center">Profile</h1>
+                    <div class="form-group border p-1">
                         <label>username</label>
-                        <p><b><?php echo $row["username"]; ?></b></p>
+                        <p><b><?php echo $username; ?></b></p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group border p-1">
                         <label>email</label>
-                        <p><b><?php echo $row["email"]; ?></b></p>
+                        <p><b><?php echo $user['email']; ?></b></p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group border p-1">
                         <label>password</label>
-                        <p><b><?php echo $row["password"]; ?></b></p>
+                        <p><b><?php echo $user['password']; ?></b></p>
                     </div>
-                    <p><a href="../super.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>        
         </div>

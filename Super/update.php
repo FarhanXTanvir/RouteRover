@@ -1,6 +1,6 @@
 <?php
     // Connect Database
-    require_once 'config.php';
+    require_once '../connect.php';
 // Define variables and initialize with empty values
 $username = $email = $password = "";
 $username_err = $email_err = $password_err = "";

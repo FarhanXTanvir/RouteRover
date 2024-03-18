@@ -40,11 +40,24 @@ if(isset($_SESSION['user'])){
             <h4>Follow us</h4>
             <div class ='social-links'>
               <ul>
-                <li><a href='https://facebook.com'><i class='fab fa-facebook' aria-hidden='true'></i></a></li>
-                <li><a href='https://twitter.com'><i class='fab fa-twitter' aria-hidden='true'></i></a></li>
-                <li><a href='https://telegram.org'><i class='fab fa-telegram' aria-hidden='true'></i></a></li>
-                <li><a href='https://linkedin.com'><i class='fab fa-linkedin' aria-hidden='true'></i></a></li>
-                <li><a href='https://instagram.com'><i class='fab fa-instagram' aria-hidden='true'></i></a></li>
+                <li><a href='https://www.facebook.com/RouteRover/' target='_blank'>
+                  <i class='fab fa-facebook' tabindex='0'></i>
+                </a></li>
+                <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
+                  <i class='fab fa-instagram' tabindex='0'></i>
+                </a></li>
+                <li><a href='#'>
+                  <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
+                </a></li>
+                <li><a href='#'>
+                  <i class='fab fa-youtube' tabindex='0' target='_blank'></i>
+                </a></li>
+                <li><a href='https://github.com/RouteRover' target='_blank'>
+                  <i class='fab fa-github' tabindex='0'></i>
+                </a></li>                                                      
+                <li><a href='https://codepen.io/RouteRover' target='_blank'>
+                  <i class='fab fa-codepen' tabindex='0'></i>
+                </a></li>
               </ul>
             </div>
         </div>
@@ -105,11 +118,24 @@ elseif(isset($_SESSION['admin'])){
             <h4>Follow us</h4>
             <div class ='social-links'>
               <ul>
-                <li><a href='https://facebook.com'><i class='fab fa-facebook' aria-hidden='true'></i></a></li>
-                <li><a href='https://twitter.com'><i class='fab fa-twitter' aria-hidden='true'></i></a></li>
-                <li><a href='https://telegram.org'><i class='fab fa-telegram' aria-hidden='true'></i></a></li>
-                <li><a href='https://linkedin.com'><i class='fab fa-linkedin' aria-hidden='true'></i></a></li>
-                <li><a href='https://instagram.com'><i class='fab fa-instagram' aria-hidden='true'></i></a></li>
+                <li><a href='https://www.facebook.com/RouteRover/' target='_blank'>
+                  <i class='fab fa-facebook' tabindex='0'></i>
+                </a></li>
+                <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
+                  <i class='fab fa-instagram' tabindex='0'></i>
+                </a></li>
+                <li><a href='#'>
+                  <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
+                </a></li>
+                <li><a href='#'>
+                  <i class='fab fa-youtube' tabindex='0' target='_blank'></i>
+                </a></li>
+                <li><a href='https://github.com/RouteRover' target='_blank'>
+                  <i class='fab fa-github' tabindex='0'></i>
+                </a></li>                                                      
+                <li><a href='https://codepen.io/RouteRover' target='_blank'>
+                  <i class='fab fa-codepen' tabindex='0'></i>
+                </a></li>
               </ul>
             </div>
         </div>
@@ -166,14 +192,27 @@ else{
             </ul>
         </div>
         <div class='footer-col'>
-            <h4>Follow us</h4>
+            <h4 class='sl'>Follow us</h4>
             <div class ='social-links'>
               <ul>
-                <li><a href='https://facebook.com'><i class='fab fa-facebook' aria-hidden='true'></i></a></li>
-                <li><a href='https://twitter.com'><i class='fab fa-twitter' aria-hidden='true'></i></a></li>
-                <li><a href='https://telegram.org'><i class='fab fa-telegram' aria-hidden='true'></i></a></li>
-                <li><a href='https://linkedin.com'><i class='fab fa-linkedin' aria-hidden='true'></i></a></li>
-                <li><a href='https://instagram.com'><i class='fab fa-instagram' aria-hidden='true'></i></a></li>
+                  <li><a href='https://www.facebook.com/RouteRover/' target='_blank'>
+                    <i class='fab fa-facebook' tabindex='0'></i>
+                  </a></li>
+                  <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
+                    <i class='fab fa-instagram' tabindex='0'></i>
+                  </a></li>
+                  <li><a href='#'>
+                    <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
+                  </a></li>
+                  <li><a href='#'>
+                    <i class='fab fa-youtube' tabindex='0' target='_blank'></i>
+                  </a></li>
+                  <li><a href='https://github.com/RouteRover' target='_blank'>
+                    <i class='fab fa-github' tabindex='0'></i>
+                  </a></li>                                                      
+                  <li><a href='https://codepen.io/RouteRover' target='_blank'>
+                    <i class='fab fa-codepen' tabindex='0'></i>
+                  </a></li>
               </ul>
             </div>
         </div>

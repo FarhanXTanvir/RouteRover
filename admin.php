@@ -6,7 +6,6 @@
     header('Location: login.php');
     exit();
   }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +34,7 @@
     <h2 class="ap-h2">Admin Panel</h2>
     <div class="ap">
       <div class="content">
+        <?php echo 'Hi ' . $_SESSION['admin']; ?>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa aut beatae nihil blanditiis velit consequuntur non molestias, eius aliquam animi quibusdam ea at voluptatum aperiam qui illum facilis, quasi, quisquam a sint laboriosam. Voluptates eius consequatur, amet modi laborum autem culpa quod tempore saepe qui dicta iusto eveniet quaerat.</p><br>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa aut beatae nihil blanditiis velit consequuntur non molestias, eius aliquam animi quibusdam ea at voluptatum aperiam qui illum facilis, quasi, quisquam a sint laboriosam. Voluptates eius consequatur, amet modi laborum autem culpa quod tempore saepe qui dicta iusto eveniet quaerat.</p>
       </div>
