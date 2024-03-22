@@ -1,15 +1,14 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
   background: #222;
 }
-section 
-{
+section {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,19 +17,17 @@ section
   overflow: hidden;
 }
 
-section .signin
-{
+section .signin {
   width: 400px;
-  background: #222;  
+  background: #222;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px;
   border-radius: 4px;
-  box-shadow: 0 15px 35px rgba(0,0,0,9);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
 }
-section .signin .content 
-{
+section .signin .content {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -38,25 +35,21 @@ section .signin .content
   flex-direction: column;
   gap: 40px;
 }
-section .signin .content h2 
-{
+section .signin .content h2 {
   font-size: 2em;
   color: orange;
 }
-section .signin .content .form 
-{
-  width: 100%;
+section .signin .content .form {
+  width: 300px;
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
-section .signin .content .form .inputBox
-{
+section .signin .content .form .inputBox {
   position: relative;
   width: 100%;
 }
-section .signin .content .form .inputBox input 
-{
+section .signin .content .form .inputBox input {
   position: relative;
   width: 100%;
   background: #333;
@@ -68,8 +61,7 @@ section .signin .content .form .inputBox input
   font-weight: 500;
   font-size: 1em;
 }
-section .signin .content .form .inputBox i 
-{
+section .signin .content .form .inputBox i {
   position: absolute;
   left: 0;
   width: 150%;
@@ -78,25 +70,21 @@ section .signin .content .form .inputBox i
   color: #aaa;
 }
 
-.signin .content .links 
-{
+.signin .content .links {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-.signin .content .form .links a 
-{
+.signin .content .form .links a {
   color: #fff;
   text-decoration: none;
 }
-.signin .content .form .links a:nth-child(2)
-{
+.signin .content .form .links a:nth-child(2) {
   color: rgb(83, 243, 30);
   font-weight: 600;
 }
-.signin .content .form .inputBox input[type="submit"]
-{
+.signin .content .form .inputBox input[type="submit"] {
   padding: 10px;
   background: orange;
   color: #000;
@@ -105,18 +93,25 @@ section .signin .content .form .inputBox i
   letter-spacing: 0.05em;
   cursor: pointer;
 }
-input[type="submit"]:active
-{
+input[type="submit"]:active {
   opacity: 0.6;
 }
-.signin .content .form p{
+.signin .content .form p {
   color: white;
   margin-right: 5px;
 }
-.test{
+.error {
   color: rgb(0, 0, 0);
   background: #edc6cb;
   border: 2px solid #f95668;
+  padding: 10px;
+  margin-bottom: 1px;
+  border-radius: 4px;
+}
+.success {
+  color: rgb(0, 0, 0);
+  background: #09c97f;
+  border: 2px solid #56f963;
   padding: 10px;
   margin-bottom: 1px;
   border-radius: 4px;

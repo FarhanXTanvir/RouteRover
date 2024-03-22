@@ -15,7 +15,7 @@
                 <li><a href='about.php'>About</a></li>
                 <li><a href='index.php#contact'>Contact</a></li>
                 <div class='nv-button'>
-                  <a href='profile.php?username=" . $_SESSION["admin"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
+                  <a href='profile.php?id=" . $_SESSION["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
                   <a href='logout.php'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
                 </div>
               </ul>
@@ -30,7 +30,7 @@
                 <li><a href='about.php'>About</a></li>
                 <li><a href='index.php#contact'>Contact</a></li>
                 <div class='nv-button'>
-                  <a href='profile.php?id=" . $_SESSION["user"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
+                  <a href='profile.php?id=" . $_SESSION["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
                   <a href='logout.php'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
                 </div>
               </ul>

@@ -1,5 +1,6 @@
 <?php
-require_once "../connect.php";
+session_start();
+require_once "connect.php";
 
 // Define variables and initialize with empty values
 $username = $email = $password = "";
@@ -44,7 +45,14 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
     // Check input errors before inserting in database
     if (empty ($username_err) && empty ($email_err) && empty ($password_err)) {
         // Prepare an update statement
-        $sql = "UPDATE admins SET username=?, email=?, password=? WHERE id=?";
+        if (isset ($_SESSION["admin"])) {
+            $sql = "UPDATE admins SET username=?, email=?, password=? WHERE id=?";
+        } elseif (isset ($_SESSION["user"])) {
+            $sql = "UPDATE users SET username=?, email=?, password=? WHERE id=?";
+        } else {
+            echo "Unexpected Error Occured";
+            exit();
+        }
 
         if ($stmt = mysqli_prepare($con, $sql)) {
             // Bind variables to the prepared statement as parameters
@@ -59,7 +67,7 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 // Records updated successfully. Redirect to landing page
-                header("location: ../super.php");
+                header("location: index.php");
                 exit();
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
@@ -79,7 +87,11 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
         $id = trim($_GET["id"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM admins WHERE id = ?";
+        if (isset ($_SESSION["admin"])) {
+            $sql = "SELECT * FROM admins WHERE id = ?";
+        } elseif (isset ($_SESSION["user"])) {
+            $sql = "SELECT * FROM users WHERE id = ?";
+        }
         if ($stmt = mysqli_prepare($con, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
@@ -176,7 +188,7 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
                         </div>
                         <input type="hidden" name="id" value="<?php echo $id; ?>" />
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="../super.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="./index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>

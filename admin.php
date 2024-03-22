@@ -1,6 +1,7 @@
 <?php
-  // We need to use sessions, so you should always start sessions using the below code.
+  // We need to use sessions, so we should always start sessions using the below code.
   session_start();
+
   // If the user is not logged in redirect to the login page...
   if (!isset($_SESSION["admin"])) {
     header('Location: login.php');
@@ -34,7 +35,7 @@
     <h2 class="ap-h2">Admin Panel</h2>
     <div class="ap">
       <div class="content">
-        <?php echo 'Hi ' . $_SESSION['admin']; ?>
+        <?php echo "Hi "  . $_SESSION['admin'] . $_SESSION['id']; ?>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa aut beatae nihil blanditiis velit consequuntur non molestias, eius aliquam animi quibusdam ea at voluptatum aperiam qui illum facilis, quasi, quisquam a sint laboriosam. Voluptates eius consequatur, amet modi laborum autem culpa quod tempore saepe qui dicta iusto eveniet quaerat.</p><br>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa aut beatae nihil blanditiis velit consequuntur non molestias, eius aliquam animi quibusdam ea at voluptatum aperiam qui illum facilis, quasi, quisquam a sint laboriosam. Voluptates eius consequatur, amet modi laborum autem culpa quod tempore saepe qui dicta iusto eveniet quaerat.</p>
       </div>

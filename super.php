@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/super.css">
     <script>
         $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();   
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 </head>
@@ -25,11 +25,11 @@
                         <a href="super/create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add Admin</a>
                     </div>
                     <?php
-                    // Include config file
+
                     require_once "connect.php";
-                    
+
                     // Attempt select query execution
-                    $sql = "SELECT * FROM admin";
+                    $sql = "SELECT * FROM admins";
                     if($result = mysqli_query($con, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
@@ -45,22 +45,23 @@
                                 </thead>";
                                 echo "<tbody>";
                                 $count = 1;
-                                while($row = mysqli_fetch_array($result)){
+                                while($user = mysqli_fetch_array($result)){
                                     echo "<tr>";
                                         echo "<td>" . $count . "</td>";
-                                        echo "<td>" . $row['username'] . "</td>";
-                                        echo "<td>" . $row['email'] . "</td>";
-                                        echo "<td>" . $row['password'] . "</td>";
-                                        echo "<td>";
-                                            echo '<a href="super/read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            echo '<a href="super/update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                            echo '<a href="super/delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                        echo "<td>" . $user['username'] . "</td>";
+                                        echo "<td>" . $user['email'] . "</td>";
+                                        echo "<td>" . $user['password'] . "</td>";
+                                        echo "<td class='act'>";
+                                            echo '<a href="super/read.php?id='. $user['id'] .'" title="View Record" data-toggle="tooltip"><span class="fa fa-user"></span></a>';
+                                            echo '<a href="super/update.php?id='. $user['id'] .'" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                            echo '<a href="super/delete.php?id='. $user['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                     $count++;
                                 }
-                                echo "</tbody>";                            
+                                echo "</tbody>";
                             echo "</table>";
+                            echo "<div class='text-center'><a href='index.php'><button class='btn btn-success font-weight-bolder'>Home</button></a></div>";
                             // Free result set
                             mysqli_free_result($result);
                         } else{
@@ -69,12 +70,12 @@
                     } else{
                         echo "Oops! Something went wrong. Please try again later.";
                     }
- 
+
                     // Close connection
                     mysqli_close($con);
                     ?>
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
 </body>

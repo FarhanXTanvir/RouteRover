@@ -56,7 +56,7 @@
                     <div class="links"> <p>Already Registered?</p> <a href="login.php">Signin</a></div> 
 
                     <div class="inputBox"> 
-                        <input type="submit" value="Sign Up" name="submit"> 
+                        <input type="submit" value="Sign Up" name="register"> 
                     </div> 
                 </div>
             </form> 

@@ -30,15 +30,12 @@
   color: white;
 }
 /* Social Links */
-.ftop .social-links{
-
-}
 .ftop .social-links ul {
   list-style-type: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3.5%;
+  gap: 5%;
   margin-right: 1%;
 }
 
@@ -46,14 +43,7 @@
   font-size: xx-large;
 }
 
-.ftop .social-links .fab {
-  
-}
-
 /* transition for social icon hover animation */
-.ftop .social-links a{
-  
-}
 .ftop .social-links 
 .fa-facebook,
 .fa-codepen,
@@ -104,7 +94,7 @@
 .ftop .social-links
 .fa-codepen:hover,
 .fa-codepen:focus {
-  color: #000;
+  color: #cebebe;
   transform: scale(1.3);
 }
 

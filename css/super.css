@@ -1,15 +1,20 @@
-body{
-    color: black;
-}
 .wrapper{
-    width: auto;
-    margin: 0 auto;
-    width: 60%;
+    width: 70%;
+    padding: 1%;
+    margin: auto auto;
 }
 h2{
     text-align: center;
 }
-tr{
-    color: black;
+th{
+    text-align: center;
 }
-</style>
+td{
+    padding: 1%;
+}
+.act{
+    display: flex;
+    justify-content: space-around;
+    gap: 10%;
+    padding: 1.5%;
+}

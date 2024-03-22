@@ -5,7 +5,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     require_once '../connect.php';
     
     // Prepare a select statement
-    $sql = "SELECT * FROM admin WHERE id = ?";
+    $sql = "SELECT * FROM admins WHERE id = ?";
     
     if($stmt = mysqli_prepare($con, $sql)){
         // Bind variables to the prepared statement as parameters
@@ -70,15 +70,15 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Admin Record</h1>
                     <div class="form-group">
-                        <label>username</label>
+                        <label>Username</label>
                         <p><b><?php echo $row["username"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>email</label>
+                        <label>Email</label>
                         <p><b><?php echo $row["email"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>password</label>
+                        <label>Password</label>
                         <p><b><?php echo $row["password"]; ?></b></p>
                     </div>
                     <p><a href="../super.php" class="btn btn-primary">Back</a></p>
