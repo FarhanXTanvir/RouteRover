@@ -1,171 +1,190 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
   background: #222;
 }
-/* ---------Main Body----------- */
-.main{
+/* h1 ---------Main Body----------- */
+.main {
   padding: 5%;
   background: #222;
 }
-.main .row{
-  width: 98%;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  background: #222;
-  margin-bottom: 1%;
-}
-.main .row .col{
-  display: flex;
-  margin: 1%;
-  padding: 1%;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  width: 70%;
-  color: white;
-  background: #222;
-}
-
-
+/* h2 @section Route Finder */
 .route-finder {
   background: #19181880;
   color: orange;
-  width: 95%;
-  margin: 1%;
-  padding: 1%;
-  text-align:center;
-}
-.route-finder h1{
+  width: 60%;
+  margin: 2% auto;
+  padding: 3%;
   text-align: center;
-  font-size: 30px;
-  margin-bottom: 2%;;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 9);
 }
-.route-finder h2{
-    text-align: center;
+.route-finder h1 {
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 2%;
 }
-.route-finder .welcome{
+
+.route-finder .welcome {
   color: white;
   margin-bottom: 50px;
   font-size: 15;
 }
-.route-finder .form{
-  font-size: 20px;
-  color: #ffffff;
-  font-weight: bold;
-  margin: 15px;
+
+.route-finder h2 {
+  text-align: center;
+  margin-bottom: 2%;
 }
 
-.route-finder input{
-  margin-bottom: 5px;
-  text-align: center;
+.route-finder input {
   width: 60%;
-  font-size: 100%;
+  margin: 0.4em 0;
+  padding: 0.5em;
+  border-radius: 0.4em;
+  text-align: center;
+  font-size: 1rem;
   display: inline-block;
 }
-.route-finder button{
+.route-finder button {
   color: black;
+  font-size: 1rem;
+  font-weight: bold;
   background: rgb(78, 238, 163);
-  margin-left: 10px; 
-  font-size: 15px;
-  font-weight: 750;
-  border-radius: 10px; 
-  padding: 5px; 
-  width: 70px;
+  border-radius: 0.35em;
+  width: 40%;
+  padding: 0.5em;
+  margin-top: 0.5em;
 }
-.route-finder button:hover{
-  background: rgb(148, 185, 168);
+
+.route-finder button:hover {
+  background: rgb(0, 255, 136);
 }
-.route-finder button:active{
+.route-finder button:active {
   background: rgb(24, 232, 138);
 }
 
-/* Add a card effect for articles */
-.card {
-  background: #222;
-  border: white solid 1px;
-  padding: 5%;
-  margin-top: 20px;
+/* @section Table of results */
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Contact Form */
-.contact{
-  width: 95%;
-  padding: 3%;
-  margin: 0.5%;
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  color: black;
+}
+
+th {
+  background-color: #4caf50;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* h1 @section Contact Form */
+.contact {
   text-align: center;
   color: white;
-  background: #000000;
-  box-shadow: 0 15px 35px rgba(0,0,0,9);
-}
-.contact h3{
-  background: orange; color: black;
-  text-align: center;
-}
-.contact p{
-  margin-bottom: 2%;
-  text-align: left;
-}
-.contact .form{
-  padding: 1% 5%;
-}
-.contact label[for="email"]{
-  display: inline-block;
-  text-align: left;
-}
-.contact input[type="email"]{
-  border: none;
+  background: #19181880;
   width: 60%;
-  margin: 0% 0%;
-  padding: 1%;
-}
-.contact label[for="message"]{
-  display: block;
-  text-align: left;
-}
-.contact textarea{
-  width: 65%;
-  padding: 1%;
-}
-.contact input[type="submit"]{
-  background: orange;
-  border: none;
-  width: 60%;
-  margin: 0 0%;
-}
-.contact .input{
-  text-align: left;
-  width: 100%;
-}
-.contact .input-btn{
-  display: flex;
-  justify-content: left;
-  width: 100%;
+  margin: 2em auto;
+  padding: 3em;
+  box-shadow: 0 0.9375em 2.1875em rgba(0, 0, 0, 9); /* 15px/16px and 35px/16px */
 }
 
+.contact h3 {
+  background: orange;
+  color: black;
+  text-align: center;
+}
+
+.contact p {
+  margin-bottom: 2em;
+  text-align: left;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 1.25em; /* 20px/16px */
+  background: #171616;
+  width: 100%;
+  max-width: 37.5em; /* 600px/16px */
+  border-radius: 0.5em; /* 8px/16px */
+  box-shadow: 0px 0px 0.625em rgba(0, 0, 0, 0.1); /* 10px/16px */
+}
+
+.contact form .input {
+  width: 100%;
+  margin-bottom: 0.9375em; /* 15px/16px */
+}
+
+.contact form input,
+.contact form textarea {
+  width: 100%;
+  padding: 0.625em; /* 10px/16px */
+  border: 0.0625em solid #ddd; /* 1px/16px */
+  border-radius: 0.25em; /* 4px/16px */
+}
+
+.contact .input label {
+  color: rgb(251, 251, 251);
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 0.3125em; /* 5px/16px */
+  display: block;
+}
+
+.contact button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  width: 60%;
+  padding: 0.6em 1.5em; /* 15px/16px and 32px/16px */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em; /* 16px/16px */
+  font-weight: bold;
+  margin: 0.25em auto; /* 4px/16px and 2px/16px */
+  cursor: pointer;
+  border-radius: 0.35em; /* 4px/16px */
+}
+
+/* Media query for screens smaller than 37.5em (600px/16px) */
+@media (max-width: 37.5em) {
+  .contact {
+    width: 100%;
+  }
+
+  .contact form {
+    width: 90%;
+  }
+}
 
 /*------------- Media Query---------- */
 /* Responsive layout - when the screen is less than 600px wide*/
 @media screen and (max-width: 600px) {
-  .route-finder h1{
+  .route-finder h1 {
     font-size: 150%;
   }
-  .route-finder .welcome{
+  .route-finder .welcome {
     font-size: 80%;
   }
-  .route-finder input{
+  .route-finder input {
     font-size: 75%;
   }
 }
-
-
-
-
