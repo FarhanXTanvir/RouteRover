@@ -44,6 +44,31 @@ if ($currentLocation && $destination) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta name="keywords" content="RouteRover, Route Finder, Transport, Bus, Route, Destination, Pricing">
+  <meta name="author" content="RouteRover">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta property="og:title" content="RouteRover">
+  <meta property="og:description"
+    content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta property="og:image" content="routerover_icon.png">
+  <meta property="og:url" content="https://routerover.000webhostapp.com/">
+  <meta property="og:site_name" content="RouteRover">
+  <meta name="twitter:title" content="RouteRover">
+  <meta name="twitter:description"
+    content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta name="twitter:image" content="routerover_icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@RouteRover">
+  <meta name="twitter:site" content="@RouteRover">
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
   <!-- <meta http-equiv="refresh" content="5"> -->
   <title> Home | RouteRover </title>
 
