@@ -178,13 +178,38 @@ tr:hover {
 /*------------- Media Query---------- */
 /* Responsive layout - when the screen is less than 600px wide*/
 @media screen and (max-width: 600px) {
-  .route-finder h1 {
-    font-size: 150%;
-  }
-  .route-finder .welcome {
-    font-size: 80%;
-  }
-  .route-finder input {
-    font-size: 75%;
+  @media screen and (max-width: 600px) {
+    .main {
+      padding: 0 15px;
+    }
+
+    .route-finder,
+    .contact {
+      width: 100%;
+    }
+
+    .input {
+      width: 100%;
+    }
+
+    .input-field {
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    /* Adjust the font size of headings and paragraphs if necessary */
+    h1,
+    h2,
+    h3 {
+      font-size: 1.5em;
+    }
+
+    p {
+      font-size: 1em;
+    }
   }
 }
