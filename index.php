@@ -1,13 +1,21 @@
 <?php
+// Start the session
 session_start();
-if (isset($_SESSION["user"])) {
-  header('Location: user.php');
-  exit;
+if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
+  if (isset($_COOKIE['user'])) {
+    $_SESSION["user"] = $_COOKIE['user'];
+    header('Location: user');
+  } elseif (isset($_COOKIE['admin'])) {
+    $_SESSION["admin"] = $_COOKIE['admin'];
+    header('Location: admin');
+  }
+} else if (isset($_SESSION["user"])) {
+  header('Location: user');
 } elseif (isset($_SESSION["admin"])) {
-  header('Location: admin.php');
-  exit;
+  header('Location: admin');
 }
 
+// Connect Database
 require_once ('connect.php');
 
 // Get the user's current location and desired destination

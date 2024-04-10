@@ -10,13 +10,13 @@
             echo "
             <nav class='top-nav'>
               <ul>
-                <li><a href='index.php'>Home</a></li>
-                <li><a href='services.php'>Services</a></li>
-                <li><a href='about.php'>About</a></li>
-                <li><a href='index.php#contact'>Contact</a></li>
+                <li><a href='index'>Home</a></li>
+                <li><a href='services'>Services</a></li>
+                <li><a href='about'>About</a></li>
+                <li><a href='index#contact'>Contact</a></li>
                 <div class='nv-button'>
-                  <a href='profile.php?id=" . $_SESSION["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
-                  <a href='logout.php'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
+                  <a href='profile?id=" . $_SESSION["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
+                  <a href='logout'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
                 </div>
               </ul>
             </nav>";
@@ -25,13 +25,13 @@
             echo "
             <nav class='top-nav'>
               <ul>
-                <li><a href='index.php'>Home</a></li>
-                <li><a href='services.php'>Services</a></li>
-                <li><a href='about.php'>About</a></li>
-                <li><a href='index.php#contact'>Contact</a></li>
+                <li><a href='index'>Home</a></li>
+                <li><a href='services'>Services</a></li>
+                <li><a href='about'>About</a></li>
+                <li><a href='index#contact'>Contact</a></li>
                 <div class='nv-button'>
-                  <a href='profile.php?id=" . $_SESSION["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
-                  <a href='logout.php'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
+                  <a href='profile?id=" . $_SESSION["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
+                  <a href='logout'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
                 </div>
               </ul>
             </nav>";
@@ -40,13 +40,13 @@
             echo "
             <nav class='top-nav'>
               <ul>
-                <li><a href='index.php'>Home</a></li>
-                <li><a href='services.php'>Services</a></li>
-                <li><a href='about.php'>About</a></li>
-                <li><a href='index.php#contact'>Contact</a></li>
+                <li><a href='index'>Home</a></li>
+                <li><a href='services'>Services</a></li>
+                <li><a href='about'>About</a></li>
+                <li><a href='index#contact'>Contact</a></li>
                 <div class='nv-button'>
-                  <a href='login.php'><button class='custom-button'>Login</button></a>
-                  <a href='register.php'><button class='custom-button'>Register</button></a>
+                  <a href='login'><button class='custom-button'>Login</button></a>
+                  <a href='register'><button class='custom-button'>Register</button></a>
                 </div>
               </ul>
             </nav>";

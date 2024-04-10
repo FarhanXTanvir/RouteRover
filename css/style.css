@@ -168,48 +168,25 @@ tr:hover {
 /*------------- Media Query---------- */
 /* Responsive layout - when the screen is less than 600px wide*/
 /* Media query for screens smaller than 37.5em (600px/16px) */
-@media screen and (max-width: 37.5em) {
+@media screen and (max-width: 600px) {
   .main {
-    padding: 0 2rem;
-  }
-
-  .route-finder,
-  .contact {
     width: 100%;
-    margin-top: 3rem;
+    padding: 0;
+    margin: 0;
   }
-
-  .input {
+  .route-finder {
     width: 100%;
+    margin: 0;
+    padding: 1%;
   }
-
-  .input-field {
+  .route-finder h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 2%;
+  }
+  #contact {
     width: 100%;
-    padding: 0 0.2rem; /* Adjust padding as needed */
-    font-size: medium; /* Adjust font size as needed */
-    box-sizing: border-box; /* This ensures padding doesn't affect total width */
-  }
-
-  table {
-    width: 100%;
-    overflow-x: auto;
-  }
-
-  /* Adjust the font size of headings and paragraphs if necessary */
-  h1,
-  h2,
-  h3 {
-    font-size: 1.5em;
-  }
-
-  p {
-    font-size: 1em;
-  }
-  .contact {
-    width: 100%;
-  }
-
-  .contact form {
-    width: 90%;
+    margin: 0;
+    padding: 1%;
   }
 }

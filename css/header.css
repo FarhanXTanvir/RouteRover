@@ -38,9 +38,14 @@ header p{
   text-decoration: none;
 }
 .top-nav li a:hover{
-  background: orange;
+  background: rgb(232, 169, 87);
   color: black;
   padding: 5px;
+}
+.top-nav li a.active {
+    background: orange;
+    color: black;
+    padding: 5px;
 }
 .top-nav button{
   background: rgb(24, 232, 138);

@@ -1,5 +1,5 @@
 <?php
-if (isset ($_POST['login'])) {
+if (isset($_POST['login'])) {
     $role = $_POST["role"];
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -15,8 +15,10 @@ if (isset ($_POST['login'])) {
                 $_SESSION["user"] = $user["username"];
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["id"] = $user["id"];
-                header("Location: user.php");
-                die ("Redirecting to User dashboard...");
+                // If they are, set a cookie to keep them logged in
+                setcookie('user', $username, time() + (86400 * 30), "/"); // 86400 = 1 day
+                header("Location: user");
+                die("Redirecting to User dashboard...");
             } else {
                 array_push($errors, "Password does not match");
             }
@@ -28,14 +30,17 @@ if (isset ($_POST['login'])) {
         $result = mysqli_query($con, $sql);
         $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
         $errors = array();
-        if ($user) {
+        if ($username === 'super') {
+            array_push($errors, "You are not authorized to login as super admin");
+        } else if ($user) {
             if (password_verify($password, $user["password"])) {
                 $_SESSION["admin"] = $user["username"];
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["id"] = $user["id"];
-
-                header("Location: admin.php");
-                die ("Redirecting to Admin Panel...");
+                // If they are, set a cookie to keep them logged in
+                setcookie('admin', $username, time() + (86400 * 30), "/"); // 86400 = 1 day
+                header("Location: admin");
+                die("Redirecting to Admin Panel...");
             } else {
                 array_push($errors, "Password does not match");
             }

@@ -57,3 +57,21 @@ document
       );
     }
   });
+// Select all menu items
+const menuItems = document.querySelectorAll('.top-nav li a');
+
+// Add click event listener to each menu item
+menuItems.forEach(item => {
+    item.addEventListener('click', event => {
+        // Prevent the default action of the click
+        event.preventDefault();
+
+        // Remove 'active' class from all menu items
+        menuItems.forEach(menuItem => {
+            menuItem.classList.remove('active');
+        });
+
+        // Add 'active' class to the clicked menu item
+        event.target.classList.add('active');
+    });
+});

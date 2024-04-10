@@ -1,8 +1,15 @@
 <?php
 session_start();
-if (isset ($_SESSION["user"])) {
+
+if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
+    if (isset($_COOKIE['user'])) {
+        $_SESSION["user"] = $_COOKIE['user'];
+    }
     header('Location: user.php');
-} elseif (isset ($_SESSION["admin"])) {
+} elseif (isset($_SESSION["admin"]) || isset($_COOKIE['admin'])) {
+    if (isset($_COOKIE['admin'])) {
+        $_SESSION["admin"] = $_COOKIE['admin'];
+    }
     header('Location: admin.php');
 }
 ?>
