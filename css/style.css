@@ -66,7 +66,12 @@ body {
 .route-finder button:active {
   background: rgb(24, 232, 138);
 }
-
+.output {
+  text-align: center;
+  color: white;
+  margin: 2em auto;
+  padding: 3em;
+}
 /* @section Table of results */
 table {
   width: 100%;
@@ -187,11 +192,11 @@ tr:hover {
     width: 95%;
     padding: 4%;
   }
-  #contact p{
+  #contact p {
     width: 95%;
     padding: 4%;
   }
-  #contact form{
+  #contact form {
     width: 92%;
     margin: 4%;
     padding: 3%;

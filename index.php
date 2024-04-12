@@ -14,36 +14,77 @@ if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
 } elseif (isset($_SESSION["admin"])) {
   header('Location: admin');
 }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Get the departure and destination locations from the form data
+  $departure = $_POST['loc1'];
+  $destination = $_POST['loc2'];
+  // Check if the posted locations are not empty and the location exists in the options
 
-// Connect Database
-require_once ('connect.php');
+  $locations = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
+  if (!empty($departure) && !empty($destination)) {
+    if (in_array($departure, $locations) && in_array($destination, $locations)) {
+      // Both locations are valid, connect database
+      require_once ('connect.php');
 
-// Get the user's current location and desired destination
-$currentLocation = $_POST['areas1'] ?? null;
-$destination = $_POST['areas2'] ?? null;
+      // Get the route number from the database
+      $stmt = $con->prepare("SELECT $destination FROM routes WHERE name = ?");
+      $stmt->bind_param("s", $departure);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      if ($result->num_rows > 0) {
+        // Output the fare
+        while ($row = $result->fetch_assoc()) {
 
-$buses = [];
-if ($currentLocation && $destination) {
-  // Prepare the SQL query
-  $sql = "SELECT * FROM buses WHERE DepartureLocation = ? AND Destination = ?";
+          $routeNo = $row[$destination];
+        }
+      } else {
+        echo "No route found.";
+      }
+      $stmt->close();
+      $tableName = "route" . $routeNo;
+      // Prepare the SQL query
+      $stmt = $con->prepare("SELECT $destination FROM $tableName WHERE name = ?");
+      $stmt->bind_param("s", $departure);
+      // Execute the SQL query
+      $stmt->execute();
 
-  // Prepare the statement
-  $stmt = $con->prepare($sql);
+      // Get the result
+      $result = $stmt->get_result();
 
-  // Bind the parameters
-  $stmt->bind_param("ss", $currentLocation, $destination);
+      // Check if the query returned a result
+      $table = " ";
+      if ($result->num_rows > 0) {
+        // Output the fare
+        while ($row = $result->fetch_assoc()) {
+          // Create Table for output
+          $table = "<table>
+                  <tr>
+                    <th>যাত্রাস্থান</th>
+                    <th>গন্তব্যস্থল</th>
+                    <th>রুট নং</th>
+                    <th>ভাড়া</th>
+                  </tr>
+                  <tr>
+                    <td>$departure</td>
+                    <td>$destination</td>
+                    <td>$routeNo</td>
+                    <td>$row[$destination]</td>
+                  </tr>
+                </table>";
+        }
+      } else {
+        $table = "No results found.";
+      }
 
-  // Execute the query
-  $stmt->execute();
+      // Close the statement
+      $stmt->close();
 
-  // Get the results
-  $result = $stmt->get_result();
-
-  // Fetch the data
-  $buses = $result->fetch_all(MYSQLI_ASSOC);
-
-  // Close the connection
-  $con->close();
+    } else {
+      $table = "Invalid location selected.";
+    }
+  } else {
+    $table = "Please select both a departure and destination location.";
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -100,72 +141,52 @@ if ($currentLocation && $destination) {
   <?php include 'src/inc/header.php'; ?>
   <section class="main">
     <div class="route-finder" id="route-finder" style="height:auto;">
-      <h1>Welcome to RouteRover!</h1>
+      <h1>RouteRover - এ আপনাকে স্বাগতম!</h1>
       <p class="welcome">
-        Want to find your Route no., Available transports and Pricing details for going to your next destination?
-        RouteRover is here on your service!! Get everything on your fingertips with a single click.
+        <!-- Want to find your Route no., Available transports and Pricing details for going to your next destination?
+        RouteRover is here on your service!! Get everything on your fingertips with a single click. -->
+        আপনি কি আপনার পরবর্তী গন্তব্যস্থলে যাওয়ার জন্য আপনার রুট নম্বর, উক্ত রুটে সচল ্বাস এবং বাস ভাড়া জানতে চাচ্ছেন?
+        তাহলে RouteRover আছে আপনার সেবায়!! শুধু একটি ক্লিকের মাধ্যমে সব কিছু আপনার হাতের মুঠোয়।
       </p>
       <h2>Route Finder</h2>
       <form action="index.php" method="post">
         <div class="input">
-          <input class="input-field" name="areas1" list="areas1" placeholder="Departure Location">
-          <datalist id="areas1">
+          <input class="input-field" name="loc1" list="loc1" placeholder="যাত্রাস্থান">
+          <datalist id="loc1">
             <!-- options -->
-            <option value="A">
-            <option value="B">
-            <option value="C">
+            <?php foreach ($locations as $location): ?>
+              <option value="<?php echo $location; ?>">
+              <?php endforeach; ?>
           </datalist>
         </div>
         <div class="input">
-          <input class="input-field" name="areas2" list="areas2" placeholder="Destination Location">
-          <datalist id="areas2">
+          <input class="input-field" name="loc2" list="loc2" placeholder="গন্তব্যস্থল">
+          <datalist id="loc2">
             <!-- options -->
-            <option value="A">
-            <option value="B">
-            <option value="C">
+            <?php foreach ($locations as $location): ?>
+              <option value="<?php echo $location; ?>">
+              <?php endforeach; ?>
           </datalist>
         </div>
         <button type="submit">Search</button>
       </form>
+      <!-- Display the search results in a table -->
+      <?php
+      if (isset($table)) {
+        echo "<div class=\"output\" style=\"color: white\">"
+          . $table .
+          "</div>";
+      }
+      ?>
     </div>
-    <!-- Display the search results in a table -->
-    <?php if (!empty($buses)): ?>
-      <table>
-        <tr>
-          <th>Bus Name</th>
-          <th>Departure Location</th>
-          <th>Destination</th>
-          <th>Departure Time</th>
-          <th>Arrival Time</th>
-          <th>Price</th>
-        </tr>
-        <?php foreach ($buses as $bus): ?>
-          <tr>
-            <td>
-              <?php echo htmlspecialchars($bus['BusName']); ?>
-            </td>
-            <td>
-              <?php echo htmlspecialchars($bus['DepartureLocation']); ?>
-            </td>
-            <td>
-              <?php echo htmlspecialchars($bus['Destination']); ?>
-            </td>
-            <td>
-              <?php echo htmlspecialchars($bus['DepartureTime']); ?>
-            </td>
-            <td>
-              <?php echo htmlspecialchars($bus['ArrivalTime']); ?>
-            </td>
-            <td>
-              <?php echo htmlspecialchars($bus['Price']); ?>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      </table>
-    <?php endif; ?>
+
     <div id="contact" class="contact">
       <h3> Contact Form </h3>
-      <p>While using our services if you face any inconvenience then please inform us.</p>
+      <p>
+        <!-- While using our services if you face any inconvenience then please inform us. -->
+        আমাদের সেবা ব্যবহার করার সময় আপনি যদি কোনও অসুবিধা অনুভব করেন তাহলে অনুগ্রহ করে আমাদের জানান।
+
+      </p>
       <form action="contact.php" method="post">
         <div class="input">
           <label for="email">Email: </label>
