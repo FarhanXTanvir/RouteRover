@@ -5,12 +5,12 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
     if (isset($_COOKIE['user'])) {
         $_SESSION["user"] = $_COOKIE['user'];
     }
-    header('Location: user.php');
+    header('Location: user');
 } elseif (isset($_SESSION["admin"]) || isset($_COOKIE['admin'])) {
     if (isset($_COOKIE['admin'])) {
         $_SESSION["admin"] = $_COOKIE['admin'];
     }
-    header('Location: admin.php');
+    header('Location: admin');
 }
 ?>
 <!doctype html>
@@ -21,14 +21,11 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title> Login | RouteRover </title>
-    <!-- ----Script---- -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- Style Sheet -->
-    <link rel="stylesheet" href="css/login.css">
     <?php include 'src/lib/lib.html'; ?>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="css/login.css">
 
 
     <!-- Font Family -->
@@ -49,8 +46,8 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
             <div class="content">
                 <h2>Sign In</h2>
                 <?php require_once "authenticate.php"; ?>
-                <!-- <form action="login.php" method="post"> -->
-                <form action="login.php" method="post">
+                <!-- <form action="login" method="post"> -->
+                <form action="login" method="post">
                     <div class="form">
                         <div class="inputBox" style="text-align:right;">
                             <i class="fa-solid fa-shield"></i>
@@ -67,7 +64,7 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
                             <input type="password" name="password"> <i class="fas fa-lock"> Password </i>
                         </div>
 
-                        <div class="links"> <a href="#">Forgot Password</a> <a href="register.php">Signup</a></div>
+                        <div class="links"> <a href="#">Forgot Password</a> <a href="register">Signup</a></div>
 
                         <div class="inputBox">
                             <input type="submit" value="Login" name="login">
@@ -79,6 +76,9 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
     </section>
     <!-- ----------------- Footer Section --------------- -->
     <?php include 'src/inc/footer.php'; ?>
+    <!-- ----Script---- -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

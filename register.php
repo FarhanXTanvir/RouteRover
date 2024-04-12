@@ -76,6 +76,7 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
         </div>
     </section>
     <?php include 'src/inc/footer.php'; ?>
+    <script src="script\script.js"></script>
 </body>
 
 </html>

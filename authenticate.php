@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
                 $_SESSION["id"] = $user["id"];
                 // If they are, set a cookie to keep them logged in
                 setcookie('user', $username, time() + (86400 * 30), "/"); // 86400 = 1 day
-                header("Location: user");
+                header("Location: user.php");
                 die("Redirecting to User dashboard...");
             } else {
                 array_push($errors, "Password does not match");
@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
                 $_SESSION["id"] = $user["id"];
                 // If they are, set a cookie to keep them logged in
                 setcookie('admin', $username, time() + (86400 * 30), "/"); // 86400 = 1 day
-                header("Location: admin");
+                header("Location: admin.php");
                 die("Redirecting to Admin Panel...");
             } else {
                 array_push($errors, "Password does not match");

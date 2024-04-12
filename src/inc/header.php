@@ -1,13 +1,13 @@
 <!-- -----------Header Section---------- -->
-  <header>
-    <!-- ----------- Header Cover---------- -->
-    <div class="cover">
-      <h1>R<span>oute</span> R<span>over</span></h1>
-      <p>Your one-stop travel companion</p>
-    </div>
-        <?php
-          if(isset($_SESSION["admin"])){
-            echo "
+<header>
+  <!-- ----------- Header Cover---------- -->
+  <div class="cover">
+    <h1>R<span>oute</span> R<span>over</span></h1>
+    <p>Your one-stop travel companion</p>
+  </div>
+  <?php
+  if (isset($_SESSION["admin"])) {
+    echo "
             <nav class='top-nav'>
               <ul>
                 <li><a href='index'>Home</a></li>
@@ -20,9 +20,8 @@
                 </div>
               </ul>
             </nav>";
-          }
-          elseif (isset($_SESSION["user"])) {
-            echo "
+  } elseif (isset($_SESSION["user"])) {
+    echo "
             <nav class='top-nav'>
               <ul>
                 <li><a href='index'>Home</a></li>
@@ -35,9 +34,8 @@
                 </div>
               </ul>
             </nav>";
-        }
-          else{
-            echo "
+  } else {
+    echo "
             <nav class='top-nav'>
               <ul>
                 <li><a href='index'>Home</a></li>
@@ -50,7 +48,7 @@
                 </div>
               </ul>
             </nav>";
-          }
-        ?>
-    <!-- Navigation bar -->  
-  </header>
+  }
+  ?>
+  <!-- Navigation bar -->
+</header>

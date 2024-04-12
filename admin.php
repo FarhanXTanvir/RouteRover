@@ -49,6 +49,7 @@ include 'auth_check.php';
   </section>
   <!-- ----------------- Footer Section --------------- -->
   <?php include 'src/inc/footer.php'; ?>
+  <script src="script\script.js"></script>
 </body>
 
 </html>
