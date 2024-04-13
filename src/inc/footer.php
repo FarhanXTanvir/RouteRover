@@ -8,10 +8,8 @@ if (isset($_SESSION['user'])) {
         <div class='footer-col'>
             <h4>Company</h4>
             <ul>
-                <li><a href='#'>About us</a></li>
-                <li><a href='#'>Our Services</a></li>
-                <li><a href='#'>Privacy Policy</a></li>
-                <li><a href='#'>Affiliate Programme</a></li>
+                <li><a href='about'>About us</a></li>
+                <li><a href='services'>Our Services</a></li>
             </ul>
         </div>
         <div class='footer-col'>
@@ -42,7 +40,7 @@ if (isset($_SESSION['user'])) {
                   <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
                     <i class='fab fa-instagram' tabindex='0'></i>
                   </a></li>
-                  <li><a href='#'>
+                  <li><a href='https://pinterest.com/RouteRover'>
                     <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
                   </a></li>
                   <li><a href='#'>
@@ -50,7 +48,7 @@ if (isset($_SESSION['user'])) {
                   </a></li>
                   <li><a href='https://github.com/RouteRover' target='_blank'>
                     <i class='fab fa-github' tabindex='0'></i>
-                  </a></li>                                                      
+                  </a></li>                                            
                   <li><a href='https://codepen.io/RouteRover' target='_blank'>
                     <i class='fab fa-codepen' tabindex='0'></i>
                   </a></li>
@@ -84,10 +82,8 @@ if (isset($_SESSION['user'])) {
         <div class='footer-col'>
             <h4>Company</h4>
             <ul>
-                <li><a href='#'>About us</a></li>
-                <li><a href='#'>Our Services</a></li>
-                <li><a href='#'>Privacy Policy</a></li>
-                <li><a href='#'>Affiliate Programme</a></li>
+                <li><a href='about.php'>About us</a></li>
+                <li><a href='services.php'>Our Services</a></li>
             </ul>
         </div>
         <div class='footer-col'>
@@ -118,7 +114,7 @@ if (isset($_SESSION['user'])) {
                   <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
                     <i class='fab fa-instagram' tabindex='0'></i>
                   </a></li>
-                  <li><a href='#'>
+                  <li><a href='https://pinterest.com/RouteRover'>
                     <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
                   </a></li>
                   <li><a href='#'>
@@ -126,7 +122,7 @@ if (isset($_SESSION['user'])) {
                   </a></li>
                   <li><a href='https://github.com/RouteRover' target='_blank'>
                     <i class='fab fa-github' tabindex='0'></i>
-                  </a></li>                                                      
+                  </a></li>                                            
                   <li><a href='https://codepen.io/RouteRover' target='_blank'>
                     <i class='fab fa-codepen' tabindex='0'></i>
                   </a></li>
@@ -160,10 +156,8 @@ if (isset($_SESSION['user'])) {
         <div class='footer-col'>
             <h4>Company</h4>
             <ul>
-                <li><a href='#'>About us</a></li>
-                <li><a href='#'>Our Services</a></li>
-                <li><a href='#'>Privacy Policy</a></li>
-                <li><a href='#'>Affiliate Programme</a></li>
+                <li><a href='about.php'>About us</a></li>
+                <li><a href='services.php'>Our Services</a></li>
             </ul>
         </div>
         <div class='footer-col'>
@@ -194,7 +188,7 @@ if (isset($_SESSION['user'])) {
                   <li><a href='https://www.instagram.com/RouteRover/' target='_blank'>
                     <i class='fab fa-instagram' tabindex='0'></i>
                   </a></li>
-                  <li><a href='#'>
+                  <li><a href='https://pinterest.com/RouteRover'>
                     <i class='fab fa-pinterest' tabindex='0' target='_blank'></i>
                   </a></li>
                   <li><a href='#'>
@@ -202,7 +196,7 @@ if (isset($_SESSION['user'])) {
                   </a></li>
                   <li><a href='https://github.com/RouteRover' target='_blank'>
                     <i class='fab fa-github' tabindex='0'></i>
-                  </a></li>                                                      
+                  </a></li>                                            
                   <li><a href='https://codepen.io/RouteRover' target='_blank'>
                     <i class='fab fa-codepen' tabindex='0'></i>
                   </a></li>

@@ -14,8 +14,10 @@ if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
 } elseif (isset($_SESSION["admin"])) {
   header('Location: admin');
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Get the departure and destination locations from the form data
+  $table = " ";
   $departure = $_POST['loc1'];
   $destination = $_POST['loc2'];
   // Check if the posted locations are not empty and the location exists in the options
@@ -31,53 +33,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $stmt->bind_param("s", $departure);
       $stmt->execute();
       $result = $stmt->get_result();
+      $routeNo = 0; // Set a default value for $routeNo
       if ($result->num_rows > 0) {
         // Output the fare
-        while ($row = $result->fetch_assoc()) {
-
-          $routeNo = $row[$destination];
+        if ($departure !== $destination) {
+          while ($row = $result->fetch_assoc()) {
+            $routeNo = $row[$destination];
+          }
+        } else {
+          $table = "আপনি ইতোমধ্যে আপনার গন্তব্যে পৌছে গিয়েছেন। আপনি কি পুনরায় আপনার গন্তব্যস্থল নির্বাচন করতে চান?";
         }
       } else {
         echo "No route found.";
       }
       $stmt->close();
-      $tableName = "route" . $routeNo;
-      // Prepare the SQL query
-      $stmt = $con->prepare("SELECT $destination FROM $tableName WHERE name = ?");
-      $stmt->bind_param("s", $departure);
-      // Execute the SQL query
-      $stmt->execute();
 
-      // Get the result
-      $result = $stmt->get_result();
+      if ($departure !== $destination) {
+        $tableName = "route" . $routeNo;
+        // Prepare the SQL query
+        $stmt = $con->prepare("SELECT $destination FROM $tableName WHERE name = ?");
+        $stmt->bind_param("s", $departure);
+        // Execute the SQL query
+        $stmt->execute();
 
-      // Check if the query returned a result
-      $table = " ";
-      if ($result->num_rows > 0) {
-        // Output the fare
-        while ($row = $result->fetch_assoc()) {
-          // Create Table for output
-          $table = "<table>
-                  <tr>
-                    <th>যাত্রাস্থান</th>
-                    <th>গন্তব্যস্থল</th>
-                    <th>রুট নং</th>
-                    <th>ভাড়া</th>
-                  </tr>
-                  <tr>
-                    <td>$departure</td>
-                    <td>$destination</td>
-                    <td>$routeNo</td>
-                    <td>$row[$destination]</td>
-                  </tr>
-                </table>";
+        // Get the result
+        $result = $stmt->get_result();
+
+        // Check if the query returned a result
+        if ($result->num_rows > 0) {
+          // Output the fare
+          while ($row = $result->fetch_assoc()) {
+            // Create Table for output
+            $table = "
+                  ফলাফলঃ
+                  <table>
+                    <tr>
+                      <th>যাত্রাস্থান</th>
+                      <th>গন্তব্যস্থল</th>
+                      <th>রুট নং</th>
+                      <th>ভাড়া</th>
+                    </tr>
+                    <tr>
+                      <td>$departure</td>
+                      <td>$destination</td>
+                      <td>$routeNo</td>
+                      <td>$row[$destination] টাকা</td>
+                    </tr>
+                  </table>";
+          }
+        } else {
+          $table = "No results found.";
         }
-      } else {
-        $table = "No results found.";
-      }
 
-      // Close the statement
-      $stmt->close();
+        // Close the statement
+        $stmt->close();
+      }
 
     } else {
       $table = "Invalid location selected.";
@@ -93,6 +103,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="description"
     content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta name="keywords" content="RouteRover, Route Finder, Transport, Bus, Route, Destination, Pricing">
@@ -122,11 +135,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title> Home | RouteRover </title>
 
   <!-- Style Sheet -->
-  <link rel="stylesheet" href="css/style.css">
   <?php include 'src/lib/lib.html'; ?>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css?v=1.1">
 
   <!-- Font Family -->
   <link
@@ -141,11 +154,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <?php include 'src/inc/header.php'; ?>
   <section class="main">
     <div class="route-finder" id="route-finder" style="height:auto;">
-      <h1>RouteRover - এ আপনাকে স্বাগতম!</h1>
+      <h1>R<span style="color: white;">oute</span>R<span style="color: white;">over - এ আপনাকে স্বাগতম!</span> </h1>
       <p class="welcome">
         <!-- Want to find your Route no., Available transports and Pricing details for going to your next destination?
         RouteRover is here on your service!! Get everything on your fingertips with a single click. -->
-        আপনি কি আপনার পরবর্তী গন্তব্যস্থলে যাওয়ার জন্য আপনার রুট নম্বর, উক্ত রুটে সচল ্বাস এবং বাস ভাড়া জানতে চাচ্ছেন?
+        আপনি কি আপনার পরবর্তী গন্তব্যস্থলে যাওয়ার জন্য আপনার রুট নম্বর, উক্ত রুটে সচল বাস এবং বাস ভাড়া জানতে চাচ্ছেন?
         তাহলে RouteRover আছে আপনার সেবায়!! শুধু একটি ক্লিকের মাধ্যমে সব কিছু আপনার হাতের মুঠোয়।
       </p>
       <h2>Route Finder</h2>
@@ -184,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <h3> Contact Form </h3>
       <p>
         <!-- While using our services if you face any inconvenience then please inform us. -->
-        আমাদের সেবা ব্যবহার করার সময় আপনি যদি কোনও অসুবিধা অনুভব করেন তাহলে অনুগ্রহ করে আমাদের জানান।
+        আমাদের সার্ভিস ব্যবহার করার সময় আপনি যদি কোনও অসুবিধা অনুভব করেন তাহলে অনুগ্রহ করে আমাদের জানান।
 
       </p>
       <form action="contact.php" method="post">

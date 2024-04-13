@@ -33,7 +33,7 @@ session_start();
     <h2>Our Services</h2>
     <div class="row">
       <div class="column">
-        <a href="index.php#route-finder">
+        <a href="index#route-finder">
           <div class="card">
             <div class="icon-wrapper">
               <i class="fas fa-search-plus"></i>
