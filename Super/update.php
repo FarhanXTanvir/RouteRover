@@ -6,13 +6,13 @@ $username = $email = $password = "";
 $username_err = $email_err = $password_err = "";
 
 // Processing form data when form is submitted
-if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
+if (isset($_POST["id"]) && !empty($_POST["id"])) {
     // Get hidden input value
     $id = $_POST["id"];
 
     // Validate name
     $input_username = trim($_POST["username"]);
-    if (empty ($input_username)) {
+    if (empty($input_username)) {
         $username_err = "Please enter a username.";
     } elseif (!preg_match("/^[a-zA-Z0-9_]+$/", $input_username)) {
         $username_err = "Please enter a valid username. No spaces or special characters are allowed except underscore.";
@@ -22,7 +22,7 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
 
     // Validate email
     $input_email = trim($_POST["email"]);
-    if (empty ($input_email)) {
+    if (empty($input_email)) {
         $email_err = "Please enter an email.";
     } elseif (!filter_var($input_email, FILTER_VALIDATE_EMAIL)) {
         $email_err = "Please enter a valid email address.";
@@ -32,17 +32,17 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
 
     // Validate password
     $input_password = trim($_POST["password"]);
-    if (empty ($input_password)) {
+    if (empty($input_password)) {
         $password_err = "Please enter a password.";
-    } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $input_password)) {
-        $password_err = "Please enter a valid password. Must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@$!%*?&).";
+    } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/", $input_password)) {
+        $password_err = "Please enter a valid password. Must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@#$!%*?&).";
     } else {
         $password = $input_password;
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
     }
 
     // Check input errors before inserting in database
-    if (empty ($username_err) && empty ($email_err) && empty ($password_err)) {
+    if (empty($username_err) && empty($email_err) && empty($password_err)) {
         // Prepare an update statement
         $sql = "UPDATE admins SET username=?, email=?, password=? WHERE id=?";
 
@@ -74,7 +74,7 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
     mysqli_close($con);
 } else {
     // Check existence of id parameter before processing further
-    if (isset ($_GET["id"]) && !empty (trim($_GET["id"]))) {
+    if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         // Get URL parameter
         $id = trim($_GET["id"]);
 
@@ -150,7 +150,7 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
                         <div class="form-group">
                             <label>Username</label>
                             <input type="text" name="username"
-                                class="form-control <?php echo (!empty ($username_err)) ? 'is-invalid' : ''; ?>"
+                                class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
                                 value="<?php echo $username; ?>">
                             <span class="invalid-feedback">
                                 <?php echo $username_err; ?>
@@ -159,7 +159,7 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email" name="email"
-                                class="form-control <?php echo (!empty ($email_err)) ? 'is-invalid' : ''; ?>"
+                                class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>"
                                 value="<?php echo $email; ?>">
                             <span class="invalid-feedback">
                                 <?php echo $email_err; ?>
@@ -168,7 +168,7 @@ if (isset ($_POST["id"]) && !empty ($_POST["id"])) {
                         <div class="form-group">
                             <label> Password </label>
                             <input type="password" name="password"
-                                class="form-control <?php echo (!empty ($password_err)) ? 'is-invalid' : ''; ?>"
+                                class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"
                                 value="">
                             <span class="invalid-feedback">
                                 <?php echo $password_err; ?>

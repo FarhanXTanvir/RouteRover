@@ -1,111 +1,118 @@
 <?php
+// require_once './validators/config.php'; 
 // Start the session
 session_start();
-if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
-  if (isset($_COOKIE['user'])) {
-    $_SESSION["user"] = $_COOKIE['user'];
+// include './validators/check_cookie.php';
+if (isset($_SESSION["username"])) {
+  if ($_SESSION['role'] === "user") {
     header('Location: user');
-  } elseif (isset($_COOKIE['admin'])) {
-    $_SESSION["admin"] = $_COOKIE['admin'];
+  } else if ($_SESSION['role'] === "admin") {
     header('Location: admin');
   }
-} else if (isset($_SESSION["user"])) {
-  header('Location: user');
-} elseif (isset($_SESSION["admin"])) {
-  header('Location: admin');
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Get the departure and destination locations from the form data
-  $table = " ";
-  $departure = $_POST['loc1'];
-  $destination = $_POST['loc2'];
-  // Check if the posted locations are not empty and the location exists in the options
-
-  $locations = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
-  if (!empty($departure) && !empty($destination)) {
-    if (in_array($departure, $locations) && in_array($destination, $locations)) {
-      // Both locations are valid, connect database
-      require_once ('connect.php');
-
-      // Get the route number from the database
-      $stmt = $con->prepare("SELECT $destination FROM routes WHERE name = ?");
-      $stmt->bind_param("s", $departure);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      $routeNo = 0; // Set a default value for $routeNo
-      if ($result->num_rows > 0) {
-        // Output the fare
-        if ($departure !== $destination) {
-          while ($row = $result->fetch_assoc()) {
-            $routeNo = $row[$destination];
-          }
-        } else {
-          $table = "আপনি ইতোমধ্যে আপনার গন্তব্যে পৌছে গিয়েছেন। আপনি কি পুনরায় আপনার গন্তব্যস্থল নির্বাচন করতে চান?";
-        }
-      } else {
-        echo "No route found.";
-      }
-      $stmt->close();
-
-      if ($departure !== $destination) {
-        $tableName = "route" . $routeNo;
-        // Prepare the SQL query
-        $stmt = $con->prepare("SELECT $destination FROM $tableName WHERE name = ?");
-        $stmt->bind_param("s", $departure);
-        // Execute the SQL query
-        $stmt->execute();
-
-        // Get the result
-        $result = $stmt->get_result();
-
-        // Check if the query returned a result
-        if ($result->num_rows > 0) {
-          // Output the fare
-          while ($row = $result->fetch_assoc()) {
-            // Create Table for output
-            $table = "
-                  ফলাফলঃ
-                  <table>
-                    <tr>
-                      <th>যাত্রাস্থান</th>
-                      <th>গন্তব্যস্থল</th>
-                      <th>রুট নং</th>
-                      <th>ভাড়া</th>
-                    </tr>
-                    <tr>
-                      <td>$departure</td>
-                      <td>$destination</td>
-                      <td>$routeNo</td>
-                      <td>$row[$destination] টাকা</td>
-                    </tr>
-                  </table>";
-          }
-        } else {
-          $table = "No results found.";
-        }
-
-        // Close the statement
-        $stmt->close();
-      }
-
-    } else {
-      $table = "Invalid location selected.";
-    }
-  } else {
-    $table = "Please select both a departure and destination location.";
+} else if (isset($_COOKIE["username"])) {
+  if ($_COOKIE['role'] === "user") {
+    header('Location: user');
+  } else if ($_COOKIE['role'] === "admin") {
+    header('Location: admin');
   }
+} else if (isset($_COOKIE["super"]) || isset($_SESSION["super"])) {
+  header('Location: super.php');
 }
-?>
+
+$table = " ";
+$error = " ";
+$sqlAll = " ";
+// Get the last modification time of the routes.json file
+$routesLastModified = filemtime('script/routes.json');
+// Check if the last modification time is stored in the session
+if (!isset($_COOKIE['routesLastModified'])) {
+  // If not, store it in the session
+  setcookie('routesLastModified', $routesLastModified, time() + (86400 * 30), "/"); // 86400 = 1 da
+}
+
+$jsonData = file_get_contents('script/routes.json');
+// echo "<script>console.log('Current: $routesLastModified and LastMod: {$_COOKIE['routesLastModified']}');</script>";
+// Check if the unique values file exists
+if (!file_exists('script/unique_values.json') || $routesLastModified > $_COOKIE['routesLastModified']) {
+  // Log to the browser's console
+  // echo "<script>console.log('Unique Values Generated');</script>";
+
+  // Decode the JSON data into a PHP array
+  $data = json_decode($jsonData, true);
+  // If the file doesn't exist, compute the unique values
+
+  // Initialize an associative array to hold unique values
+  $uniqueValues = array();
+  require_once 'connect.php';
+  // Loop through each item in the data array
+  foreach ($data as $key => $values) {
+    $tableName = "রুট" . $key;
+
+    // // Start the SQL query
+    $sql = "CREATE TABLE IF NOT EXISTS $tableName (id INT AUTO_INCREMENT PRIMARY KEY, location VARCHAR(255) UNIQUE";
+
+    $location = "INSERT IGNORE INTO $tableName (location) VALUES ";
+    foreach ($values as $value) {
+      // Add a column for each value in the data array
+      $sql .= ", `$value` VARCHAR(255)";
+      $location .= "('$value'), ";
+
+      // Use the value as the key in the associative array
+      // This will automatically remove duplicates
+      $uniqueValues[$value] = true;
+    }
+    $location = rtrim($location, ", ") . ";";
+    // // End the SQL query
+    $sql .= "); " . $location . " ";
+
+    $sqlAll .= $sql . " ";
+
+    // Execute the SQL query
+    if ($con->multi_query($sql) === TRUE) {
+      do {
+        if ($result = $con->store_result()) {
+          $result->free();
+        }
+      } while ($con->more_results() && $con->next_result());
+
+      $sqlAll .= "<br>Table $tableName created successfully<br><br>";
+    } else {
+      $sqlAll .= "Error creating table $tableName: " . $con->error;
+    }
+  }
+  // Close the connection
+  $con->close();
+
+  // Get the keys of the associative array, which are the unique values
+  $uniqueValues = array_keys($uniqueValues);
+
+  // Sort the unique values
+  sort($uniqueValues);
+
+  // Save the unique values to a file
+  file_put_contents('script/unique_values.json', json_encode($uniqueValues));
+  $routesLastModified = filemtime('script/routes.json');
+  setcookie('routesLastModified', $routesLastModified, time() + (86400 * 30), "/");
+} else {
+  // echo "<script>console.log('Unique Values Exists');</script>";
+  // Decode the JSON data into a PHP array
+  $data = json_decode($jsonData, true);
+
+  // If the file exists, read the unique values from the file
+  $uniqueValues = json_decode(file_get_contents('script/unique_values.json'), true);
+}
+
+include './search.php'
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Expires" content="0"> -->
   <meta name="description"
     content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta name="keywords" content="RouteRover, Route Finder, Transport, Bus, Route, Destination, Pricing">
@@ -117,16 +124,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta property="og:description"
     content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta property="og:image" content="routerover_icon.png">
-  <meta property="og:url" content="https://routerover.000webhostapp.com/">
+  <meta property="og:url" content="https://routerover.free.nf/">
   <meta property="og:site_name" content="RouteRover">
   <meta name="twitter:title" content="RouteRover">
   <meta name="twitter:description"
     content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta name="twitter:image" content="routerover_icon.png">
-  <meta name="twitter:card" content="summary_large_image">
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
   <meta name="twitter:creator" content="@RouteRover">
   <meta name="twitter:site" content="@RouteRover">
-  <meta name="theme-color" content="#000000">
+  <!-- <meta name="theme-color" content="#000000"> -->
+
   <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
@@ -135,11 +143,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title> Home | RouteRover </title>
 
   <!-- Style Sheet -->
-  <?php include 'src/lib/lib.html'; ?>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="css/style.css?v=1.1">
+  <link rel="stylesheet" href="css/style.css">
+  <?php include 'src/inc.php'; ?>
+
 
   <!-- Font Family -->
   <link
@@ -162,32 +168,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         তাহলে RouteRover আছে আপনার সেবায়!! শুধু একটি ক্লিকের মাধ্যমে সব কিছু আপনার হাতের মুঠোয়।
       </p>
       <h2>Route Finder</h2>
-      <form action="index.php" method="post">
+      <form method="post">
         <div class="input">
-          <input class="input-field" name="loc1" list="loc1" placeholder="যাত্রাস্থান">
-          <datalist id="loc1">
+          <input class="input-field" name="dept" list="dept" aria-label="dept" placeholder="যাত্রাস্থান">
+          <datalist id="dept">
             <!-- options -->
-            <?php foreach ($locations as $location): ?>
-              <option value="<?php echo $location; ?>">
+            <?php foreach ($uniqueValues as $location): ?>
+              <option value="<?php print_r($location); ?>">
               <?php endforeach; ?>
           </datalist>
         </div>
         <div class="input">
-          <input class="input-field" name="loc2" list="loc2" placeholder="গন্তব্যস্থল">
-          <datalist id="loc2">
+          <input class="input-field" name="dest" list="dest" aria-label="dest" placeholder="গন্তব্যস্থল">
+          <datalist id="dest">
             <!-- options -->
-            <?php foreach ($locations as $location): ?>
-              <option value="<?php echo $location; ?>">
+            <?php foreach ($uniqueValues as $location): ?>
+              <option value="<?php print_r($location); ?>">
               <?php endforeach; ?>
           </datalist>
         </div>
-        <button type="submit">Search</button>
+        <button type="submit" value="search" name="search">Search</button>
       </form>
       <!-- Display the search results in a table -->
       <?php
-      if (isset($table)) {
-        echo "<div class=\"output\" style=\"color: white\">"
+      // Now $uniqueValues is a unique set of all values in the data array
+      if ($table !== " ") {
+        echo "
+        <div class='welcome'>
+          <span class='close'> x </span>"
           . $table .
+          "</div>";
+      } else if ($error !== " ") {
+        echo "
+          <div class='error'>
+            <span class='close'> x </span>"
+          . $error .
           "</div>";
       }
       ?>
@@ -200,21 +215,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         আমাদের সার্ভিস ব্যবহার করার সময় আপনি যদি কোনও অসুবিধা অনুভব করেন তাহলে অনুগ্রহ করে আমাদের জানান।
 
       </p>
-      <form action="contact.php" method="post">
+      <form method="post" id="contactForm">
         <div class="input">
           <label for="email">Email: </label>
-          <input type="email" placeholder="yourname@email.com" name="email" required>
+          <input type="text" placeholder="yourname@email.com" id="email" name="email" autocomplete="email">
         </div>
         <div class="input">
           <label for="message"> Message: </label>
-          <textarea placeholder="Type here..." name="comments" cols="25" rows="10"></textarea>
+          <textarea placeholder="Type here..." id="message" name="message" cols="25" rows="10"></textarea>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" value="contact" name="contact">Submit</button>
       </form>
+      <?php include './contact.php'; ?>
     </div>
     </div>
+    <?php
+    if ($sqlAll !== " ") {
+      echo "
+    <div class='success'> 
+      <span class='close'> x </span> "
+        . $sqlAll .
+        "</div>";
+    }
+    ?>
   </section>
   <?php include 'src/inc/footer.php'; ?>
+  <script src="script/script.js"></script>
 </body>
 
 </html>

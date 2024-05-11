@@ -1,16 +1,19 @@
 <?php
 session_start();
-
-if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
-    if (isset($_COOKIE['user'])) {
-        $_SESSION["user"] = $_COOKIE['user'];
+if (isset($_SESSION["username"])) {
+    if ($_SESSION['role'] === "user") {
+        header('Location: user');
+    } else if ($_SESSION['role'] === "admin") {
+        header('Location: admin');
     }
-    header('Location: user.php');
-} elseif (isset($_SESSION["admin"]) || isset($_COOKIE['admin'])) {
-    if (isset($_COOKIE['admin'])) {
-        $_SESSION["admin"] = $_COOKIE['admin'];
+} else {
+    if (isset($_COOKIE["username"])) {
+        if ($_COOKIE['role'] === "user") {
+            header('Location: user');
+        } else if ($_COOKIE['role'] === "admin") {
+            header('Location: admin');
+        }
     }
-    header('Location: admin.php');
 }
 ?>
 <!doctype html>
@@ -28,8 +31,7 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
 
     <!-- Style Sheet -->
     <link rel="stylesheet" href="css/login.css">
-    <?php include 'src/lib/lib.html'; ?>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <?php include 'src/inc.php'; ?>
 
     <!-- Font Family -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +41,10 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
         rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
 </head>
 
 <body>
@@ -47,36 +52,35 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
     <section>
         <div class="signin">
             <div class="content">
-                <h2>REGISTER</h2>
-                <?php require_once "entry.php"; ?>
-                <form action="register.php" method="post">
-                    <div class="form">
-                        <div class="inputBox">
-                            <input type="text" name="username"> <i class="fas fa-user"> Username </i>
-                        </div>
-                        <div class="inputBox">
-                            <input type="email" name="email"> <i class="fas fa-envelope"> Email </i>
-                        </div>
-                        <div class="inputBox">
-                            <input type="password" name="password"> <i class="fas fa-lock"> Password </i>
-                        </div>
-                        <div class="inputBox">
-                            <input type="password" name="cpassword"> <i class="fas fa-lock"> Confirm Password </i>
-                        </div>
-                        <div class="links">
-                            <p>Already Registered?</p> <a href="login.php">Signin</a>
-                        </div>
-
-                        <div class="inputBox">
-                            <input type="submit" value="Sign Up" name="register">
-                        </div>
+                <h2>Create Account</h2>
+                <form method="post">
+                    <div class="inputBox">
+                        <label for="username"><i class="fas fa-user" aria-hidden="true"></i> Username</label>
+                        <input type="text" name="username" id="username" autocomplete="username">
                     </div>
+                    <div class="inputBox">
+                        <label for="email"><i class="fas fa-envelope" aria-hidden="true"></i> Email</label>
+                        <input type="email" name="email" id="email" autocomplete="email">
+                    </div>
+                    <div class="inputBox">
+                        <label for="password"><i class="fas fa-lock" aria-hidden="true"></i> Password</label>
+                        <input type="password" name="password" id="password" autocomplete="new-password">
+                    </div>
+                    <div class="inputBox">
+                        <label for="cpassword"><i class="fas fa-lock" aria-hidden="true"></i> Confirm Password</label>
+                        <input type="password" name="cpassword" id="cpassword" autocomplete="new-password">
+                    </div>
+                    <div class="links">
+                        <p style="color: white;">Already Registered?</p> <a href="login.php">Login</a>
+                    </div>
+                    <?php require_once "./validators/entry.php"; ?>
+                    <input type="submit" value="REGISTER" name="register">
                 </form>
             </div>
         </div>
     </section>
     <?php include 'src/inc/footer.php'; ?>
-    <script src="script\script.js"></script>
+    <!-- <script src="script/register.js"></script> -->
 </body>
 
 </html>

@@ -12,13 +12,11 @@ if (isset($_POST['login'])) {
         $errors = array();
         if ($user) {
             if (password_verify($password, $user["password"])) {
-                $_SESSION["user"] = $user["username"];
-                $_SESSION["email"] = $user["email"];
-                $_SESSION["id"] = $user["id"];
-                // If they are, set a cookie to keep them logged in
-                setcookie('user', $username, time() + (86400 * 30), "/"); // 86400 = 1 day
-                header("Location: user.php");
-                die("Redirecting to User dashboard...");
+                $login = true;
+                echo "
+                <div class='success'>
+                    Login successful, Redirecting to User Dashboard... <span class='close'> x </span> 
+                </div>";
             } else {
                 array_push($errors, "Password does not match");
             }
@@ -34,13 +32,11 @@ if (isset($_POST['login'])) {
             array_push($errors, "You are not authorized to login as super admin");
         } else if ($user) {
             if (password_verify($password, $user["password"])) {
-                $_SESSION["admin"] = $user["username"];
-                $_SESSION["email"] = $user["email"];
-                $_SESSION["id"] = $user["id"];
-                // If they are, set a cookie to keep them logged in
-                setcookie('admin', $username, time() + (86400 * 30), "/"); // 86400 = 1 day
-                header("Location: admin.php");
-                die("Redirecting to Admin Panel...");
+                $login = true;
+                echo "
+                <div class='success'>
+                    Login successful, Redirecting to Admin Panel... <span class='close'> x </span> 
+                </div>";
             } else {
                 array_push($errors, "Password does not match");
             }
@@ -50,10 +46,28 @@ if (isset($_POST['login'])) {
     }
     if (count($errors) > 0) {
         foreach ($errors as $error) {
-            echo "<div class='error alert alert-danger alert-dismissible'>
-                <a href='#' class='close' data-dismiss='alert' aria-label='close'> &times;</a> $error
-                </div>";
+            echo "
+            <div class='error'>
+                <span class='close'> x </span> $error
+            </div>";
         }
+    } else if ($login === true) {
+        $_SESSION["username"] = $user["username"];
+        $_SESSION["email"] = $user["email"];
+        $_SESSION["id"] = $user["id"];
+        $_SESSION["role"] = $role;
+
+        // If they are, set a cookie to keep them logged in
+        setcookie('username', $_SESSION["username"], time() + (86400 * 30), "/"); // 86400 = 1 day
+        setcookie('id', $_SESSION["id"], time() + (86400 * 30), "/"); // 86400 = 1 day
+        setcookie('email', $_SESSION["email"], time() + (86400 * 30), "/"); // 86400 = 1 day
+        setcookie('role', $role, time() + (86400 * 30), "/"); // 86400 = 1 day
+
+        echo "
+        <script>
+            setTimeout(function(){
+            window.location.href = './index.php';
+            }, 1000);
+        </script>";
     }
 }
-?>

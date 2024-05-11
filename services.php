@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +8,7 @@ session_start();
 
   <!-- Style Sheet -->
   <link rel="stylesheet" href="css/services.css">
-  <?php include 'src/lib/lib.html'; ?>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <?php include 'src/inc.php'; ?>
 
   <!-- Font Family -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +18,10 @@ session_start();
     rel="stylesheet">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
 </head>
 
 <body>
@@ -59,20 +56,37 @@ session_start();
         </a>
       </div>
       <div class="column">
-        <div class="card">
-          <div class="icon-wrapper">
-            <i class="fas fa-wrench"></i>
+        <a class="reserveBus">
+          <div class="card">
+            <div class="icon-wrapper">
+              <i class="fas fa-wrench"></i>
+            </div>
+            <h3>Reserve Bus</h3>
+            <p>
+              Reserve local bus for group trips.
+            </p>
           </div>
-          <h3>Reserve Bus</h3>
-          <p>
-            Reserve local bus for group trips.
-          </p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
   <!-- ----------------- Footer Section --------------- -->
   <?php include 'src/inc/footer.php'; ?>
+  <script>
+    document.querySelector('.reserveBus').addEventListener('click', () => {
+      const row = document.querySelector('.row');
+      const div = `
+      <div class="error" style="padding: 1rem;">
+        <h2 style="color: red;">Service Unavailable</h2>
+        <span class="close"> x </span>
+        <p>
+          This service is currently unavailable. Please try again later.
+        </p> 
+      </div>`;
+      // add div in the row before end
+      row.insertAdjacentHTML('afterend', div);
+    });
+  </script>
 </body>
 
 </html>

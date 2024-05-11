@@ -1,20 +1,108 @@
-.wrapper{
-    width: 70%;
-    padding: 1%;
-    margin: auto auto;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-h2{
-    text-align: center;
+
+body {
+  background: #222;
 }
-th{
-    text-align: center;
+
+/* ---------About Section  -------------- */
+#ap h1 {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background: #17f9f5;
+  padding: 1rem;
+  margin: 0;
+  box-shadow: 0 0 0.15rem #3a3939;
 }
-td{
-    padding: 1%;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 1%;
+  color: white;
+  background: #3a39397d;
+  box-shadow: 0 0 0.15rem #3a3939;
 }
-.act{
-    display: flex;
-    justify-content: space-around;
-    gap: 10%;
-    padding: 1.5%;
+.table {
+  text-align: right;
+  margin: 1rem 0;
 }
+.container h2 {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background: #17f9f5;
+  padding: 1rem;
+  width: 40%;
+  margin-top: 0.4%;
+}
+.container .content {
+  display: flex;
+  justify-content: center;
+  width: 85%;
+}
+.container table {
+  width: 75%;
+  border-collapse: collapse;
+  margin-top: 2%;
+  font-size: 1rem;
+}
+.container th {
+  background: #17f9f5;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 0.5rem;
+  text-align: center;
+}
+.container tr {
+  background: #f9f9f9;
+  color: #333;
+  text-align: center;
+}
+.container td {
+  padding: 0.5rem;
+}
+.container tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.container tr:nth-child(odd) {
+  background: #f1f1f1;
+}
+.container tr:hover {
+  background: #affaf9;
+}
+.container th,
+.container td {
+  border: 1px solid #ddd;
+}
+
+a.addBtn {
+  margin-top: 2rem;
+}
+
+a .addAdmin {
+  justify-self: flex-end;
+  background: #06eb37;
+  color: black;
+  font-weight: 700;
+  padding: 0.5rem;
+  text-decoration: none;
+  border-radius: 0.4rem;
+}
+
+.container .act {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.act a {
+  text-decoration: none;
+  color: black;
+}
+/* ----------------- Media Query ---------------*/

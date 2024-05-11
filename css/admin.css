@@ -1,50 +1,111 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #222;
+}
+
+/* ---------About Section  -------------- */
+#ap h2 {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background: #0af761;
+  padding: 1rem;
+  margin: 0;
+  box-shadow: 0 0 0.15rem #3a3939;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* padding: 1%; */
+  color: white;
+  background: #3a39397d;
+  box-shadow: 0 0 0.15rem #3a3939;
+}
+.container h3 {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background: #17f9f5;
+  padding: 1rem;
+  width: 50%;
+  margin-top: 0.4%;
+}
+.container .content {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
+.content .table {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+a.addBtn {
+  text-decoration: none;
+  font-weight: bold;
+}
+.addToTable {
+  background: #06eb37;
+  color: black;
+  font-weight: 700;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+}
+.container table {
+  width: 100%;
+  text-align: center;
+  color: black;
+  border-collapse: collapse;
+}
+.container th {
+  background: #17f9f5;
+}
+.container tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.container tr:nth-child(odd) {
+  background: #f1f1f1;
+}
+.container tr:hover {
+  background: #affaf9;
+}
+.container table th,
+.container table td {
+  padding: 0.2rem 0.5rem;
+  border: 0.1rem solid #ddd;
+}
+
+.container table.adminList td {
+  font-size: 1vw;
+}
+.container table.adminList th {
+  font-size: 1.2vw;
+}
+.container table.adminList td p.longString {
+  overflow: auto;
+  resize: horizontal;
+}
+
+td.act a {
+  text-decoration: none;
+  margin-right: 0.22rem; /* Adjust as needed */
+}
+td.act a:last-child {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    width: 80%;
   }
-  
-  body{
-    background: #222;
+  .container h3 {
+    width: 60%;
   }
-  
-  /* ---------About Section  -------------- */
-  
-  .ap{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    margin: 2%;
-    padding: 5%;
-    color: white;
-    background: #333;
-  }
-  .ap-h2
-  {
-    text-align: center;
-    color: white;
-    margin-top: 1.5%;
-  }
-    
-  /* ----------------- Media Query ---------------*/  
-  @media screen and (min-width: 768px) {
-    section {
-      padding: 0 2em;
-    }
-    .column {
-      flex: 0 50%;
-      max-width: 50%;
-    }
-  }
-  @media screen and (min-width: 992px) {
-    section {
-      padding: 1em 3em;
-    }
-    .column {
-      flex: 0 0 33.33%;
-      max-width: 33.33%;
-    }
-  }
-    
+}
+/* ----------------- Media Query ---------------*/

@@ -1,4 +1,5 @@
 <?php
+// require_once './validators/check_cookie.php';
 require_once 'connect.php';
 
 // Function to get user data by username
@@ -8,10 +9,12 @@ function get_user_info($id)
 
     // Query the database
     // !Have to query via user id, because username is not primary key
-    if (isset ($_SESSION["admin"])) {
-        $sql = "SELECT * FROM admins WHERE id=$id";
-    } elseif (isset ($_SESSION["user"])) {
-        $sql = "SELECT * FROM users WHERE id=$id";
+    if (isset($_SESSION["username"])) {
+        if ($_SESSION["role"] === "admin") {
+            $sql = "SELECT * FROM admins WHERE id=$id";
+        } elseif ($_SESSION["role"] === "user") {
+            $sql = "SELECT * FROM users WHERE id=$id";
+        }
     } else {
         echo "No user logged in";
         exit();
@@ -35,4 +38,3 @@ function get_user_info($id)
 
 // Usage example
 $user = get_user_info($id);
-?>

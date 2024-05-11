@@ -11,10 +11,7 @@ session_start();
 
   <!-- Style Sheet -->
   <link rel="stylesheet" href="css/about.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <?php include 'src/lib/lib.html'; ?>
+  <?php include 'src/inc.php'; ?>
 
   <!-- Font Family -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,42 +21,25 @@ session_start();
     rel="stylesheet">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
 </head>
 
 <body>
   <?php include 'src/inc/header.php'; ?>
   <section id="#about">
-    <h2 class="abt-h2">About Us</h2>
-    <?php
-    if (isset ($_SESSION["admin"])) {
-      echo <<<FT
-          <div class="about">
-            <div class="content">
-              <p>Hi {$_SESSION["admin"]} </p>
-            </div>
-          </div>
-        FT;
-    } elseif (isset ($_SESSION["user"])) {
-      echo <<<FT
-          <div class="about">
-            <div class="content">
-              <p> Hi {$_SESSION["user"]} </p>
-            </div>
-          </div>
-        FT;
-    }
-    ?>
+    <h2 class="abt-h2">আমাদের উদ্দেশ্য ও কাজ</h2>
     <div class="about">
       <div class="content">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa aut beatae nihil blanditiis velit
-          consequuntur non molestias, eius aliquam animi quibusdam ea at voluptatum aperiam qui illum facilis, quasi,
-          quisquam a sint laboriosam. Voluptates eius consequatur, amet modi laborum autem culpa quod tempore saepe qui
-          dicta iusto eveniet quaerat.</p><br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa aut beatae nihil blanditiis velit
-          consequuntur non molestias, eius aliquam animi quibusdam ea at voluptatum aperiam qui illum facilis, quasi,
-          quisquam a sint laboriosam. Voluptates eius consequatur, amet modi laborum autem culpa quod tempore saepe qui
-          dicta iusto eveniet quaerat.</p>
+        <p>আমরা চট্টগ্রাম শহরে যাতায়াত ব্যবস্থায় সহায়তাকারী একটি সেবা প্রতিষ্ঠান। মূলত এই সেবা প্রদানকারী ওয়েবসাইটটি
+          আমাদের বিশ্ববিদ্যালয়ের প্রাতিষ্ঠানিক একটি প্রজেক্টের অংশ। আমরা চট্টগ্রাম শহরে যাতায়াতে যানবাহন ব্যবহার করার
+          কাজটাকে আরো সহজ করতে প্রজেক্টটির উদ্দ্যোগ নিয়েছি।
+          আমাদের প্রজেক্টের মূল উদ্দেশ্য হল চট্টগ্রাম শহরে যাতায়াতে যানবাহন ব্যবহার করার সময় সঠিক ও সহজ রাস্তা প্রদর্শন
+          করা এবং যাতায়াতয়া খরচ সম্পর্কে যথাযথ তথ্য পাওয়া। </p><br>
+        <p>এই প্রজেক্ট নিয়ে কাজ করছে চট্টগ্রাম প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়ের ইলেকট্রনিক্স ও টেলিকমিউনিকেশন বিভাগের
+          দুইজন শিক্ষার্থী ফারহান তানভীর(ID: 2008060) ও তানভীর আহমেদ সিফাত(ID: 2008018)। </p>
       </div>
     </div>
   </section>

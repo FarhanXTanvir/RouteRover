@@ -1,3 +1,6 @@
+<?php
+// header("Cache-Control: no-cache");
+?>
 <!-- -----------Header Section---------- -->
 <header>
   <!-- ----------- Header Cover---------- -->
@@ -5,50 +8,49 @@
     <h1>R<span>oute</span> R<span>over</span></h1>
     <p>Your one-stop travel companion</p>
   </div>
-  <?php
-  if (isset($_SESSION["admin"])) {
-    echo "
-            <nav class='top-nav'>
-              <ul>
-                <li><a href='index'>Home</a></li>
-                <li><a href='services'>Services</a></li>
-                <li><a href='about'>About</a></li>
-                <li><a href='index#contact'>Contact</a></li>
-                <div class='nv-button'>
-                  <a href='profile?id=" . $_SESSION["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
-                  <a href='logout'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
-                </div>
-              </ul>
-            </nav>";
-  } elseif (isset($_SESSION["user"])) {
-    echo "
-            <nav class='top-nav'>
-              <ul>
-                <li><a href='index'>Home</a></li>
-                <li><a href='services'>Services</a></li>
-                <li><a href='about'>About</a></li>
-                <li><a href='index#contact'>Contact</a></li>
-                <div class='nv-button'>
-                  <a href='profile?id=" . $_SESSION["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
-                  <a href='logout'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
-                </div>
-              </ul>
-            </nav>";
-  } else {
-    echo "
-            <nav class='top-nav'>
-              <ul>
-                <li><a href='index'>Home</a></li>
-                <li><a href='services'>Services</a></li>
-                <li><a href='about'>About</a></li>
-                <li><a href='index#contact'>Contact</a></li>
-                <div class='nv-button'>
-                  <a href='login'><button class='custom-button'>Login</button></a>
-                  <a href='register'><button class='custom-button'>Register</button></a>
-                </div>
-              </ul>
-            </nav>";
-  }
-  ?>
+  <nav class='top-nav'>
+    <ul>
+      <li><a href='index'>Home</a></li>
+      <li><a href='services'>Services</a></li>
+      <li><a href='about'>About</a></li>
+      <?php
+      if (isset($_COOKIE["role"])) {
+        if ($_COOKIE["role"] === "admin") {
+          echo "
+        <li class='nv-button'>
+          <a href='profile?id=" . $_COOKIE["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
+          <a href='logout'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
+        </li>
+        ";
+        } elseif ($_COOKIE["role"] === "user") {
+          echo "
+        <li><a href='index#contact'>Contact</a></li>
+        <li class='nv-button'>
+          <a href='profile?id=" . $_COOKIE["id"] . "'><button><i class='fas fa-user-circle'></i> Profile </button></a>
+          <a href='logout'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
+        </li>
+        ";
+        }
+      } elseif (isset($_COOKIE["super"])) {
+        echo "
+        <li class='nv-button'>
+          <a href='super/logout.php'><button><i class='fas fa-sign-out-alt'></i> Logout </button></a>
+        </li>
+        ";
+      } else {
+        echo "
+        <li><a href='index#contact'>Contact</a></li>
+        <li class='nv-button'>
+          <a href='login'><button class='custom-button'>Login</button></a>
+          <a href='register'><button class='custom-button'>Register</button></a>
+        </li>
+        ";
+      }
+      ?>
+    </ul>
+  </nav>
   <!-- Navigation bar -->
 </header>
+<div class='nv-hamburger'>
+  <button class='hamburger'>&#9776;</button>
+</div>

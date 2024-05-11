@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (isset($_POST['register'])) {
 	// Store the form post data into some variables
 	$username = $_POST['username'];
@@ -10,26 +10,26 @@ if (isset($_POST['register'])) {
 	$errors = array();
 
 	// Checking empty fields
-	if(empty($username) || empty($email) || empty($password) || empty($cpassword)) {
+	if (empty($username) || empty($email) || empty($password) || empty($cpassword)) {
 		array_push($errors, "All fields are required");
 	}
 	// Validating email syntax
-	if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		array_push($errors, "Email is not valid");
 	}
 	// Validating password rules
 	if (empty($password)) {
 		$password_err = "Please enter a password.";
-	} elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $password)) {
-		array_push($errors,"Please enter a valid password. Must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@$!%*?&).");
+	} elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/", $password)) {
+		array_push($errors, "Please enter a valid password. Must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@$!%*?&).");
 	} else {
 		// Hashing password for data security
 		$password_hash = password_hash($password, PASSWORD_DEFAULT);
 	}
-	
+
 	//Validating Confirmation password
-	if ($password !== $cpassword){
-		array_push($errors,"Confirmation Password does not match");
+	if ($password !== $cpassword) {
+		array_push($errors, "Confirmation Password does not match");
 	}
 
 	require_once 'connect.php';
@@ -38,20 +38,21 @@ if (isset($_POST['register'])) {
 
 	// Checking if same username already exists
 	$userCount = mysqli_num_rows($result);
-	if ($userCount>0) {
-		array_push($errors,"Username already exists!");
+	if ($userCount > 0) {
+		array_push($errors, "Username already exists!");
 	}
 	// If there are any errors print them one by one
-	if(count($errors)>0){
+	if (count($errors) > 0) {
 		//  $error contains each error message from $errors
-		foreach($errors as $error){
-			echo "<div class='error alert alert-danger alert-dismissible'>
-			<a href='#' class='close' data-dismiss='alert' aria-label='close'> &times;</a> $error
+		foreach ($errors as $error) {
+			echo "
+			<div class='error'>
+				<span class='close'> x </span> $error
 			</div>";
 		}
 	}
-// If there is no error then insert the data into database or add new user in DB
-	else{
+	// If there is no error then insert the data into database or add new user in DB
+	else {
 		$sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
 
 		// Initializing statement 
@@ -61,24 +62,21 @@ if (isset($_POST['register'])) {
 		$preparestmt = mysqli_stmt_prepare($stmt, $sql);
 
 		// If statement is prepared then bind the parameters
-		if($preparestmt){
+		if ($preparestmt) {
 			mysqli_stmt_bind_param($stmt, "sss", $username, $email, $password_hash);
 
 			// Execute the statement
 			mysqli_stmt_execute($stmt);
 			echo "
-			<div class='success alert alert-success alert-dismissible'>
-				<a href='#' class='close' data-dismiss='alert' aria-label='close'> &times;</a> Registration Successful. You can Login now!
+			<div class='success'>
+				<span class='close'> x </span> Registration Successful. You can Login now!
 			</div>";
 			// Close statement
 			mysqli_stmt_close($stmt);
-		}
-		else{
+		} else {
 			die("Oops! Something went wrong. Please try again later.");
-		} 
+		}
 	}
 	// Close connection
 	mysqli_close($con);
 }
-?>
-                

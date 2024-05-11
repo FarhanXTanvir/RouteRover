@@ -2,7 +2,7 @@
 if (isset($_POST['login'])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    
+
     require_once '../connect.php';
     $sql = "SELECT * FROM admins WHERE username = '$username'";
     $result = mysqli_query($con, $sql);
@@ -13,8 +13,14 @@ if (isset($_POST['login'])) {
             $_SESSION["super"] = $user["username"];
             // If they are, set a cookie to keep them logged in
             setcookie('super', $username, time() + (86400 * 30), "/"); // 86400 = 1 day
-            header("Location: ../super.php");
-            die("Redirecting to User dashboard...");
+            echo "<div class='success'>
+                Login successful, Redirecting to Super dashboard... <span class='close'> x </span> 
+                </div>
+                <script type='text/javascript'>
+                    setTimeout(function(){
+                    window.location.href = '../super.php';
+                    }, 1000);
+                </script>";
         } else {
             array_push($errors, "Password does not match");
         }
@@ -23,10 +29,9 @@ if (isset($_POST['login'])) {
     }
     if (count($errors) > 0) {
         foreach ($errors as $error) {
-            echo "<div class='error alert alert-danger alert-dismissible'>
-                <a href='#' class='close' data-dismiss='alert' aria-label='close'> &times;</a> $error
+            echo "<div class='error'>
+                 $error <span href='#' class='close'> x </span>
                 </div>";
         }
     }
 }
-?>

@@ -33,7 +33,7 @@ body {
   color: white;
   margin-bottom: 50px;
   padding: 1rem;
-  font-size: 15;
+  font-size: 1em;
 }
 
 .route-finder h2 {
@@ -71,32 +71,72 @@ body {
   text-align: center;
   margin: 1em auto;
 }
+.route-finder form {
+  margin-bottom: 1rem;
+}
 /* @section Table of results */
+span.dd {
+  color: black;
+  background: white;
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 1rem;
+  border: 0.1rem solid black;
+}
 table {
+  margin-top: 1rem;
   width: 100%;
   border-collapse: collapse;
+  color: black;
+  /* margin: 0.4rem auto; */
+}
+tr.tr {
+  background: white;
+  cursor: pointer;
+}
+tr.tr:hover {
+  background: #f6c780;
 }
 
 th,
 td {
-  border: 1px solid #ddd;
-  padding: 0.35em;
+  border: 0.1rem solid black;
+  padding: 0.2rem;
   text-align: center;
+  font-size: 1rem;
+}
+th {
+  background: orange;
+  font-size: 1.2rem;
+}
+td a {
+  text-decoration: none;
   color: black;
 }
-
-th {
-  background-color: #4caf50;
+.error {
+  position: relative;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  background: #edc6cb;
+  border: 0.1rem solid #f95668;
+  padding: 0.8rem 0.4rem;
+  margin: 0 auto;
+  margin-bottom: 0.2rem;
+  border-radius: 0.4rem;
+  width: 70%;
 }
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+.success {
+  position: relative;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  background: #09c97f;
+  border: 0.1rem solid #56f963;
+  padding: 0.8rem 0.4rem;
+  margin: 0 auto;
+  margin-bottom: 0.2rem;
+  border-radius: 0.4rem;
+  width: 70%;
 }
-
-tr:hover {
-  background-color: #ddd;
-}
-
 /* h1 @section Contact Form */
 .contact {
   text-align: center;
@@ -105,13 +145,14 @@ tr:hover {
   width: 60%;
   margin: 2em auto;
   padding: 3em;
-  box-shadow: 0 0rem 1.5rem rgba(0, 0, 0, 9); /* 15px/16px and 35px/16px */
+  box-shadow: 0 0rem 1.5rem rgba(0, 0, 0, 9);
 }
 
 .contact h3 {
   background: orange;
   color: black;
   text-align: center;
+  padding: 0.5rem 0;
 }
 
 .contact p {
@@ -124,12 +165,12 @@ tr:hover {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 1.25em; /* 20px/16px */
+  padding: 1.25em;
   background: #171616;
   width: 100%;
-  max-width: 37.5em; /* 600px/16px */
-  border-radius: 0.5em; /* 8px/16px */
-  box-shadow: 0px 0px 0.625em rgba(0, 0, 0, 0.1); /* 10px/16px */
+  max-width: 37.5em;
+  border-radius: 0.5em;
+  box-shadow: 0px 0px 0.625em rgba(0, 0, 0, 0.1);
 }
 
 .contact form .input {
@@ -140,46 +181,46 @@ tr:hover {
 .contact form input,
 .contact form textarea {
   width: 100%;
-  padding: 0.625em; /* 10px/16px */
-  border: 0.0625em solid #ddd; /* 1px/16px */
-  border-radius: 0.25em; /* 4px/16px */
+  padding: 0.625em;
+  border: 0.0625em solid #ddd;
+  border-radius: 0.25em;
 }
 
 .contact .input label {
   color: rgb(251, 251, 251);
   text-align: left;
   font-weight: bold;
-  margin-bottom: 0.3125em; /* 5px/16px */
+  margin-bottom: 0.3125em;
   display: block;
 }
 
 .contact button {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
   border: none;
   color: white;
   width: 60%;
-  padding: 0.6em 1.5em; /* 15px/16px and 32px/16px */
+  padding: 0.6em 1.5em;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1em; /* 16px/16px */
+  font-size: 1em;
   font-weight: bold;
-  margin: 0.25em auto; /* 4px/16px and 2px/16px */
+  margin: 0.25em auto;
   cursor: pointer;
-  border-radius: 0.35em; /* 4px/16px */
+  border-radius: 0.35em;
 }
 
 /*------------- Media Query---------- */
 /* Responsive layout - when the screen is less than 600px wide*/
 /* Media query for screens smaller than 37.5em (600px/16px) */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
   .main {
     width: 100%;
     padding: 1%;
     margin-top: 2%;
   }
   .route-finder {
-    width: 95%;
+    width: 90%;
     padding: 4%;
   }
   .route-finder h1 {
@@ -188,7 +229,7 @@ tr:hover {
     margin-bottom: 2%;
   }
   #contact {
-    width: 95%;
+    width: 90%;
     padding: 4%;
   }
   #contact p {
@@ -197,7 +238,37 @@ tr:hover {
   }
   #contact form {
     width: 92%;
-    margin: 4%;
+    margin: 2%;
+    padding: 3%;
+  }
+}
+/* 750px and 1200px */
+@media screen and (min-width: 750px) and (max-width: 1200px) {
+  .main {
+    width: 100%;
+    padding: 1%;
+    margin-top: 2%;
+  }
+  .route-finder {
+    width: 78%;
+    padding: 4%;
+  }
+  /* .route-finder h1 {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 2%;
+  } */
+  #contact {
+    width: 78%;
+    padding: 4%;
+  }
+  #contact p {
+    width: 95%;
+    padding: 4%;
+  }
+  #contact form {
+    width: 92%;
+    margin: 2% auto;
     padding: 3%;
   }
 }

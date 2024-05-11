@@ -1,6 +1,17 @@
 <?php
 // Start the session
-include 'auth_check.php';
+// $location = "admin.php";
+// include './validators/auth_check';
+// require_once './validators/config.php';
+session_start();
+include './validators/check_cookie.php';
+if (isset($_SESSION["username"])) {
+  if ($_SESSION['role'] === "user") {
+    header('Location: user');
+  }
+} else {
+  header('Location: login');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,14 +19,7 @@ include 'auth_check.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Home | Admin </title>
-
-  <!-- Style Sheet -->
-  <link rel="stylesheet" href="css/admin.css">
-  <?php include 'src/lib/lib.html'; ?>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title> Dashboard | Admin </title>
 
   <!-- Font Family -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,31 +29,53 @@ include 'auth_check.php';
     rel="stylesheet">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+
+  <!-- Custom CSS -->
+
+  <?php include 'src/inc.php'; ?>
+  <link rel="stylesheet" href="css/admin.css">
 
 </head>
 
 <body>
   <?php include 'src/inc/header.php'; ?>
-  <section id="#ap">
-    <h2 class="ap-h2">Admin Panel</h2>
-    <div class="ap">
+  <section id="ap">
+    <h2>Admin Panel</h2>
+    <?php echo "<h3 style='color: red; text-align: center; font-size: 2rem; margin: 1rem;'>Hey " . $_COOKIE['username'] . " " . $_COOKIE['id'] . "!</h3>"; ?>
+    <div class="container">
+      <h3>Routes</h3>
       <div class="content">
-        <?php echo "Hi " . $_SESSION['admin'] . $_SESSION['id']; ?>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa aut beatae nihil blanditiis velit
-          consequuntur non molestias, eius aliquam animi quibusdam ea at voluptatum aperiam qui illum facilis, quasi,
-          quisquam a sint laboriosam. Voluptates eius consequatur, amet modi laborum autem culpa quod tempore saepe qui
-          dicta iusto eveniet quaerat.</p><br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio culpa aut beatae nihil blanditiis velit
-          consequuntur non molestias, eius aliquam animi quibusdam ea at voluptatum aperiam qui illum facilis, quasi,
-          quisquam a sint laboriosam. Voluptates eius consequatur, amet modi laborum autem culpa quod tempore saepe qui
-          dicta iusto eveniet quaerat.</p>
+        <div class="table" style="width: 80%;">
+          <button class="addToTable">
+            <!-- <i class="fa-solid fa-plus"></i> -->
+            + Add Route
+          </button>
+          <table>
+            <thead>
+              <tr>
+                <th> Route No. </th>
+                <th class='act'> Actions </th>
+              </tr>
+            </thead>
+            <?php
+            for ($i = 1; $i <= 5; $i++) {
+              echo "<tr>";
+              echo "<td> Route $i </td>";
+              echo "<td class='act'd> <a href='admin.php?id=$i' title='Update Record'><i class='fa-solid fa-pencil'></i></a> <a href='admin.php?id=$i' title='View Record'><i class='fa-solid fa-user'></i></a> <a href='admin.php?id=$i' title='Delete Record'><i class='fa-solid fa-trash'></i></a> </td>";
+              echo "</tr>";
+            }
+            ?>
+          </table>
+        </div>
       </div>
     </div>
   </section>
   <!-- ----------------- Footer Section --------------- -->
   <?php include 'src/inc/footer.php'; ?>
-  <script src="script\script.js"></script>
 </body>
 
 </html>

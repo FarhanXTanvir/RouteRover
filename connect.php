@@ -17,7 +17,7 @@ $DB_NAME = 'routerover';
 // $DB_NAME = 'if0_36176538_routerover';
 
 $con = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME); // Check connection
+// Set character set to utf8mb4
 if (!$con) {
-    die ("Connection failed: " . mysqli_connect_error());
+    die("Connection failed: " . mysqli_connect_error());
 }
-?>

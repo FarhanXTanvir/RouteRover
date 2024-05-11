@@ -1,16 +1,19 @@
 <?php
+// require_once './validators/config.php';
 session_start();
-
-if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
-    if (isset($_COOKIE['user'])) {
-        $_SESSION["user"] = $_COOKIE['user'];
+// include './validators/check_cookie.php';
+if (isset($_SESSION["username"])) {
+    if ($_SESSION['role'] === "user") {
+        header('Location: user');
+    } else if ($_SESSION['role'] === "admin") {
+        header('Location: admin');
     }
-    header('Location: user');
-} elseif (isset($_SESSION["admin"]) || isset($_COOKIE['admin'])) {
-    if (isset($_COOKIE['admin'])) {
-        $_SESSION["admin"] = $_COOKIE['admin'];
+} else if (isset($_COOKIE["username"])) {
+    if ($_COOKIE['role'] === "user") {
+        header('Location: user');
+    } else if ($_COOKIE['role'] === "admin") {
+        header('Location: admin');
     }
-    header('Location: admin');
 }
 ?>
 <!doctype html>
@@ -23,9 +26,8 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
     <title> Login | RouteRover </title>
 
     <!-- Style Sheet -->
-    <?php include 'src/lib/lib.html'; ?>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <link rel="stylesheet" href="css/login.css">
+    <?php include 'src/inc.php'; ?>
 
 
     <!-- Font Family -->
@@ -36,49 +38,46 @@ if (isset($_SESSION["user"]) || isset($_COOKIE['user'])) {
         rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
 </head>
 
 <body>
     <?php include 'src/inc/header.php'; ?>
     <section>
         <div class="signin">
-            <div class="content">
-                <h2>Sign In</h2>
-                <?php require_once "authenticate.php"; ?>
-                <!-- <form action="login" method="post"> -->
-                <form action="login" method="post">
-                    <div class="form">
-                        <div class="inputBox" style="text-align:right;">
-                            <i class="fa-solid fa-shield"></i>
-                            <select name="role">
-                                <option name="user" value="user">user</option>
-                                <option name="admin" value="admin">admin</option>
-                            </select>
-                        </div>
-                        <div class="inputBox">
-                            <input type="text" name="username"> <i class="fas fa-user"> Username </i>
-                        </div>
+            <h2>LOGIN</h2>
+            <!-- <form action="login" method="post"> -->
+            <form method="post">
+                <p class="roleSelect">
+                    <i class="fa fa-shield" aria-hidden="true"></i>
+                    <select name="role" id="role" aria-label="Role">
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
+                </p>
+                <div class="inputBox">
+                    <label for="username"><i class="fas fa-user" aria-hidden="true"> </i> Username </label>
+                    <input type="text" name="username" id="username" autocomplete="username">
+                </div>
 
-                        <div class="inputBox">
-                            <input type="password" name="password"> <i class="fas fa-lock"> Password </i>
-                        </div>
+                <div class="inputBox">
+                    <label for="password"><i class="fas fa-lock" aria-hidden="true"></i> Password</label>
+                    <input type="password" name="password" id="password" autocomplete="current-password">
+                </div>
 
-                        <div class="links"> <a href="#">Forgot Password</a> <a href="register">Signup</a></div>
-
-                        <div class="inputBox">
-                            <input type="submit" value="Login" name="login">
-                        </div>
-                    </div>
-                </form>
-            </div>
+                <div class="links">
+                    <a href="#">Forgot Password</a> <a href="register">Register</a>
+                </div>
+                <?php require_once "./validators/authenticate.php"; ?>
+                <input type="submit" value="Login" name="login">
+            </form>
         </div>
     </section>
     <!-- ----------------- Footer Section --------------- -->
     <?php include 'src/inc/footer.php'; ?>
-    <!-- ----Script---- -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

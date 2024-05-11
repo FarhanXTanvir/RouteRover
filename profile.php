@@ -1,13 +1,20 @@
 <?php
+// require_once './validators/config.php';
 session_start();
+include './validators/check_cookie.php';
+
+if (!isset($_SESSION["username"])) {
+    header("location: super/error.php");
+    exit("Please login first.");
+}
 // Check existence of id parameter before processing further
-if (isset ($_GET["id"]) && !empty (trim($_GET["id"]))) {
+if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     // Get URL parameter
     $id = trim($_GET["id"]);
 } else {
     //URL doesn't contain id parameter. Redirect to error page
     header("location: super/error.php");
-    exit ("Please login first.");
+    exit("Please login first.");
     // echo "Please login first.";
 }
 

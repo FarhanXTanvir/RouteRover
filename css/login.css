@@ -6,115 +6,194 @@
 }
 
 body {
-  background: #222;
+  background: #222222;
 }
 section {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 2%;
+  padding: 4% 2%;
   flex-wrap: wrap;
   overflow: hidden;
 }
 
 section .signin {
-  width: 400px;
   background: #222;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  border-radius: 4px;
+  flex-direction: column;
+  width: 40%;
+  gap: 1%;
+  padding: 2%;
+  border-radius: 0.4rem;
   box-shadow: 0 0rem 1.5rem rgba(0, 0, 0, 9);
 }
-section .signin .content {
-  width: 100%;
+section .signin h2 {
+  font-size: 1.7rem;
+  color: rgb(27, 240, 105);
+  text-align: center;
+  margin-top: 2rem;
+}
+section .signin p:nth-child(1) {
+  align-self: flex-end;
+}
+section .signin form {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-direction: column;
-  gap: 40px;
+  gap: 1.4rem;
+  padding: 1rem;
+  margin-top: 0.4rem;
 }
-section .signin .content h2 {
-  font-size: 2em;
-  color: orange;
-}
-section .signin .content .form {
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-section .signin .content .form .inputBox {
-  position: relative;
-  width: 100%;
-}
-section .signin .content .form .inputBox input {
-  position: relative;
-  width: 100%;
+
+section .signin form .inputBox {
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1em;
   background: #333;
-  border: none;
-  outline: none;
-  padding: 25px 10px 7.5px;
-  border-radius: 4px;
+  width: 90%;
+  padding: 1.5%;
+  border-radius: 0.3rem;
+}
+section .signin form .inputBox input {
   color: #fff;
   font-weight: 500;
   font-size: 1em;
+  width: 95%;
+  background: #6d6c6c3b;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  margin: 1% auto;
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.4rem;
 }
-section .signin .content .form .inputBox i {
-  position: absolute;
-  left: 0;
-  width: 150%;
-  padding: 5px 10px;
-  font-style: normal;
+
+section .signin form .inputBox label {
+  display: block;
+  text-align: left;
+  color: #aaa;
+  width: 100%;
+}
+section .signin form i {
   color: #aaa;
 }
 
-.signin .content .links {
+.signin .links {
+  font-size: 1rem;
   position: relative;
-  width: 100%;
+  width: 95%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
-.signin .content .form .links a {
+.signin form .links a {
   color: #fff;
   text-decoration: none;
 }
-.signin .content .form .links a:nth-child(2) {
+.signin form .links a:nth-child(2) {
   color: rgb(83, 243, 30);
   font-weight: 600;
 }
-.signin .content .form .inputBox input[type="submit"] {
-  padding: 10px;
+.signin form input[type="submit"] {
+  padding: 0.5rem;
   background: orange;
+  border-radius: 0.2rem;
   color: #000;
   font-weight: 900;
   font-size: 1.35em;
   letter-spacing: 0.05em;
   cursor: pointer;
+  width: 68%;
 }
-input[type="submit"]:active {
+
+.signin form input[type="submit"]:active {
   opacity: 0.6;
 }
-.signin .content .form p {
-  color: white;
-  margin-right: 5px;
+.signin form input[type="submit"]:hover {
+  opacity: 0.6;
+  border: 0.1rem solid black;
 }
+
 .error {
+  position: relative;
   color: rgb(0, 0, 0);
+  text-align: center;
   background: #edc6cb;
-  border: 2px solid #f95668;
-  padding: 10px;
-  margin-bottom: 1px;
-  border-radius: 4px;
+  border: 0.1rem solid #f95668;
+  padding: 0.8rem 0.4rem;
+  margin: 0 auto;
+  margin-bottom: 0.2rem;
+  border-radius: 0.4rem;
+  width: 70%;
 }
 .success {
+  position: relative;
   color: rgb(0, 0, 0);
+  text-align: center;
   background: #09c97f;
-  border: 2px solid #56f963;
-  padding: 10px;
-  margin-bottom: 1px;
-  border-radius: 4px;
+  border: 0.1rem solid #56f963;
+  padding: 0.8rem 0.4rem;
+  margin: 0 auto;
+  margin-bottom: 0.2rem;
+  border-radius: 0.4rem;
+  width: 70%;
+}
+span.close {
+  color: #000000;
+  font-size: 1.4rem;
+  line-height: 0.8rem;
+  position: absolute;
+  top: 1.5%;
+  right: 1.5%;
+  cursor: pointer;
+}
+span.close:hover {
+  color: #f95668;
+}
+
+.fa-shield {
+  font-size: 1.5rem;
+  color: #00d0ff !important;
+}
+section .signin select {
+  font-size: 1rem;
+  outline: 0.1rem solid #74e4fd;
+  box-shadow: 0 0 0.1rem #61bdd2;
+  margin: 0 0.8rem 0 0.2rem;
+}
+
+@media screen and (max-width: 450px) {
+  section .signin {
+    width: 90%;
+  }
+  section .signin form .inputBox input {
+    width: 90%;
+  }
+  section .signin form .inputBox {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 450px) and (max-width: 700px) {
+  section .signin {
+    width: 75%;
+  }
+  section .signin form .inputBox input {
+    width: 90%;
+  }
+  section .signin form .inputBox {
+    width: 90%;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 1220px) {
+  section .signin {
+    width: 56%;
+  }
+  section .signin form .inputBox input {
+    width: 90%;
+  }
+  section .signin form .inputBox {
+    width: 90%;
+  }
 }
 
 /* .alert{
