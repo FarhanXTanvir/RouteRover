@@ -23,33 +23,33 @@ if (isset($_POST['search'])) {
         if (count($routeNo) > 0) {
           // Connect to the database
           require_once 'connect.php';
+          mysqli_set_charset($con, 'utf8');
           // Get the bus fare for each route number from the each table of routes
+
           $fare = array();
           foreach ($routeNo as $route) {
-            $tableCheck = "SHOW TABLES LIKE '$route'";
-            $tableCheckResult = mysqli_query($con, $tableCheck);
-            if (mysqli_num_rows($tableCheckResult) > 0) {
-              // The table exists, so you can run your query
-              $sql = "SELECT Fare FROM $route";
-              $result = mysqli_query($con, $sql);
-              // ...
-            } else {
-              $error .= "দুঃখিত, এই রুটে কোন তথ্য পাওয়া যায়নি।";
-              continue;
-            }
+            $tableName = "রুট" . $route;
+            // $tableName = "রুট" . "১০";
+            $sql = "SELECT `$destination` FROM `$tableName` WHERE location = ?";
+            $stmt = mysqli_prepare($con, $sql);
+            mysqli_stmt_bind_param($stmt, 's', $departure);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
             if (mysqli_num_rows($result) > 0) {
               while ($row = mysqli_fetch_assoc($result)) {
-                $fare[] = $row['Fare'];
+                $fare[$tableName] = $row[$destination];
               }
             }
           }
+
+
           $table = "
           <span class='dd'>" . $departure . " => " . $destination . "</span>
           <table class=\"table\">
-          <tr><th>Route No.</th><th>Fare</th></tr>";
-          foreach ($routeNo as $index => $route) {
-            $fareValue = isset($fare[$index]) ? $fare[$index] : 'N/A';
-            $table .= "<tr class='tr'><td><a href='#'> [click] " . $route . "</a></td><td>" . $fareValue . "</td></tr>";
+          <tr><th>রুট নং</th><th>ভাড়া</th></tr>";
+          foreach ($routeNo as $route) {
+            $fareValue = isset($fare["রুট" . $route]) ? $fare["রুট" . $route] : 'N/A';
+            $table .= "<tr class='tr'><td><a href='#'>" . $route . "</a></td><td>" . $fareValue . " টাকা </td></tr>";
           }
           $table .= "</table>";
         } else {

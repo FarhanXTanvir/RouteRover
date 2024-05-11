@@ -27,15 +27,18 @@ $routesLastModified = filemtime('script/routes.json');
 // Check if the last modification time is stored in the session
 if (!isset($_COOKIE['routesLastModified'])) {
   // If not, store it in the session
+  $_SESSION['routesLastModified'] = $routesLastModified;
   setcookie('routesLastModified', $routesLastModified, time() + (86400 * 30), "/"); // 86400 = 1 da
+} else {
+  $_SESSION['routesLastModified'] = $_COOKIE['routesLastModified'];
 }
 
 $jsonData = file_get_contents('script/routes.json');
-// echo "<script>console.log('Current: $routesLastModified and LastMod: {$_COOKIE['routesLastModified']}');</script>";
+echo "<script>console.log('Current: $routesLastModified and LastMod: {$_SESSION['routesLastModified']}');</script>";
 // Check if the unique values file exists
-if (!file_exists('script/unique_values.json') || $routesLastModified > $_COOKIE['routesLastModified']) {
+if (!file_exists('script/unique_values.json') || $routesLastModified > $_SESSION['routesLastModified']) {
   // Log to the browser's console
-  // echo "<script>console.log('Unique Values Generated');</script>";
+  echo "<script>console.log('Unique Values Generated');</script>";
 
   // Decode the JSON data into a PHP array
   $data = json_decode($jsonData, true);
@@ -66,22 +69,27 @@ if (!file_exists('script/unique_values.json') || $routesLastModified > $_COOKIE[
     $sql .= "); " . $location . " ";
 
     $sqlAll .= $sql . " ";
-
+    echo "<script>console.log('SQL Before execution');</script>";
     // Execute the SQL query
     if ($con->multi_query($sql) === TRUE) {
+      echo "<script>console.log('If true');</script>";
       do {
+        echo "<script>console.log('Do');</script>";
         if ($result = $con->store_result()) {
+          echo "<script>console.log('Do If true');</script>";
           $result->free();
         }
       } while ($con->more_results() && $con->next_result());
-
+      echo "<script>console.log('SQL After execution');</script>";
       $sqlAll .= "<br>Table $tableName created successfully<br><br>";
     } else {
+      echo "<script>console.log('Unexecuted');</script>";
       $sqlAll .= "Error creating table $tableName: " . $con->error;
     }
   }
   // Close the connection
   $con->close();
+  echo "<script>console.log('con closed');</script>";
 
   // Get the keys of the associative array, which are the unique values
   $uniqueValues = array_keys($uniqueValues);
@@ -94,7 +102,7 @@ if (!file_exists('script/unique_values.json') || $routesLastModified > $_COOKIE[
   $routesLastModified = filemtime('script/routes.json');
   setcookie('routesLastModified', $routesLastModified, time() + (86400 * 30), "/");
 } else {
-  // echo "<script>console.log('Unique Values Exists');</script>";
+  echo "<script>console.log('Unique Values Exists');</script>";
   // Decode the JSON data into a PHP array
   $data = json_decode($jsonData, true);
 
