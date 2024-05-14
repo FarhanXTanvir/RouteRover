@@ -1,6 +1,3 @@
-<?php
-// header("Cache-Control: no-cache");
-?>
 <!-- -----------Header Section---------- -->
 <header>
   <!-- ----------- Header Cover---------- -->

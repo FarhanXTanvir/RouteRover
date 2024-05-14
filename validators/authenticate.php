@@ -5,11 +5,15 @@ if (isset($_POST['login'])) {
     $password = $_POST["password"];
     require_once 'connect.php';
 
-    if ($role === 'user') {
+    $errors = array();
+    if (empty($username) || empty($password)) {
+        array_push($errors, "All fields are required");
+    }
+
+    if ($role === 'user' && count($errors) === 0) {
         $sql = "SELECT * FROM users WHERE username = '$username'";
         $result = mysqli_query($con, $sql);
         $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        $errors = array();
         if ($user) {
             if (password_verify($password, $user["password"])) {
                 $login = true;
@@ -23,11 +27,10 @@ if (isset($_POST['login'])) {
         } else {
             array_push($errors, "Username does not exist");
         }
-    } elseif ($role === 'admin') {
+    } elseif ($role === 'admin' && count($errors) === 0) {
         $sql = "SELECT * FROM admins WHERE username = '$username'";
         $result = mysqli_query($con, $sql);
         $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        $errors = array();
         if ($username === 'super') {
             array_push($errors, "You are not authorized to login as super admin");
         } else if ($user) {

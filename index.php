@@ -19,9 +19,7 @@ if (isset($_SESSION["username"])) {
   header('Location: super.php');
 }
 
-$table = " ";
-$error = " ";
-$sqlAll = " ";
+$jsonData = file_get_contents('script/routes.json');
 // Get the last modification time of the routes.json file
 $routesLastModified = filemtime('script/routes.json');
 // Check if the last modification time is stored in the session
@@ -33,7 +31,11 @@ if (!isset($_COOKIE['routesLastModified'])) {
   $_SESSION['routesLastModified'] = $_COOKIE['routesLastModified'];
 }
 
-$jsonData = file_get_contents('script/routes.json');
+$table = " ";
+$error = " ";
+$sqlAll = " ";
+
+
 echo "<script>console.log('Current: $routesLastModified and LastMod: {$_SESSION['routesLastModified']}');</script>";
 // Check if the unique values file exists
 if (!file_exists('script/unique_values.json') || $routesLastModified > $_SESSION['routesLastModified']) {
@@ -47,14 +49,15 @@ if (!file_exists('script/unique_values.json') || $routesLastModified > $_SESSION
   // Initialize an associative array to hold unique values
   $uniqueValues = array();
   require_once 'connect.php';
+  mysqli_set_charset($con, 'utf8');
   // Loop through each item in the data array
   foreach ($data as $key => $values) {
     $tableName = "রুট" . $key;
 
-    // // Start the SQL query
-    $sql = "CREATE TABLE IF NOT EXISTS $tableName (id INT AUTO_INCREMENT PRIMARY KEY, location VARCHAR(255) UNIQUE";
+    // Start the SQL query
+    $sql = "CREATE TABLE IF NOT EXISTS `$tableName` (id INT AUTO_INCREMENT PRIMARY KEY, location VARCHAR(255) UNIQUE";
 
-    $location = "INSERT IGNORE INTO $tableName (location) VALUES ";
+    $location = "INSERT IGNORE INTO `$tableName` (location) VALUES ";
     foreach ($values as $value) {
       // Add a column for each value in the data array
       $sql .= ", `$value` VARCHAR(255)";
@@ -65,31 +68,25 @@ if (!file_exists('script/unique_values.json') || $routesLastModified > $_SESSION
       $uniqueValues[$value] = true;
     }
     $location = rtrim($location, ", ") . ";";
-    // // End the SQL query
+    // End the SQL query
     $sql .= "); " . $location . " ";
 
     $sqlAll .= $sql . " ";
-    echo "<script>console.log('SQL Before execution');</script>";
+
     // Execute the SQL query
     if ($con->multi_query($sql) === TRUE) {
-      echo "<script>console.log('If true');</script>";
       do {
-        echo "<script>console.log('Do');</script>";
         if ($result = $con->store_result()) {
-          echo "<script>console.log('Do If true');</script>";
           $result->free();
         }
       } while ($con->more_results() && $con->next_result());
-      echo "<script>console.log('SQL After execution');</script>";
       $sqlAll .= "<br>Table $tableName created successfully<br><br>";
     } else {
-      echo "<script>console.log('Unexecuted');</script>";
       $sqlAll .= "Error creating table $tableName: " . $con->error;
     }
   }
   // Close the connection
   $con->close();
-  echo "<script>console.log('con closed');</script>";
 
   // Get the keys of the associative array, which are the unique values
   $uniqueValues = array_keys($uniqueValues);
@@ -111,6 +108,7 @@ if (!file_exists('script/unique_values.json') || $routesLastModified > $_SESSION
 }
 
 include './search.php'
+
   ?>
 <!DOCTYPE html>
 <html lang="en">
