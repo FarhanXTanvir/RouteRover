@@ -29,14 +29,6 @@ if (isset($_SESSION["username"])) {
     <link rel="stylesheet" href="css/login.css">
     <?php include 'src/inc.php'; ?>
 
-
-    <!-- Font Family -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
@@ -49,23 +41,23 @@ if (isset($_SESSION["username"])) {
     <section>
         <div class="signin">
             <h2>LOGIN</h2>
-            <!-- <form action="login" method="post"> -->
             <form method="post">
                 <p class="roleSelect">
-                    <i class="fa fa-shield" aria-hidden="true"></i>
+                    <i class="admin-shield fa fa-shield" aria-hidden="true"></i>
                     <select name="role" id="role" aria-label="Role">
                         <option value="user">user</option>
                         <option value="admin">admin</option>
                     </select>
                 </p>
                 <div class="inputBox">
-                    <label for="username"><i class="fas fa-user" aria-hidden="true"> </i> Username </label>
-                    <input type="text" name="username" id="username" autocomplete="username">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <input type="text" name="username" id="username" area-label="username" placeholder="Username"
+                        autocomplete="username">
                 </div>
-
                 <div class="inputBox">
-                    <label for="password"><i class="fas fa-lock" aria-hidden="true"></i> Password</label>
-                    <input type="password" name="password" id="password" autocomplete="current-password">
+                    <i class="fas fa-lock" aria-hidden="true"></i>
+                    <input type="password" name="password" id="password" area-label="password" placeholder="Password"
+                        autocomplete="current-password">
                 </div>
 
                 <div class="links">

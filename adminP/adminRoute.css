@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  background-color: #f1f1f1;
+  font-size: 1.5rem;
+  padding: 2rem;
+}
+h1,
+h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.route {
+  /* background: #000000; */
+  /* color: white; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+.route table {
+  border-collapse: collapse;
+}
+.route td,
+.route th {
+  padding: 0.5rem;
+  width: 3rem;
+  border: 0.2rem solid black;
+  text-align: center;
+}
+.route td:nth-child(2),
+.route td:nth-child(3) {
+  width: 15rem;
+}
+.route input {
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  width: 5rem;
+  text-align: center;
+}
+
+.form {
+  background-color: #fff;
+  background: rgb(210, 173, 173);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(250, 227, 227);
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  margin-top: 1rem;
+}
+
+div.pair {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgb(211, 189, 189);
+  border-radius: 0.4rem;
+}
+
+div.input {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.input input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+input[name="route"] {
+  font-size: 1.6rem;
+  font-weight: bolder;
+  color: black;
+}
+button,
+#createRoute {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 0.2rem solid #ccc;
+  border-radius: 0.6rem;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+#createRoute {
+  width: 40%;
+}
+#updateRoutes {
+  width: 40%;
+}
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  width: 40%;
+}
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-plus-circle,
+.fa-times-circle {
+  cursor: pointer;
+}
+.fa-plus-circle,
+.fa-times-circle {
+  opacity: 0.75;
+}
+.fa-plus-circle {
+  font-size: 2rem;
+  color: rgb(34, 194, 2);
+}
+.fa-times-circle {
+  margin-right: 0.2rem;
+  margin-top: 0.2rem;
+  font-size: 1.3rem;
+  color: rgb(242, 12, 12);
+}
+td table .fa-xmark,
+td table .fa-check {
+  cursor: pointer;
+  font-size: 1rem;
+}

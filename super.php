@@ -16,13 +16,6 @@ if (!isset($_SESSION["super"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Dashboard | Super </title>
 
-  <!-- Font Family -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
@@ -39,11 +32,11 @@ if (!isset($_SESSION["super"])) {
 <body>
   <?php include 'src/inc/header.php'; ?>
   <section id="ap">
-    <h2>Super Panel</h2>
+    <h1>Super Panel</h1>
     <div class="container">
-      <h3>Admin List</h3>
+      <h2>Admin List</h2>
       <div class="content">
-        <div class="table">
+        <div class="table adminTable">
           <a href="super/create.php" class="addBtn">
             <button class="addToTable">
               <!-- <i class="fa-solid fa-plus"></i> -->
@@ -64,7 +57,6 @@ if (!isset($_SESSION["super"])) {
                           <th>#</th>
                           <th>Username</th>
                           <th>Email</th>
-                          <th class='longString'>Password</th>
                           <th class='act'>Action</th>
                       </tr>
                   </thead>";
@@ -74,7 +66,7 @@ if (!isset($_SESSION["super"])) {
                       <td>" . $count . "</td>";
                 echo "<td>" . $user['username'] . "</td>";
                 echo "<td>" . $user['email'] . "</td>";
-                echo "<td class='longString'><p>" . $user['password'] . "</p></td>";
+                // echo "<td class='longString'><p>" . $user['password'] . "</p></td>";
                 echo "<td class='act'>";
                 echo '<a href="super/read.php?id=' . $user['id'] . '" title="View Record"><i
                                 class="fa-solid fa-user"></i></a>';

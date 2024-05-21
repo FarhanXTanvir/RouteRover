@@ -25,20 +25,9 @@ if (isset($_SESSION["username"])) {
 
     <title> Register | RouteRover </title>
 
-    <!-- ----Script---- -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
     <!-- Style Sheet -->
     <link rel="stylesheet" href="css/login.css">
     <?php include 'src/inc.php'; ?>
-
-    <!-- Font Family -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
@@ -55,20 +44,24 @@ if (isset($_SESSION["username"])) {
                 <h2>Create Account</h2>
                 <form method="post">
                     <div class="inputBox">
-                        <label for="username"><i class="fas fa-user" aria-hidden="true"></i> Username</label>
-                        <input type="text" name="username" id="username" autocomplete="username">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <input type="text" name="username" id="username" area-label="username" placeholder="Username"
+                            autocomplete="username">
                     </div>
                     <div class="inputBox">
-                        <label for="email"><i class="fas fa-envelope" aria-hidden="true"></i> Email</label>
-                        <input type="email" name="email" id="email" autocomplete="email">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <input type="email" name="email" id="email" area-label="email" placeholder="Email"
+                            autocomplete="email">
                     </div>
                     <div class="inputBox">
-                        <label for="password"><i class="fas fa-lock" aria-hidden="true"></i> Password</label>
-                        <input type="password" name="password" id="password" autocomplete="new-password">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="password" id="password" area-label="password"
+                            placeholder="Password" autocomplete="new-password">
                     </div>
                     <div class="inputBox">
-                        <label for="cpassword"><i class="fas fa-lock" aria-hidden="true"></i> Confirm Password</label>
-                        <input type="password" name="cpassword" id="cpassword" autocomplete="new-password">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="cpassword" id="cpassword" area-label="cpassword"
+                            placeholder="Confirm Password" autocomplete="new-password">
                     </div>
                     <div class="links">
                         <p style="color: white;">Already Registered?</p> <a href="login.php">Login</a>

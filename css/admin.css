@@ -8,9 +8,27 @@
 body {
   background: #222;
 }
-
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 0.2rem solid #000000;
+  padding: 0.6rem 0.4rem;
+  text-align: center;
+  font-size: large;
+}
+th {
+  background: #68f3f3;
+  color: black;
+}
+td {
+  background: #d7f5f5;
+  color: black;
+}
 /* ---------About Section  -------------- */
-#ap h2 {
+#ap h1 {
+  font-size: 2rem;
   text-align: center;
   color: rgb(0, 0, 0);
   background: #0af761;
@@ -23,28 +41,57 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  /* padding: 1%; */
+  padding: 1%;
   color: white;
   background: #3a39397d;
   box-shadow: 0 0 0.15rem #3a3939;
 }
-.container h3 {
+.container h2 {
+  font-size: 1.8rem;
   text-align: center;
   color: rgb(0, 0, 0);
   background: #17f9f5;
   padding: 1rem;
   width: 50%;
   margin-top: 0.4%;
+  margin-bottom: 0.4%;
 }
-.container .content {
-  display: flex;
-  justify-content: center;
-  width: 90%;
+.content {
+  width: 80%;
+  margin: 1rem auto;
+  /* background: green; */
 }
-.content .table {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+
+.routes {
+  width: 95%;
+  margin: 1rem auto;
+  /* background: red; */
+  text-align: right;
+}
+.routes table {
+  width: 100%;
+}
+.routes th {
+  font-size: 2rem;
+}
+.routes td {
+  font-size: 1.75rem;
+}
+
+.adminTable {
+  width: 100%;
+  margin: 1rem auto;
+  text-align: right;
+}
+.adminTable table {
+  width: 100%;
+}
+td.act a {
+  color: black;
+  margin-right: 0.3rem;
+}
+td.act a:last-child {
+  margin-right: 0;
 }
 a.addBtn {
   text-decoration: none;
@@ -56,48 +103,30 @@ a.addBtn {
   font-weight: 700;
   padding: 0.5rem;
   border-radius: 0.4rem;
+  font-size: 1.35rem;
 }
-.container table {
-  width: 100%;
+
+.operations a button {
+  /* width: 30%; */
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: 1.6rem;
+  border: 0.2rem solid #ccc;
+  border-radius: 0.6rem;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.operations {
+  width: 50%;
   text-align: center;
-  color: black;
-  border-collapse: collapse;
 }
-.container th {
-  background: #17f9f5;
-}
-.container tr:nth-child(even) {
-  background: #f9f9f9;
-}
-.container tr:nth-child(odd) {
-  background: #f1f1f1;
-}
-.container tr:hover {
-  background: #affaf9;
-}
-.container table th,
-.container table td {
-  padding: 0.2rem 0.5rem;
-  border: 0.1rem solid #ddd;
-}
-
-.container table.adminList td {
-  font-size: 1vw;
-}
-.container table.adminList th {
-  font-size: 1.2vw;
-}
-.container table.adminList td p.longString {
-  overflow: auto;
-  resize: horizontal;
-}
-
-td.act a {
-  text-decoration: none;
-  margin-right: 0.22rem; /* Adjust as needed */
-}
-td.act a:last-child {
-  margin-right: 0;
+.seeRoutes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 768px) {

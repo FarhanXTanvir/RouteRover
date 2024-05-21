@@ -22,18 +22,11 @@ if (!isset($_COOKIE['super'])) {
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
-
-  <!-- Font Family -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../assets/fontawesome/fontawesome.css" />
+
+  <!-- Google Fonts --> <!-- Poppins -->
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
 
   <!-- Style Sheet -->
   <link rel="stylesheet" href="../css/login.css?v=1">
@@ -56,17 +49,18 @@ if (!isset($_COOKIE['super'])) {
   <section>
     <div class="signin">
       <div class="content">
+        <i class="super-shield fa fa-shield" aria-hidden="true"></i>
         <h2>SUPER LOGIN</h2>
-        <form action="login.php" method="post">
-          <i class="fa fa-shield" aria-hidden="true"></i>
+        <form method="post">
           <div class="inputBox">
-            <label for="username"><i class="fas fa-user" aria-hidden="true"> </i> Username </label>
-            <input type="text" name="username" id="username" autocomplete="username">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <input type="text" name="username" id="username" area-label="username" placeholder="Username"
+              autocomplete="username">
           </div>
-
           <div class="inputBox">
-            <label for="password"><i class="fas fa-lock" aria-hidden="true"></i> Password</label>
-            <input type="password" name="password" id="password" autocomplete="current-password">
+            <i class="fas fa-lock" aria-hidden="true"></i>
+            <input type="password" name="password" id="password" area-label="password" placeholder="Password"
+              autocomplete="current-password">
           </div>
           <?php require_once "authenticate.php"; ?>
           <input type="submit" value="Login" name="login">

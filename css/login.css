@@ -35,6 +35,9 @@ section .signin h2 {
 section .signin p:nth-child(1) {
   align-self: flex-end;
 }
+section .signin .content {
+  text-align: center;
+}
 section .signin form {
   display: flex;
   flex-direction: column;
@@ -45,36 +48,35 @@ section .signin form {
 }
 
 section .signin form .inputBox {
+  display: flex;
+  justify-content: left;
+  align-items: center;
   color: #fff;
   text-align: center;
   font-weight: 700;
-  font-size: 1em;
   background: #333;
   width: 90%;
-  padding: 1.5%;
+  padding: 2%;
+  margin: 1.5% 0;
   border-radius: 0.3rem;
 }
 section .signin form .inputBox input {
   color: #fff;
-  font-weight: 500;
-  font-size: 1em;
-  width: 95%;
+  font-weight: bold;
+  font-size: 1.2em;
+  width: 90%;
   background: #6d6c6c3b;
   border: none;
   outline: none;
   border-radius: 0.2rem;
   margin: 1% auto;
-  padding: 0.2rem 0.6rem;
+  padding: 0.4rem 0.6rem;
   margin-top: 0.4rem;
 }
 
-section .signin form .inputBox label {
-  display: block;
-  text-align: left;
-  color: #aaa;
-  width: 100%;
-}
 section .signin form i {
+  font-size: 1.5rem;
+  margin-right: 0.2rem;
   color: #aaa;
 }
 
@@ -150,7 +152,11 @@ span.close:hover {
   color: #f95668;
 }
 
-.fa-shield {
+section .signin i.super-shield {
+  font-size: 2.5rem;
+  color: #00d0ff !important;
+}
+section .signin i.admin-shield {
   font-size: 1.5rem;
   color: #00d0ff !important;
 }

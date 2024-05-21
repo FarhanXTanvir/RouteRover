@@ -10,106 +10,24 @@ if (isset($_SESSION["username"])) {
     header('Location: admin');
   }
 } else if (isset($_COOKIE["username"])) {
-  if ($_COOKIE['role'] === "user") {
-    header('Location: user');
-  } else if ($_COOKIE['role'] === "admin") {
-    header('Location: admin');
+  if (isset($_COOKIE['role'])) {
+    if ($_COOKIE['role'] === "user") {
+      header('Location: user');
+    } else if ($_COOKIE['role'] === "admin") {
+      header('Location: admin');
+    }
   }
 } else if (isset($_COOKIE["super"]) || isset($_SESSION["super"])) {
   header('Location: super.php');
 }
-
-$jsonData = file_get_contents('script/routes.json');
-// Get the last modification time of the routes.json file
-$routesLastModified = filemtime('script/routes.json');
-// Check if the last modification time is stored in the session
-if (!isset($_COOKIE['routesLastModified'])) {
-  // If not, store it in the session
-  $_SESSION['routesLastModified'] = $routesLastModified;
-  setcookie('routesLastModified', $routesLastModified, time() + (86400 * 30), "/"); // 86400 = 1 da
-} else {
-  $_SESSION['routesLastModified'] = $_COOKIE['routesLastModified'];
+$uniqueValues = json_decode(file_get_contents('script/unique_values.json'), true);
+$options = "";
+foreach ($uniqueValues as $location) {
+  $options .= <<<FT
+  <option value="$location"></option>
+FT;
 }
-
-$table = " ";
-$error = " ";
-$sqlAll = " ";
-
-
-echo "<script>console.log('Current: $routesLastModified and LastMod: {$_SESSION['routesLastModified']}');</script>";
-// Check if the unique values file exists
-if (!file_exists('script/unique_values.json') || $routesLastModified > $_SESSION['routesLastModified']) {
-  // Log to the browser's console
-  echo "<script>console.log('Unique Values Generated');</script>";
-
-  // Decode the JSON data into a PHP array
-  $data = json_decode($jsonData, true);
-  // If the file doesn't exist, compute the unique values
-
-  // Initialize an associative array to hold unique values
-  $uniqueValues = array();
-  require_once 'connect.php';
-  mysqli_set_charset($con, 'utf8');
-  // Loop through each item in the data array
-  foreach ($data as $key => $values) {
-    $tableName = "রুট" . $key;
-
-    // Start the SQL query
-    $sql = "CREATE TABLE IF NOT EXISTS `$tableName` (id INT AUTO_INCREMENT PRIMARY KEY, location VARCHAR(255) UNIQUE";
-
-    $location = "INSERT IGNORE INTO `$tableName` (location) VALUES ";
-    foreach ($values as $value) {
-      // Add a column for each value in the data array
-      $sql .= ", `$value` VARCHAR(255)";
-      $location .= "('$value'), ";
-
-      // Use the value as the key in the associative array
-      // This will automatically remove duplicates
-      $uniqueValues[$value] = true;
-    }
-    $location = rtrim($location, ", ") . ";";
-    // End the SQL query
-    $sql .= "); " . $location . " ";
-
-    $sqlAll .= $sql . " ";
-
-    // Execute the SQL query
-    if ($con->multi_query($sql) === TRUE) {
-      do {
-        if ($result = $con->store_result()) {
-          $result->free();
-        }
-      } while ($con->more_results() && $con->next_result());
-      $sqlAll .= "<br>Table $tableName created successfully<br><br>";
-    } else {
-      $sqlAll .= "Error creating table $tableName: " . $con->error;
-    }
-  }
-  // Close the connection
-  $con->close();
-
-  // Get the keys of the associative array, which are the unique values
-  $uniqueValues = array_keys($uniqueValues);
-
-  // Sort the unique values
-  sort($uniqueValues);
-
-  // Save the unique values to a file
-  file_put_contents('script/unique_values.json', json_encode($uniqueValues));
-  $routesLastModified = filemtime('script/routes.json');
-  setcookie('routesLastModified', $routesLastModified, time() + (86400 * 30), "/");
-} else {
-  echo "<script>console.log('Unique Values Exists');</script>";
-  // Decode the JSON data into a PHP array
-  $data = json_decode($jsonData, true);
-
-  // If the file exists, read the unique values from the file
-  $uniqueValues = json_decode(file_get_contents('script/unique_values.json'), true);
-}
-
-include './search.php'
-
-  ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -152,12 +70,6 @@ include './search.php'
   <link rel="stylesheet" href="css/style.css">
   <?php include 'src/inc.php'; ?>
 
-
-  <!-- Font Family -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-
   <!-- Favicon -->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
@@ -166,7 +78,7 @@ include './search.php'
   <?php include 'src/inc/header.php'; ?>
   <section class="main">
     <div class="route-finder" id="route-finder" style="height:auto;">
-      <h1>R<span style="color: white;">oute</span>R<span style="color: white;">over - এ আপনাকে স্বাগতম!</span> </h1>
+      <h1>R<span style="color: white;">oute</span>R<span style="color: white;">over - এ আপনাকে স্বাগতম!</span></h1>
       <p class="welcome">
         <!-- Want to find your Route no., Available transports and Pricing details for going to your next destination?
         RouteRover is here on your service!! Get everything on your fingertips with a single click. -->
@@ -176,42 +88,23 @@ include './search.php'
       <h2>Route Finder</h2>
       <form method="post">
         <div class="input">
-          <input class="input-field" name="dept" list="dept" aria-label="dept" placeholder="যাত্রাস্থান">
-          <datalist id="dept">
+          <input class="input-field" name="departure" list="departure" aria-label="departure" placeholder="যাত্রাস্থান">
+          <datalist id="departure">
             <!-- options -->
-            <?php foreach ($uniqueValues as $location): ?>
-              <option value="<?php print_r($location); ?>">
-              <?php endforeach; ?>
+            <?php echo $options ?>
           </datalist>
         </div>
         <div class="input">
-          <input class="input-field" name="dest" list="dest" aria-label="dest" placeholder="গন্তব্যস্থল">
-          <datalist id="dest">
+          <input class="input-field" name="destination" list="destination" aria-label="destination"
+            placeholder="গন্তব্যস্থল">
+          <datalist id="destination">
             <!-- options -->
-            <?php foreach ($uniqueValues as $location): ?>
-              <option value="<?php print_r($location); ?>">
-              <?php endforeach; ?>
+            <?php echo $options ?>
           </datalist>
         </div>
         <button type="submit" value="search" name="search">Search</button>
       </form>
-      <!-- Display the search results in a table -->
-      <?php
-      // Now $uniqueValues is a unique set of all values in the data array
-      if ($table !== " ") {
-        echo "
-        <div class='welcome'>
-          <span class='close'> x </span>"
-          . $table .
-          "</div>";
-      } else if ($error !== " ") {
-        echo "
-          <div class='error'>
-            <span class='close'> x </span>"
-          . $error .
-          "</div>";
-      }
-      ?>
+      <?php include './search.php' ?>
     </div>
 
     <div id="contact" class="contact">
@@ -235,15 +128,6 @@ include './search.php'
       <?php include './contact.php'; ?>
     </div>
     </div>
-    <?php
-    if ($sqlAll !== " ") {
-      echo "
-    <div class='success'> 
-      <span class='close'> x </span> "
-        . $sqlAll .
-        "</div>";
-    }
-    ?>
   </section>
   <?php include 'src/inc/footer.php'; ?>
   <script src="script/script.js"></script>

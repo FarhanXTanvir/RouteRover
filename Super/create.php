@@ -5,26 +5,26 @@
     <meta charset="UTF-8">
     <title>Create Record</title>
     <!-- ----Script---- -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-    <!-- Font Family -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../assets/fontawesome/fontawesome.css" />
+
+    <!-- Google Fonts --> <!-- Poppins -->
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+
     <!-- Style Sheet -->
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="../css/login.css">
+
     <style>
         .wrapper {
             width: 600px;
             margin: 0 auto;
+        }
+
+        body {
+            color: white;
         }
     </style>
 </head>
