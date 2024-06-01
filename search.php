@@ -1,85 +1,81 @@
 <?php
-if (isset($_POST['search'])) {
-  $table = " ";
-  $error = " ";
-  // Get the departure and destination locations from the form data
-  $departure = $_POST['departure'];
-  $destination = $_POST['destination'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (isset($_POST['searchData'])) {
+    $searchData = json_decode($_POST["searchData"], true);
+    $searchResult = " ";
+    // Get the departure and destination locations from the form data
+    $departure = $searchData['departure'];
+    $destination = $searchData['destination'];
 
-  // Check if the posted locations are not empty and the location exists in the options
+    // echo $departure . " " . $destination;
+    // exit();
 
-  if (!empty($departure) && !empty($destination)) {
-    if ($departure === $destination) {
-      $table = "আপনি ইতোমধ্যে আপনার গন্তব্যে পৌছে গিয়েছেন। আপনি কি পুনরায় আপনার গন্তব্যস্থল নির্বাচন করতে চান?";
-    } else {
-      // Check if destination and departure are in the unique values
-      if (in_array($departure, $uniqueValues) && in_array($destination, $uniqueValues)) {
-        // Find the route numbers for the departure and destination
-        $jsonRoutes = json_decode(file_get_contents('script/routes.json'), true);
-        $routeNo = array();
-        foreach ($jsonRoutes as $route => $locations) {
-          if (in_array($departure, $locations) && in_array($destination, $locations)) {
-            $routeNo[] = $route;
-          }
-        }
-        if (count($routeNo) > 0) {
-          // Connect to the database
-          require_once './connect.php';
-
-          // Get the bus fare for each route number from the each table of routes
-          $fare = array();
-          foreach ($routeNo as $route) {
-            $tableName = "রুট" . $route;
-
-            // Example: $tableName = "রুট১০";
-            $sql = "SELECT `$destination` FROM `$tableName` WHERE location = ?";
-            $stmt = mysqli_prepare($con, $sql);
-            mysqli_stmt_bind_param($stmt, 's', $departure);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            if (mysqli_num_rows($result) > 0) {
-              while ($row = mysqli_fetch_assoc($result)) {
-                $fare[$tableName] = $row[$destination];
-              }
-            }
-          }
-
-
-          $table = "
-          <span class='dd'>" . $departure . " => " . $destination . "</span>
-          <table class='table'>
-          <tr><th>রুট নং</th><th>ভাড়া</th></tr>";
-          foreach ($routeNo as $route) {
-            $fareValue = isset($fare["রুট" . $route]) ? $fare["রুট" . $route] : 'N/A';
-            $table .= "<tr class='tr'><td><a href='#'>" . $route . "</a></td><td>" . $fareValue . " টাকা </td></tr>";
-          }
-          $table .= "</table>";
-        } else {
-          $error = "দুঃখিত, এই দুটি লোকেশনের মধ্যে কোন রুট নম্বর পাওয়া যায়নি। দয়া করে অন্য লোকেশন নির্বাচন করুন।";
-        }
-      } else {
-        $error = "দুঃখিত, আপনি সঠিক লোকেশন নির্বাচন করেননি। দয়া করে সঠিক লোকেশন নির্বাচন করুন।";
+    // Find the route numbers for the departure and destination
+    $jsonRoutes = json_decode(file_get_contents('script/routes.json'), true);
+    $routeNo = array();
+    foreach ($jsonRoutes as $route => $locations) {
+      if (in_array($departure, $locations) && in_array($destination, $locations)) {
+        $routeNo[] = $route;
       }
     }
-  } else {
-    $error = "যাত্রাস্থান এবং গন্তব্যস্থল পূরণ করুন।";
-  }
-  // Display the search results in a table
+    if (count($routeNo) > 0) {
+      // Connect to the database
+      require_once './connect.php';
 
-  // Now $uniqueValues is a unique set of all values in the jsonRoutes array
-  if ($table !== " ") {
-    echo "
-      <div class='welcome'>
-        <span class='close'> x </span>" . $table .
-      "</div>";
-  } else if ($error !== " ") {
-    echo "
+      // Get the bus fare for each route number from the each table of routes
+      $fare = array();
+      foreach ($routeNo as $route) {
+        $tableName = "রুট" . $route;
+
+        // Example: $tableName = "রুট১০";
+        $sql = "SELECT `$destination` FROM `$tableName` WHERE location = ?";
+        $stmt = mysqli_prepare($con, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $departure);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if (mysqli_num_rows($result) > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+            $fare[$tableName] = $row[$destination];
+          }
+        }
+      }
+
+
+      $searchResult = <<<FT
+            <span class="dd"> $departure => $destination </span>
+            <table class="table">
+            <tr><th>রুট নং</th><th>ভাড়া</th></tr> 
+          FT;
+      foreach ($routeNo as $route) {
+        $fareValue = isset($fare["রুট" . $route]) ? $fare["রুট" . $route] : 'N/A';
+        $searchResult .= "<tr class='tr'><td><a href='#'>" . $route . "</a></td><td>" . $fareValue . " টাকা </td></tr>";
+      }
+      $searchResult .= "</table>";
+    } else {
+      echo "
       <div class='error'>
-        <span class='close'> x </span>" . $error .
-      "</div>";
+      <i class='fa-regular fa-times close'></i>
+      দুঃখিত, এই দুটি লোকেশনের মধ্যে কোন রুট নম্বর পাওয়া যায়নি। দয়া করে অন্য লোকেশন নির্বাচন করুন।
+      </div>";
+      exit();
+    }
+
+    // Display the search results in a table
+    if ($searchResult !== " ") {
+      echo $searchResult;
+    }
   }
 }
-
+/*
+<?php include './search.php' ?>
+else if ($error !== " ") {
+    echo <<<FT
+      <div class="error">
+        <span class="close"> x </span> $error
+      </div> 
+      FT;
+  }
+*/
 // if (isset($_POST['search'])) {
 //   // Get the departure and destination locations from the form data
 

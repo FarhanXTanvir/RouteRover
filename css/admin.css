@@ -5,33 +5,35 @@
   font-family: "Poppins", sans-serif;
 }
 
-body {
-  background: #222;
+input[name="location"],
+input[name="newRoute"] {
+  font-family: "Kalpurush", Arial, sans-serif;
 }
 table {
   border-collapse: collapse;
 }
 th,
 td {
-  border: 0.2rem solid #000000;
+  border: 0.05rem solid #ffffffa3;
   padding: 0.6rem 0.4rem;
   text-align: center;
-  font-size: large;
+  font-size: 1.5rem;
 }
 th {
-  background: #68f3f3;
+  background: #68f3f3a3;
   color: black;
 }
 td {
-  background: #d7f5f5;
-  color: black;
+  background: #01171783;
+  color: white;
 }
 /* ---------About Section  -------------- */
 #ap h1 {
   font-size: 2rem;
   text-align: center;
   color: rgb(0, 0, 0);
-  background: #0af761;
+  background: #0af7617c;
+  text-shadow: 0 0 0.1rem rgb(255, 255, 255);
   padding: 1rem;
   margin: 0;
   box-shadow: 0 0 0.15rem #3a3939;
@@ -50,32 +52,11 @@ td {
   font-size: 1.8rem;
   text-align: center;
   color: rgb(0, 0, 0);
-  background: #17f9f5;
+  background: #17f9f58f;
   padding: 1rem;
   width: 50%;
   margin-top: 0.4%;
   margin-bottom: 0.4%;
-}
-.content {
-  width: 80%;
-  margin: 1rem auto;
-  /* background: green; */
-}
-
-.routes {
-  width: 95%;
-  margin: 1rem auto;
-  /* background: red; */
-  text-align: right;
-}
-.routes table {
-  width: 100%;
-}
-.routes th {
-  font-size: 2rem;
-}
-.routes td {
-  font-size: 1.75rem;
 }
 
 .adminTable {
@@ -87,8 +68,11 @@ td {
   width: 100%;
 }
 td.act a {
-  color: black;
+  color: rgb(37, 188, 222);
   margin-right: 0.3rem;
+}
+td.act a:hover {
+  color: rgb(0, 208, 255);
 }
 td.act a:last-child {
   margin-right: 0;
@@ -98,43 +82,256 @@ a.addBtn {
   font-weight: bold;
 }
 .addToTable {
-  background: #06eb37;
+  background: #06eb38a7;
   color: black;
   font-weight: 700;
   padding: 0.5rem;
   border-radius: 0.4rem;
-  font-size: 1.35rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.addToTable:hover {
+  background: #52dd12;
+}
+.routes {
+  width: 95%;
+  margin: 1rem auto;
+  /* background: red; */
+  text-align: right;
 }
 
-.operations a button {
-  /* width: 30%; */
+/* -------------- Collapsible ----------- @section Collapsible */
+.allRoutes {
+  width: 70%;
+  margin: 1rem auto;
+}
+.group {
+  width: 100%;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  /* transition: box-shadow 0.3s ease-in-out; */
+}
+.fareBlock {
   margin-top: 1rem;
-  padding: 0.5rem;
-  font-size: 1.6rem;
-  border: 0.2rem solid #ccc;
-  border-radius: 0.6rem;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
+  width: 75%;
 }
-.operations {
-  width: 50%;
+
+.allRoutes .group .header,
+.fareBlockHeader {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  padding: 1rem 1.2rem;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
 }
-.seeRoutes {
+
+.allRoutes > .group > .header {
+  font-size: 2rem;
+}
+.allRoutes .header:hover,
+.fareBlockHeader:hover {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+.header .fa-minus,
+.fareBlockHeader .fa-minus {
+  cursor: pointer;
+  /* transition: color 0.3s ease; */
+  position: absolute;
+  right: 1rem;
+}
+.header .openable,
+.fareBlockHeader .openable {
+  cursor: pointer;
+  /* transition: color 0.3s ease; */
+  position: absolute;
+  right: 1rem;
+}
+.content {
+  padding: 0.8rem 0.75rem;
+}
+
+.content > .group > .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0 auto;
 }
 
-@media screen and (max-width: 768px) {
-  .content {
-    width: 80%;
-  }
-  .container h3 {
-    width: 60%;
-  }
+.input-field {
+  text-wrap: nowrap;
+}
+
+.content input.location,
+.content input.selected,
+.content input.fare {
+  all: unset;
+  font-size: 1.5rem;
+  text-align: center;
+  color: white;
+  background: #3a3737;
+  padding: 0.4rem 0;
+  margin: 0.2rem;
+  border: #ccc 0.25rem solid;
+  border-radius: 0.4rem;
+  /* width: fit-content; */
+}
+.content input.fare {
+  width: 5ch;
+}
+.content .farePair {
+  text-align: center;
+  color: rgb(0, 251, 255);
+  text-shadow: 0 0 0.1rem white;
+  font-size: 1.2rem;
+}
+.fareBlock .eachDeparture {
+  margin: 1rem 0;
+  background: rgba(71, 68, 68, 0.781) !important;
+}
+.content input.newRoute {
+  all: unset;
+  font-size: 1.5rem;
+  text-align: center;
+  color: white;
+  background: #3a3737;
+  padding: 0.4rem 0;
+  margin: 0.8rem;
+  border: #ccc 0.25rem solid;
+  border-radius: 0.4rem;
+}
+
+.errorEach {
+  color: rgb(243, 61, 0);
+  text-shadow: 0 0 0.1rem black;
+  font-size: 1.2rem;
+}
+.content .newRouteLocations:first-child {
+  margin-top: 0.3rem;
+}
+.content input.location:hover,
+.content input.newRoute:hover {
+  box-shadow: 0 0 0.5rem #7ed7ee;
+}
+
+.addLocation {
+  margin: 0.5rem 0.2rem;
+  font-size: 2.4rem;
+  color: #0159dd;
+  text-shadow: 0 0 0.5rem white;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.content .fa-square-plus:hover {
+  opacity: 0.7;
+}
+
+.addRoute i {
+  font-size: 2.8rem;
+  color: #3adc15;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.addRoute:hover i {
+  color: black;
+}
+i.deleteLocation,
+i.deleteRoute {
+  color: #f13535;
+  text-shadow: 0 0 0.12rem black;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+i.deleteLocation:hover,
+i.deleteRoute:hover {
+  color: #ff0000;
+  text-shadow: 0 0 0.12rem rgb(237, 121, 32);
+  transition: (11, 245, 245) color 0.3s ease;
+}
+i.deleteLocation {
+  font-size: 1.5rem;
+  margin-right: 0.7rem;
+}
+i.deleteRoute {
+  display: block;
+  margin: 0.5rem 0.5rem;
+  margin-left: auto;
+  font-size: 1.9rem;
+}
+i.fa-check,
+i.fa-check-double {
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin: 0 0.5rem;
+}
+i.fa-check:hover,
+i.fa-check-double:hover {
+  color: #0de1f4;
+  transition: (11, 245, 245) color 0.3s ease;
+}
+
+/* Add a transition effect for the hover and active states */
+/* .allRoutes .header,
+.allRoutes .content {
+  transition: all 0.1s ease-in-out;
+} */
+
+/* .allRoutes .content > .group .content {
+} */
+
+.submitLocation {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.4rem 0.6rem;
+  background: #007bff;
+  color: white;
+  border-radius: 0.4rem;
+  margin: 0.5rem auto;
+}
+.submitFare {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.4rem 0.6rem;
+  background: #007bff;
+  color: white;
+  border-radius: 0.4rem;
+  margin: 0.5rem auto;
+}
+.break {
+  width: 100%;
+}
+.submitRoute {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.4rem 0.6rem;
+  background: #9904a3;
+  color: white;
+  border-radius: 0.4rem;
+  margin: 0.5rem auto;
+}
+.updateDb,
+.generateRandomValues {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.4rem 0.6rem;
+  background: #17f9f5;
+  color: black;
+  border-radius: 0.4rem;
+  margin: 0.5rem auto;
 }
 /* ----------------- Media Query ---------------*/

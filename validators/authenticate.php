@@ -3,58 +3,63 @@ if (isset($_POST['login'])) {
     $role = $_POST["role"];
     $username = $_POST["username"];
     $password = $_POST["password"];
-    require_once 'connect.php';
 
-    $errors = array();
     if (empty($username) || empty($password)) {
-        array_push($errors, "All fields are required");
+        echo "
+        <div class='error'>
+            <i class='fa-regular fa-times close'></i> All fields are required
+        </div>";
+        return;
     }
 
-    if ($role === 'user' && count($errors) === 0) {
+    require_once 'connect.php';
+    $login = false;
+    if ($role === 'user') {
         $sql = "SELECT * FROM users WHERE username = '$username'";
         $result = mysqli_query($con, $sql);
-        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        if ($user) {
+        $userCount = mysqli_num_rows($result);
+
+        if ($userCount === 1) {
+            $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
             if (password_verify($password, $user["password"])) {
                 $login = true;
                 echo "
                 <div class='success'>
-                    Login successful, Redirecting to User Dashboard... <span class='close'> x </span> 
+                    Login successful, Redirecting to User Dashboard... 
                 </div>";
             } else {
-                array_push($errors, "Password does not match");
+                $pswdError = "<p>Password does not match</p>";
+                return;
             }
         } else {
-            array_push($errors, "Username does not exist");
+
+            $userNameError = "<p>Username does not exist</p>";
+            return;
         }
-    } elseif ($role === 'admin' && count($errors) === 0) {
+    } elseif ($role === 'admin') {
         $sql = "SELECT * FROM admins WHERE username = '$username'";
         $result = mysqli_query($con, $sql);
         $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
         if ($username === 'super') {
-            array_push($errors, "You are not authorized to login as super admin");
+            echo "
+            <div class='error'>
+                <i class='fa-regular fa-times close'></i> You are not authorized to login as super admin
+            </div>";
         } else if ($user) {
             if (password_verify($password, $user["password"])) {
                 $login = true;
                 echo "
                 <div class='success'>
-                    Login successful, Redirecting to Admin Panel... <span class='close'> x </span> 
+                    Login successful, Redirecting to Admin Panel... 
                 </div>";
             } else {
-                array_push($errors, "Password does not match");
+                $pswdError = "<p>Password does not match</p>";
             }
         } else {
-            array_push($errors, "Admin does not exist");
+            $userNameError = "<p>Admin does not exist</p>";
         }
     }
-    if (count($errors) > 0) {
-        foreach ($errors as $error) {
-            echo "
-            <div class='error'>
-                <span class='close'> x </span> $error
-            </div>";
-        }
-    } else if ($login === true) {
+    if ($login === true) {
         $_SESSION["username"] = $user["username"];
         $_SESSION["email"] = $user["email"];
         $_SESSION["id"] = $user["id"];

@@ -154,3 +154,43 @@ td table .fa-check {
   cursor: pointer;
   font-size: 1rem;
 }
+/* Collapsible */
+.allRoutes {
+  width: 70%;
+  margin: 1rem auto;
+}
+.group {
+  width: 100%;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.allRoutes .header {
+  text-align: center;
+  padding: 1rem 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.allRoutes .header:hover {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
+.allRoutes .content {
+  padding: 15px;
+  display: none;
+}
+
+/* Add a transition effect for the hover and active states */
+.allRoutes .header,
+.allRoutes .content {
+  transition: all 0.1s ease-in-out;
+}
+.open .content {
+  display: block;
+}

@@ -18,10 +18,6 @@ if (!isset($_COOKIE['super'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Super Login</title>
 
-  <!-- ----Script---- -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../assets/fontawesome/fontawesome.css" />
 
@@ -29,17 +25,12 @@ if (!isset($_COOKIE['super'])) {
   <link rel="stylesheet" href="../assets/fonts/fonts.css" />
 
   <!-- Style Sheet -->
-  <link rel="stylesheet" href="../css/login.css?v=1">
-  <link rel="stylesheet" href="../css/header.css?v=1">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/header.css">
 
   <style>
     body {
-      background: #0af761;
       height: 100vh;
-    }
-
-    header {
-      background: #333;
     }
   </style>
 </head>

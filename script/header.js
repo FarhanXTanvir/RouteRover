@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // h1 || @section Hamburger menu click event |
-const hamburger = document.querySelector(".nv-hamburger");
+const hamburger = document.querySelector(".hamburger");
 const topNav = document.querySelector(".top-nav");
 
 if (hamburger) {

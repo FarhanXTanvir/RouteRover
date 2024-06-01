@@ -1,8 +1,6 @@
 <?php
-// require_once './validators/config.php'; 
 // Start the session
 session_start();
-// include './validators/check_cookie.php';
 if (isset($_SESSION["username"])) {
   if ($_SESSION['role'] === "user") {
     header('Location: user');
@@ -20,14 +18,15 @@ if (isset($_SESSION["username"])) {
 } else if (isset($_COOKIE["super"]) || isset($_SESSION["super"])) {
   header('Location: super.php');
 }
-$uniqueValues = json_decode(file_get_contents('script/unique_values.json'), true);
+$uniqueValues = json_decode(file_get_contents('script/uniqueLocations.json'), true);
 $options = "";
 foreach ($uniqueValues as $location) {
   $options .= <<<FT
-  <option value="$location"></option>
+  <li>$location</li>
 FT;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,22 +36,19 @@ FT;
   <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0"> -->
-  <meta name="description"
-    content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta name="description" content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta name="keywords" content="RouteRover, Route Finder, Transport, Bus, Route, Destination, Pricing">
   <meta name="author" content="RouteRover">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
   <meta name="bingbot" content="index, follow">
   <meta property="og:title" content="RouteRover">
-  <meta property="og:description"
-    content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta property="og:description" content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta property="og:image" content="routerover_icon.png">
   <meta property="og:url" content="https://routerover.free.nf/">
   <meta property="og:site_name" content="RouteRover">
   <meta name="twitter:title" content="RouteRover">
-  <meta name="twitter:description"
-    content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta name="twitter:description" content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta name="twitter:image" content="routerover_icon.png">
   <!-- <meta name="twitter:card" content="summary_large_image"> -->
   <meta name="twitter:creator" content="@RouteRover">
@@ -69,9 +65,6 @@ FT;
   <!-- Style Sheet -->
   <link rel="stylesheet" href="css/style.css">
   <?php include 'src/inc.php'; ?>
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -88,23 +81,23 @@ FT;
       <h2>Route Finder</h2>
       <form method="post">
         <div class="input">
-          <input class="input-field" name="departure" list="departure" aria-label="departure" placeholder="যাত্রাস্থান">
-          <datalist id="departure">
+          <input class="input-field" name="departure" list="departure" aria-label="departure" placeholder="যাত্রাস্থান" autocomplete="off">
+          <ul id="departure">
             <!-- options -->
             <?php echo $options ?>
-          </datalist>
+          </ul>
         </div>
         <div class="input">
-          <input class="input-field" name="destination" list="destination" aria-label="destination"
-            placeholder="গন্তব্যস্থল">
-          <datalist id="destination">
+          <input class="input-field" name="destination" list="destination" aria-label="destination" placeholder="গন্তব্যস্থল" autocomplete="off">
+          <ul id="destination">
             <!-- options -->
             <?php echo $options ?>
-          </datalist>
+          </ul>
         </div>
         <button type="submit" value="search" name="search">Search</button>
       </form>
-      <?php include './search.php' ?>
+      <div id="searchResult">
+      </div>
     </div>
 
     <div id="contact" class="contact">
@@ -123,9 +116,9 @@ FT;
           <label for="message"> Message: </label>
           <textarea placeholder="Type here..." id="message" name="message" cols="25" rows="10"></textarea>
         </div>
+        <?php require_once './contact.php'; ?>
         <button type="submit" value="contact" name="contact">Submit</button>
       </form>
-      <?php include './contact.php'; ?>
     </div>
     </div>
   </section>

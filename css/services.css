@@ -1,54 +1,66 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body{
-  background: #222;
-}
+
 /* --------- Services Section  -------------- */
-.services{
-  background: #222;
+.services {
+  background: 0 0 0.5rem rgba(0, 0, 0, 0.9);
 }
-h2{
+h2 {
+  background: 0 0 0.5rem rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+  font-size: 2.5rem;
+  margin: 1rem 0;
   color: white;
   text-align: center;
-  padding: 1%;
 }
 .row {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: 0 0 0.5rem rgba(0, 0, 0, 0.9);
 }
 .column {
   text-align: center;
   width: 30%;
+  /* background: red; */
+  margin: 1rem 0;
 }
 .card {
-  padding: 5%;
-  margin: 5%;
-  height: 250px;
-  background: #8bc182;
-  border-radius: 5px;
-  box-shadow: 0 0 35px rgba(0, 0, 0, 0.12);
+  padding: 1.2rem;
+  margin: 0 auto;
+  height: 14rem;
+  width: 65%;
+  background: #7bdfa09e;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.9);
+  text-shadow: 0.1rem 0.1rem 0.21rem rgba(145, 136, 136, 0.5);
+  opacity: 2;
   cursor: pointer;
   transition: 0.5s;
 }
 .card h3 {
+  width: 100%;
   color: #000000;
+  text-shadow: 0.1rem 0.1rem 0.2rem rgba(255, 255, 255, 0.5);
   font-size: larger;
   font-weight: 700;
-  margin: 1em 0;
+  margin: 0.4rem 0;
 }
 .card p {
+  width: 100%;
   color: #000000;
   font-size: medium;
 }
 .card .icon-wrapper {
   font-size: 30px;
   color: #ffffff;
-  background: #740e74;
+  background: #00000089;
   height: 2.5em;
   width: 2.5em;
   margin: auto;
@@ -59,10 +71,10 @@ h2{
   transition: 0.5s;
 }
 .card:hover {
-  background: black;
+  background: rgba(0, 0, 0, 0.545);
 }
 .card:hover .icon-wrapper {
-  background: #ffffff;
+  background: #ffffffe4;
   color: #2c7bfe;
 }
 .card:hover h3 {
@@ -71,14 +83,14 @@ h2{
 .card:hover p {
   color: #f0f0f0;
 }
-.column a:link{
+.column a:link {
   text-decoration: none;
 }
 
 /* ----------------- Media Query ---------------*/
 /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .row{
+  .row {
     display: flex;
     flex-direction: column;
   }

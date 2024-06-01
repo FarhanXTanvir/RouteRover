@@ -15,6 +15,13 @@ if (isset($_SESSION["username"])) {
         header('Location: admin');
     }
 }
+// Start output buffering
+ob_start();
+// Include the file
+require_once "./validators/authenticate.php";
+
+// Get the output and clean the buffer
+$output = ob_get_clean();
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,15 +32,22 @@ if (isset($_SESSION["username"])) {
 
     <title> Login | RouteRover </title>
 
-    <!-- Style Sheet -->
-    <link rel="stylesheet" href="css/login.css">
-    <?php include 'src/inc.php'; ?>
-
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
     <link rel="manifest" href="favicon_io/site.webmanifest">
+
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="css/login.css">
+    <?php include 'src/inc.php'; ?>
+
+    <script src="./assets/jquery.js"></script>
+    <style>
+        .break {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,20 +64,36 @@ if (isset($_SESSION["username"])) {
                     </select>
                 </p>
                 <div class="inputBox">
-                    <i class="fas fa-user" aria-hidden="true"></i>
-                    <input type="text" name="username" id="username" area-label="username" placeholder="Username"
-                        autocomplete="username">
+                    <div>
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <input type="text" name="username" id="username" area-label="username" placeholder="Username"
+                            autocomplete="username">
+                    </div>
+                    <?php
+                    if (isset($userNameError)) {
+                        echo $userNameError;
+                    } ?>
                 </div>
+
                 <div class="inputBox">
-                    <i class="fas fa-lock" aria-hidden="true"></i>
-                    <input type="password" name="password" id="password" area-label="password" placeholder="Password"
-                        autocomplete="current-password">
+                    <div>
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="password" id="password" area-label="password"
+                            placeholder="Password" autocomplete="current-password">
+                    </div>
+                    <?php
+                    if (isset($pswdError)) {
+                        echo $pswdError;
+                    } ?>
                 </div>
 
                 <div class="links">
                     <a href="#">Forgot Password</a> <a href="register">Register</a>
                 </div>
-                <?php require_once "./validators/authenticate.php"; ?>
+                <?php
+                // Display the output
+                echo $output;
+                ?>
                 <input type="submit" value="Login" name="login">
             </form>
         </div>

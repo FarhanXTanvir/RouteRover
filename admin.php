@@ -29,75 +29,59 @@ if (isset($_SESSION["username"])) {
 
   <?php include 'src/inc.php'; ?>
   <link rel="stylesheet" href="css/admin.css">
-
+  <script src="./assets/jquery.js"></script>
 </head>
 
 <?php include 'src/inc/header.php'; ?>
 <section id="ap">
   <h1>Admin Panel</h1>
-  <?php echo "<h3 style='color: red; text-align: center; font-size: 2rem; margin: 1rem;'>Hey " . $_COOKIE['username'] . " " . $_COOKIE['id'] . "!</h3>"; ?>
+  <?php echo "<h3 style='color: red; text-align: center; font-size: 2rem; margin: 1rem;'>Hey " . $_COOKIE['username'] . "!</h3>"; ?>
   <div class="container">
-    <h2>Routes</h2>
-    <div class="content">
-      <div class="table routes">
-        <a href="./adminP/create.php"><button class="addToTable">
-            <!-- <i class="fa-solid fa-plus"></i> -->
-            + Add Route
-          </button></a>
-        <table>
-          <thead>
-            <tr>
-              <th> Route No. </th>
-              <th class='act'> Actions </th>
-            </tr>
-          </thead>
+    <!-- Collapsable Route Information List -->
+    <div class="allRoutes">
+      <div class="group open">
+        <div class="header">All Routes <i class="closable fa-solid fa-minus"></i> </div>
+        <div class="content">
           <?php
           $jsonRoutes = json_decode(file_get_contents('script/routes.json'), true);
-          foreach ($jsonRoutes as $route => $locations) {
-            echo "<tr>";
-            echo "<td> রুট$route </td>";
-            echo "
-            <td class='act'd> <a href='./adminP/updateRoute.php?route=$route' title='Update Record'><i class='fa-solid fa-pencil'></i></a>
-            </a><a href='./adminP/delete.php?route=$route' title='Delete Record'><i class='fa-solid fa-trash'></i></a> 
-            </td>";
-            echo "</tr>";
-          }
-          ?>
-        </table>
+          foreach ($jsonRoutes as $route => $locations) : ?>
+            <div class="group">
+              <div class="header"><?php echo "রুট$route"; ?> <i class="openable fa-solid fa-plus"></i></div>
+              <div class="content">
+                <i class="fa-solid fa-trash-alt deleteRoute" title="Delete Route"></i>
+                <div class="break"></div>
+                <form method="post" data-route="<?php echo $route; ?>">
+                  <?php
+                  foreach ($locations as $location) {
+                    echo "
+                    <span class='input-field' tabindex='0'>
+                      <input type='text' name='location' class='location' value='$location' area-label='location' title='Click to Edit'>
+                    </span>";
+                  }
+                  ?>
+                  <i class="fa-regular fa-square-plus addLocation" title="Add Location"></i>
+                </form>
+                <div class="group fareBlock">
+                  <div class="fareBlockHeader" name="showFare" class="showFare">Set/Show Fares <i class="openable fa-solid fa-plus"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+          <div class="group">
+            <div class="header addRoute"><i class="fa-solid fa-square-plus"></i></div>
+          </div>
+        </div>
+        <input class="submitRoute" type="submit" name="submitRoute" value="Submit">
       </div>
-    </div>
-    <div class="operations">
-      <a href="./adminP/updateRoutes.php?update" style="width: 100%; text-align:center;"><button
-          id="updateRoutes">Update</button></a>
-      <a href="admin.php?open" style="width: 100%; text-align:center;"><button id="openFile">See All Routes
-        </button></a>
-    </div>
-    <div class="seeRoutes">
-      <?php
-      if (isset($_GET['open'])) {
-        $routes = json_decode(file_get_contents('./script/routes.json'), true);
-        echo "
-        <h2>All Routes</h2>
-        <div class='content'>
-        <div class='table'>
-        <table>
-        <thead><tr><th> Route No. </th><th> Locations </th></tr></thead>";
-        foreach ($routes as $route => $locations) {
-          echo "<tr>";
-          echo "<td> রুট$route </td>";
-          echo "<td>";
-          foreach ($locations as $location) {
-            echo "$location, ";
-          }
-        }
-        echo "</td></tr></table></div></div>";
-      }
-      ?>
+      <input type="submit" value="Update DB" name="updateDb" class="updateDb">
+      <input type="submit" value="Generate Random Values" name="generateRandomValues" class="generateRandomValues">
     </div>
   </div>
 </section>
 <!-- ----------------- Footer Section --------------- -->
 <?php include 'src/inc/footer.php'; ?>
+<script src="./script/admin.js"></script>
 </body>
 
 </html>

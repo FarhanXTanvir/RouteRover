@@ -1,50 +1,23 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
-body{
-  background: #222;
-}
-
 /* ---------About Section  -------------- */
 
-.about{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  margin: 2%;
+.about {
+  width: 80%;
+  margin: 2% auto;
   padding: 5%;
   color: white;
-  background: #333;
+  background: rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
 }
-.abt-h2
-{
+.abt-h2 {
   text-align: center;
+  text-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
   color: white;
   margin-top: 1.5%;
 }
-  
-/* ----------------- Media Query ---------------*/  
-@media screen and (min-width: 768px) {
-  section {
-    padding: 0 2em;
-  }
-  .column {
-    flex: 0 50%;
-    max-width: 50%;
-  }
-}
-@media screen and (min-width: 992px) {
-  section {
-    padding: 1em 3em;
-  }
-  .column {
-    flex: 0 0 33.33%;
-    max-width: 33.33%;
-  }
-}
-  

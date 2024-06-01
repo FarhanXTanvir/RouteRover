@@ -25,7 +25,7 @@ if (!isset($_SESSION["super"])) {
   <!-- Custom CSS -->
 
   <?php include 'src/inc.php'; ?>
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="./css/admin.css">
 
 </head>
 

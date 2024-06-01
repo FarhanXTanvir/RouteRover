@@ -8,11 +8,11 @@ if (isset($_SESSION["username"])) {
 } else {
   header('Location: login');
 }
-$uniqueValues = json_decode(file_get_contents('script/unique_values.json'), true);
+$uniqueValues = json_decode(file_get_contents('script/uniqueLocations.json'), true);
 $options = "";
 foreach ($uniqueValues as $location) {
   $options .= <<<FT
-  <option value="$location"></option>
+  <li>$location</li>
 FT;
 }
 ?>
@@ -55,8 +55,9 @@ FT;
   <title> Home | RouteRover </title>
 
   <!-- Style Sheet -->
-  <link rel="stylesheet" href="css/style.css">
   <?php include 'src/inc.php'; ?>
+  <script src="./assets/jquery.js"></script>
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -64,6 +65,7 @@ FT;
 
 <body>
   <?php include 'src/inc/header.php'; ?>
+
   <section class="main">
     <div class="route-finder" id="route-finder" style="height:auto;">
       <?php echo "<h2 style='color: red; font-size: 2rem;'>Hey " . $_COOKIE['username'] . " " . $_COOKIE['id'] . "!</h2>"; ?>
@@ -77,23 +79,25 @@ FT;
       <h2>Route Finder</h2>
       <form method="post">
         <div class="input">
-          <input class="input-field" name="departure" list="departure" aria-label="departure" placeholder="যাত্রাস্থান">
-          <datalist id="departure">
+          <input class="input-field" name="departure" list="departure" aria-label="departure" placeholder="যাত্রাস্থান"
+            autocomplete="off">
+          <ul id="departure">
             <!-- options -->
             <?php echo $options ?>
-          </datalist>
+          </ul>
         </div>
         <div class="input">
           <input class="input-field" name="destination" list="destination" aria-label="destination"
-            placeholder="গন্তব্যস্থল">
-          <datalist id="destination">
+            placeholder="গন্তব্যস্থল" autocomplete="off">
+          <ul id="destination">
             <!-- options -->
             <?php echo $options ?>
-          </datalist>
+          </ul>
         </div>
         <button type="submit" value="search" name="search">Search</button>
       </form>
-      <?php include './search.php' ?>
+      <div id="searchResult">
+      </div>
     </div>
 
     <div id="contact" class="contact">
@@ -112,9 +116,9 @@ FT;
           <label for="message"> Message: </label>
           <textarea placeholder="Type here..." id="message" name="message" cols="25" rows="10"></textarea>
         </div>
+        <?php require_once './contact.php'; ?>
         <button type="submit" value="contact" name="contact">Submit</button>
       </form>
-      <?php include './contact.php'; ?>
     </div>
     </div>
   </section>

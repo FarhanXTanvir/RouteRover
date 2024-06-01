@@ -7,13 +7,13 @@ if (isset($_POST['contact'])) {
   if (empty($email) || empty($message)) {
     echo "
           <div class='error'>
-            <span class='close'> x </span> All fields are required" . "
+            <i class='fa-regular fa-times close'></i> All fields are required" . "
           </div>";
   } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
     echo "
           <div class='error'>
-            <span class='close'> x </span> Invalid email format
+            <i class='fa-regular fa-times close'></i> Invalid email format
           </div>";
   } else {
     require_once 'connect.php';
@@ -34,12 +34,12 @@ if (isset($_POST['contact'])) {
 
       echo "
             <div class='success'>
-              <span class='close'> x </span> Message sent successfully
+              <span class='fa-regular fa-times close'></span> Message sent successfully
             </div>";
     } else {
       echo "
             <div class='error'>
-              <span class='close'> x </span> Error: " . $sql . "<br>" . mysqli_error($con) . "
+              <i class='fa-regular fa-times close'></i> Error: " . $sql . "<br>" . mysqli_error($con) . "
             </div>";
     }
   }
