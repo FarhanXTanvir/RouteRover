@@ -1,25 +1,15 @@
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body{
-  background: #222;
-}
 /* ------Main Body------- */
-.main{
+.main {
   padding: 0.5%;
 }
-.nv-button button{
+.nv-button button {
   width: 140%;
 }
-.nv-button{
+.nv-button {
   margin-right: 5%;
 }
 /* Left column */
-.leftcolumn {   
+.leftcolumn {
   color: white;
   float: left;
   width: 60%;
@@ -32,14 +22,14 @@ body{
   width: 40%;
   padding-left: 2%;
 }
-.services h3{
+.services h3 {
   color: black;
   padding: 1%;
   margin: 1%;
   text-align: center;
   background: orange;
 }
-.services li{
+.services li {
   list-style: none;
 }
 .route-finder {
@@ -47,49 +37,49 @@ body{
   color: orange;
   width: 100%;
   padding: 20px;
-  text-align:center;
+  text-align: center;
 }
-.route-finder h1{
+.route-finder h1 {
   text-align: center;
   font-size: 30px;
-  margin-bottom: 2%;;
+  margin-bottom: 2%;
 }
-.route-finder h2{
-    text-align: center;
+.route-finder h2 {
+  text-align: center;
 }
-.route-finder .welcome{
+.route-finder .welcome {
   color: white;
   margin-bottom: 50px;
   font-size: 15;
 }
-.route-finder .form{
+.route-finder .form {
   font-size: 20px;
   color: #ffffff;
   font-weight: bold;
   margin: 15px;
 }
 
-.route-finder input{
+.route-finder input {
   margin-bottom: 5px;
   text-align: center;
   width: 90%;
   font-size: 100%;
   display: inline-block;
 }
-.route-finder button{
+.route-finder button {
   color: black;
   background: rgb(78, 238, 163);
-  margin-left: 10px; 
+  margin-left: 10px;
   font-size: 15px;
   font-weight: 750;
-  border-radius: 10px; 
-  padding: 5px; 
+  border-radius: 10px;
+  padding: 5px;
   width: 70px;
 }
-.route-finder button:hover{
+.route-finder button:hover {
   background: rgb(148, 185, 168);
 }
-.route-finder button:active{
+.route-finder button:active {
   background: rgb(24, 232, 138);
 }
 
@@ -101,7 +91,6 @@ body{
   margin-top: 20px;
 }
 
-
 /* Clear floats after the columns */
 .row::after {
   content: "";
@@ -110,7 +99,7 @@ body{
 }
 
 /* Contact Form */
-#contact h3{
+#contact h3 {
   color: black;
   padding: 1%;
   margin: 1% auto;
@@ -118,24 +107,24 @@ body{
   text-align: center;
   background: orange;
 }
-#contact{
+#contact {
   padding: 3%;
 }
-#contact p{
+#contact p {
   margin-bottom: 2%;
 }
-textarea{
+textarea {
   width: 65%;
 }
 
 /* ----------------- Media Query ---------------*/
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
-  .leftcolumn, .rightcolumn {   
+  .leftcolumn,
+  .rightcolumn {
     width: 100%;
     padding: 0;
   }
-  
 }
 
 /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
@@ -145,4 +134,3 @@ textarea{
     width: 100%;
   }
 }
-

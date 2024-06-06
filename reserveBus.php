@@ -15,7 +15,7 @@ FT;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> eticket | RouteRover </title>
+  <title> Reserve Bus | RouteRover </title>
 
   <!-- Style Sheet -->
   <link rel="stylesheet" href="./css/services.css">
@@ -34,8 +34,8 @@ FT;
 
 <body>
   <?php include 'src/inc/header.php'; ?>
-  <section id="#eticket" class="service">
-    <h2><span class="span_e">e</span><span class="span_Ticket">Ticket</span></h2>
+  <section id="#reserveBus" class="service">
+    <h2>Bus Reservation</h2>
     <form method="post" id="showTickets">
       <div class="binder">
         <fieldset class="input">

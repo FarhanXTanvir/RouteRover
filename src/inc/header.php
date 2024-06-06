@@ -11,12 +11,15 @@
       <?php if (!isset($_COOKIE["super"])) : ?>
         <li><a href='index'>Home</a></li>
         <!-- <li><a href='services'>Services</a></li> -->
-        <li class="services-dropdown">
-          <a href='services'>Services</a>
-          <ul class="dropdown-list">
-            <li><a><i class="fas fa-search-plus"></i>&nbsp Route Finder</a></li>
-            <li><a><i class="fas fa-ticket"></i>&nbsp e-Ticket</a></li>
-            <li><a><i class="fa-solid fa-bus-simple"></i>&nbsp Bus Reservation</a></li>
+        <li class="dropdown services">
+          <div class="dropdown-header">
+            Services
+            <i class="fa-regular fa-caret-down caret"></i>
+          </div>
+          <ul class="dropdown-list hidden">
+            <li><a href='index#route-finder'>Route Finder</a></li>
+            <li><a href='reserveBus'>Reserve Bus</a></li>
+            <li><a href='eticket'>e-Ticket</a></li>
           </ul>
         </li>
         <li><a href='about'>About</a></li>

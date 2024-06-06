@@ -23,7 +23,7 @@ session_start();
 <body>
   <?php include 'src/inc/header.php'; ?>
   <section id="#about">
-    <h2 class="abt-h2">আমাদের উদ্দেশ্য ও কাজ</h2>
+    <h2 class="about-h2">আমাদের উদ্দেশ্য ও কাজ</h2>
     <div class="about">
       <div class="content">
         <p>আমরা চট্টগ্রাম শহরে যাতায়াত ব্যবস্থায় সহায়তাকারী একটি সেবা প্রতিষ্ঠান। মূলত এই সেবা প্রদানকারী ওয়েবসাইটটি

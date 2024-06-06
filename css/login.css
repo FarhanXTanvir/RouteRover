@@ -1,13 +1,3 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background: #222222;
-}
 section {
   display: flex;
   justify-content: center;

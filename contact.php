@@ -1,21 +1,11 @@
 <?php
-if (isset($_POST['contact'])) {
-  $email = $_POST['email'];
-  $message = $_POST['message'];
+if (isset($_POST['sendMessage'])) {
+  $sendMessage = json_decode($_POST["sendMessage"], true);
+  $email = trim($sendMessage['email']);
+  $message = trim($sendMessage['message']);
 
   // Validating Fields
-  if (empty($email) || empty($message)) {
-    echo "
-          <div class='error'>
-            <i class='fa-regular fa-times close'></i> All fields are required" . "
-          </div>";
-  } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-    echo "
-          <div class='error'>
-            <i class='fa-regular fa-times close'></i> Invalid email format
-          </div>";
-  } else {
+  {
     require_once 'connect.php';
     $sql = "INSERT INTO contact (Email, Message) VALUES (?, ?)";
 

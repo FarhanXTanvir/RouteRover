@@ -1,0 +1,356 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+/* h1 ---------Main Body----------- */
+.main {
+  padding: 5%;
+  /* background: #222; */
+  /* background: url("../img/bg2.jpg") no-repeat center center;
+  background-size: cover; */
+}
+
+/* @section Route Finder */
+.route-finder {
+  background: #19181880;
+  color: orange;
+  width: 60%;
+  margin: 2% auto;
+  padding: 3%;
+  text-align: center;
+  box-shadow: 0.2rem 0.2rem 1rem black;
+  position: relative;
+}
+.route-finder h1 {
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 2%;
+  text-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
+}
+
+.route-finder .welcome {
+  color: white;
+  opacity: 2;
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+  margin-bottom: 50px;
+  padding: 1rem;
+  font-size: 1em;
+}
+
+.route-finder h2 {
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 2%;
+  text-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.5);
+}
+.route-finder form {
+  margin-bottom: 1rem;
+}
+.route-finder .input {
+  position: relative;
+  display: inline-block;
+  width: 40%;
+  margin: 0 1rem;
+}
+.route-finder input {
+  all: unset;
+  background: rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+  font-size: 1.1rem;
+  text-align: center;
+  width: 96%;
+  padding: 0.5em;
+  box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5);
+  /* box-shadow: inset -0.2rem -0.1rem 0 rgb(255, 196, 0); */
+  border: none;
+  outline: none;
+  border: 0.2rem solid rgb(243, 152, 68);
+  border-radius: 0.4rem;
+}
+.route-finder input:active,
+.route-finder input:focus {
+  /* box-shadow: inset -0.2rem -0.1rem 0 rgb(255, 196, 0),
+    inset 0.1rem 0.1rem 0.1rem rgb(255, 196, 0); */
+  outline: none !important;
+}
+
+.route-finder input::placeholder {
+  color: white; /* Change this to the color you want */
+  opacity: 1; /* Firefox requires this to change the color */
+}
+.route-finder ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  z-index: 1;
+  height: 21ch;
+}
+
+.route-finder li {
+  background: rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 0.1rem rgba(255, 255, 255, 0.5);
+  border: 0.05rem groove white;
+  border-radius: 0.2rem;
+  padding: 0.6rem 0.9rem;
+  font-size: 1.35rem;
+  color: white;
+  cursor: pointer;
+}
+li.active {
+  color: black;
+  background: #f6c780;
+}
+.route-finder li:hover {
+  color: rgb(249, 180, 42);
+  background: #18181856;
+  font-weight: bold;
+  text-shadow: 0 0 0.1rem #000000;
+}
+
+.route-finder input:focus {
+  outline: 0.02rem solid rgb(255, 255, 255);
+}
+/* .route-finder form {
+  position: relative;
+} */
+
+.route-finder button[name="search"] {
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  background: rgb(78, 238, 163);
+  border-radius: 0.35em;
+  width: 40%;
+  padding: 0.5em;
+  margin-top: 1.2rem;
+}
+
+.route-finder button:hover {
+  background: rgb(0, 255, 136);
+}
+.route-finder button:active {
+  background: rgb(24, 232, 138);
+}
+.output {
+  text-align: center;
+  margin: 1em auto;
+}
+
+/* @section Table of results */
+span.dd {
+  color: white;
+  text-overflow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+  background: rgba(5, 0, 0, 0.458);
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.1rem solid black;
+  margin-top: 0.5rem;
+  border-radius: 0.4rem;
+}
+table {
+  margin-top: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  /* margin: 0.4rem auto; */
+}
+tr.tr {
+  background: rgba(4, 0, 0, 0.444);
+  cursor: pointer;
+}
+tr.tr:hover {
+  background: #f6c780;
+}
+
+th,
+td {
+  border: 0.1rem solid black;
+  padding: 0.2rem;
+  text-overflow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-size: 1rem;
+}
+th {
+  background: rgba(223, 169, 42, 0.433);
+  font-size: 1.2rem;
+}
+td a {
+  text-decoration: none;
+  color: white;
+}
+
+.errorEach {
+  color: rgb(255, 93, 34);
+  text-shadow: 0 0 0.2rem rgb(0, 0, 0);
+  font-size: 1.2rem;
+  background: rgba(0, 0, 0, 0.511);
+  width: fit-content;
+  padding: 0.2rem;
+  margin: 0.9rem auto;
+}
+
+/* h1 @section Contact Form */
+.contact {
+  text-align: center;
+  color: white;
+  background: #00000056;
+  width: 60%;
+  margin: 2em auto;
+  padding: 3em;
+  box-shadow: 0.2rem 0.2rem 1rem black;
+}
+
+.contact h3 {
+  font-size: 1.5rem;
+  background: rgba(0, 0, 0, 0.514);
+  color: white;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.contact p {
+  opacity: 2;
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+  margin-bottom: 2em;
+  margin-top: 2em;
+  text-align: left;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 1.25em;
+  background: #17161688;
+  width: 100%;
+  max-width: 37.5em;
+  border-radius: 0.5em;
+  box-shadow: 0px 0px 0.625em rgba(0, 0, 0, 0.1);
+}
+
+.contact form .input {
+  width: 100%;
+  margin-bottom: 0.9375em; /* 15px/16px */
+}
+
+.contact form input,
+.contact form textarea {
+  width: 100%;
+  padding: 0.625em;
+  border: 0.0625em solid #ddd;
+  border-radius: 0.25em;
+}
+
+.contact .input label {
+  color: rgb(251, 251, 251);
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 0.3125em;
+  display: block;
+}
+
+.contact button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  width: 60%;
+  padding: 0.6em 1.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0.25em auto;
+  cursor: pointer;
+  border-radius: 0.35em;
+}
+
+/*------------- Media Query---------- */
+/* Responsive layout - when the screen is less than 600px wide*/
+/* Media query for screens smaller than 37.5em (600px/16px) */
+@media screen and (max-width: 750px) {
+  .main {
+    width: 100%;
+    padding: 1%;
+    margin-top: 2%;
+  }
+  .route-finder form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    margin: 1rem auto;
+  }
+  .route-finder .input {
+    width: 90%;
+    margin: 0.5rem;
+  }
+  /* .route-finder ul {
+    transform: translateX(55%);
+  } */
+
+  .route-finder {
+    width: 90%;
+    padding: 4%;
+  }
+  .route-finder h1 {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 2%;
+  }
+  #contact {
+    width: 90%;
+    padding: 4%;
+  }
+  #contact p {
+    width: 95%;
+    padding: 4%;
+  }
+  #contact form {
+    width: 92%;
+    margin: 2%;
+    padding: 3%;
+  }
+}
+/* 750px and 1200px */
+@media screen and (min-width: 750px) and (max-width: 1200px) {
+  .main {
+    width: 100%;
+    padding: 1%;
+    margin-top: 2%;
+  }
+  .route-finder {
+    width: 78%;
+    padding: 4%;
+  }
+  /* .route-finder h1 {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 2%;
+  } */
+  #contact {
+    width: 78%;
+    padding: 4%;
+  }
+  #contact p {
+    width: 95%;
+    padding: 4%;
+  }
+  #contact form {
+    width: 92%;
+    margin: 2% auto;
+    padding: 3%;
+  }
+}

@@ -28,7 +28,7 @@
 .ftop .footer-col ul {
   list-style: none;
   /* background: blue; */
-  margin: auto;
+  margin: 0.7rem auto;
 }
 .ftop .footer-col ul li {
   text-align: center;

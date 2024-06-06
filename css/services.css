@@ -1,66 +1,275 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+/* --------- service Section -------------- */
+.service {
+  border: 0.2rem solid rgb(243, 152, 68);
+  border-radius: 0.4rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 55%;
+  box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-/* --------- Services Section  -------------- */
-.services {
-  background: 0 0 0.5rem rgba(0, 0, 0, 0.9);
-}
-h2 {
-  background: 0 0 0.5rem rgba(0, 0, 0, 0.9);
-  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
-  font-size: 2.5rem;
-  margin: 1rem 0;
+.service h2 {
   color: white;
   text-align: center;
+  font-size: 2.2rem;
+  text-shadow: 0 0 0.15rem rgba(0, 0, 0, 0.796);
 }
-.row {
+
+.service .span_e {
+  color: rgb(255, 0, 0);
+  margin-right: 3px;
+  font-size: 40px;
+}
+.service .span_Ticket {
+  color: white;
+}
+
+.service form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.service .binder {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   gap: 1rem;
-  background: 0 0 0.5rem rgba(0, 0, 0, 0.9);
-}
-.column {
-  text-align: center;
-  width: 30%;
+  margin: 0.5rem auto;
   /* background: red; */
-  margin: 1rem 0;
 }
-.card {
-  padding: 1.2rem;
-  margin: 0 auto;
-  height: 14rem;
-  width: 65%;
-  background: #7bdfa09e;
+
+fieldset.input {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  margin: 0 1rem;
+  background: rgba(83, 82, 82, 0.724);
+  box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5),
+    inset 0.2rem 0.2rem 0.8rem black;
+  border: 0.2rem solid rgb(243, 152, 68);
   border-radius: 0.4rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.9);
-  text-shadow: 0.1rem 0.1rem 0.21rem rgba(145, 136, 136, 0.5);
-  opacity: 2;
+}
+
+fieldset.input legend {
+  padding: 0 0.6rem;
+  margin-left: 0.5rem;
+  color: white;
+  opacity: 0.9;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+input {
+  all: unset;
+  color: white;
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+  font-size: 1.35rem;
+  text-align: center;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0.25rem 0rem;
+}
+
+input:active,
+input:focus {
+  /* box-shadow: inset -0.2rem -0.1rem 0 rgb(255, 196, 0),
+    inset 0.1rem 0.1rem 0.1rem rgb(255, 196, 0); */
+  outline: none !important;
+}
+
+input::placeholder {
+  font-weight: normal;
+  color: white;
+  opacity: 0.6;
+}
+.service ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  z-index: 1;
+  height: 21ch;
+}
+
+.service li {
+  background: rgba(0, 0, 0, 0.758);
+  text-shadow: 0 0 0.1rem rgba(255, 255, 255, 0.5);
+  border: 0.05rem groove white;
+  border-radius: 0.2rem;
+  padding: 0.6rem 0.9rem;
+  font-size: 1.35rem;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+.service li.active {
+  color: rgb(249, 180, 42);
+  text-shadow: 0 0 0.1rem #000000;
+  font-weight: bold;
+}
+
+.service li:hover {
+  color: rgb(249, 180, 42);
+  background: #272626c2;
+  font-weight: bold;
+  text-shadow: 0 0 0.1rem #000000;
+}
+
+.btnsBinder {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+a[href="./eticket"],
+a[href="./reserveBus"] {
+  display: inline-block;
+  width: 40%;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 0.3em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0.25em auto;
+  cursor: pointer;
+  border-radius: 0.35em;
+}
+.btn1 {
+  background: #0274c6;
+}
+.btn2 {
+  background: #4caf50;
+}
+
+.btn-search {
+  color: black;
+  font-size: 1.4rem;
+  font-weight: bold;
+  background: rgb(78, 238, 163);
+  border-radius: 0.35em;
+  width: 40%;
+}
+.btn:hover {
+  filter: drop-shadow(0 0 0.2rem black) hue-rotate(180deg);
+}
+
+/* @section Table of results */
+#searchResult {
+  margin-top: 2.2rem;
+}
+span.dd {
+  color: white;
+  text-overflow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+  background: rgba(5, 0, 0, 0.458);
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.1rem solid black;
+  border-radius: 0.4rem;
+}
+table {
+  margin-top: 2.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  /* margin: 0.4rem auto; */
+}
+tr.tr {
+  background: rgba(4, 0, 0, 0.444);
+  cursor: pointer;
+}
+tr.tr:hover {
+  background: rgba(171, 167, 167, 0.444);
+}
+
+th,
+td {
+  border: 0.1rem solid black;
+  padding: 0.2rem;
+  text-align: center;
+  font-size: 1rem;
+}
+th {
+  background: rgba(223, 169, 42, 0.433);
+  font-size: 1.2rem;
+}
+td a {
+  text-decoration: none;
+  color: white;
+}
+
+.output {
+  text-align: center;
+  margin: 1em auto;
+}
+.highlight {
+  background: #d4c7bba2;
+}
+.errorEach {
+  color: rgb(255, 93, 34);
+  text-shadow: 0 0 0.2rem rgb(0, 0, 0);
+  font-size: 1.2rem;
+  background: rgba(0, 0, 0, 0.511);
+  width: fit-content;
+  padding: 0.2rem;
+  margin: 0.9rem auto;
+}
+/* ----------------- Media Query ---------------*/
+@media screen and (max-width: 768px) {
+  .service {
+    width: 90%;
+  }
+}
+@media screen and (min-width: 750px) and (max-width: 1200px) {
+  .service {
+    width: 80%;
+  }
+}
+/* 
+.card {
+  padding: 5%;
+  margin: 5%;
+  height: 250px;
+  background: #8bc182;
+  border-radius: 5px;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   transition: 0.5s;
 }
 .card h3 {
-  width: 100%;
   color: #000000;
-  text-shadow: 0.1rem 0.1rem 0.2rem rgba(255, 255, 255, 0.5);
   font-size: larger;
   font-weight: 700;
-  margin: 0.4rem 0;
+  margin: 1em 0;
 }
 .card p {
-  width: 100%;
   color: #000000;
   font-size: medium;
 }
 .card .icon-wrapper {
   font-size: 30px;
   color: #ffffff;
-  background: #00000089;
+  background: #740e74;
   height: 2.5em;
   width: 2.5em;
   margin: auto;
@@ -71,10 +280,10 @@ h2 {
   transition: 0.5s;
 }
 .card:hover {
-  background: rgba(0, 0, 0, 0.545);
+  background: black;
 }
 .card:hover .icon-wrapper {
-  background: #ffffffe4;
+  background: #ffffff;
   color: #2c7bfe;
 }
 .card:hover h3 {
@@ -83,19 +292,4 @@ h2 {
 .card:hover p {
   color: #f0f0f0;
 }
-.column a:link {
-  text-decoration: none;
-}
-
-/* ----------------- Media Query ---------------*/
-/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .row {
-    display: flex;
-    flex-direction: column;
-  }
-  .column {
-    display: block;
-    width: 90%;
-  }
-}
+*/

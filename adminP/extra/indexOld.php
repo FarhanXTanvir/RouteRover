@@ -1,6 +1,8 @@
 <?php
+// require_once './validators/config.php'; 
 // Start the session
 session_start();
+// include './validators/check_cookie.php';
 if (isset($_SESSION["username"])) {
   if ($_SESSION['role'] === "user") {
     header('Location: user');
@@ -22,18 +24,10 @@ $uniqueValues = json_decode(file_get_contents('script/uniqueLocations.json'), tr
 $options = "";
 foreach ($uniqueValues as $location) {
   $options .= <<<FT
-  <li>$location</li>
-FT;
-}
-$allRoutes = json_decode(file_get_contents('script/routes.json'), true);
-$routes = "";
-foreach ($allRoutes as $key => $value) {
-  $routes .= <<<FT
-  <li>$key</li>
+  <option value="$location"></option>
 FT;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,19 +37,22 @@ FT;
   <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0"> -->
-  <meta name="description" content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta name="description"
+    content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta name="keywords" content="RouteRover, Route Finder, Transport, Bus, Route, Destination, Pricing">
   <meta name="author" content="RouteRover">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
   <meta name="bingbot" content="index, follow">
   <meta property="og:title" content="RouteRover">
-  <meta property="og:description" content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta property="og:description"
+    content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta property="og:image" content="routerover_icon.png">
   <meta property="og:url" content="https://routerover.free.nf/">
   <meta property="og:site_name" content="RouteRover">
   <meta name="twitter:title" content="RouteRover">
-  <meta name="twitter:description" content="RouteRover is a web application that helps you find the best route to your destination.">
+  <meta name="twitter:description"
+    content="RouteRover is a web application that helps you find the best route to your destination.">
   <meta name="twitter:image" content="routerover_icon.png">
   <!-- <meta name="twitter:card" content="summary_large_image"> -->
   <meta name="twitter:creator" content="@RouteRover">
@@ -72,6 +69,9 @@ FT;
   <!-- Style Sheet -->
   <link rel="stylesheet" href="css/style.css">
   <?php include 'src/inc.php'; ?>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -86,43 +86,25 @@ FT;
         তাহলে RouteRover আছে আপনার সেবায়!! শুধু একটি ক্লিকের মাধ্যমে সব কিছু আপনার হাতের মুঠোয়।
       </p>
       <h2>Route Finder</h2>
-      <form method="post" id="showFair">
-        <div class="input-binder">
-          <fieldset class="input">
-            <legend>যাত্রাস্থান</legend>
-            <input class="input-field" name="departure" list="departure" aria-label="departure" placeholder="ষোলশহর" autocomplete="off">
-            <ul id="departure">
-              <!-- options -->
-              <?php echo $options ?>
-            </ul>
-          </fieldset>
-          <fieldset class="input">
-            <legend>গন্তব্যস্থল</legend>
-            <input class="input-field" name="destination" list="destination" aria-label="destination" placeholder="বহদ্দারহাট" autocomplete="off">
-            <ul id="destination">
-              <!-- options -->
-              <?php echo $options ?>
-            </ul>
-          </fieldset>
-        </div>
-        <button class="btn btn-search" type="submit" value="search" name="search">Search</button>
-      </form>
-      <div id="showFairResult">
-      </div>
-      <form method="post" id="showRoute">
-        <fieldset class="input">
-          <input class="input-field" name="routes" list="routes" aria-label="routes" placeholder="রুট নং" autocomplete="off">
-          <ul id="routes">
+      <form method="post">
+        <div class="input">
+          <input class="input-field" name="departure" list="departure" aria-label="departure" placeholder="যাত্রাস্থান">
+          <datalist id="departure">
             <!-- options -->
-            <?php echo $routes ?>
-          </ul>
-        </fieldset>
-        <button class="showRoute" type="submit" value="search" name="searchRoute">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+            <?php echo $options ?>
+          </datalist>
+        </div>
+        <div class="input">
+          <input class="input-field" name="destination" list="destination" aria-label="destination"
+            placeholder="গন্তব্যস্থল">
+          <datalist id="destination">
+            <!-- options -->
+            <?php echo $options ?>
+          </datalist>
+        </div>
+        <button type="submit" value="search" name="search">Search</button>
       </form>
-      <div id="showRouteResult">
-      </div>
+      <?php include './search.php' ?>
     </div>
 
     <div id="contact" class="contact">
@@ -133,17 +115,17 @@ FT;
 
       </p>
       <form method="post" id="contactForm">
-        <fieldset class="input">
-          <legend>Email</legend>
+        <div class="input">
+          <label for="email">Email: </label>
           <input type="text" placeholder="yourname@email.com" id="email" name="email" autocomplete="email">
-        </fieldset>
-        <fieldset class="input">
-          <legend>Message</legend>
-          <textarea placeholder="Type here..." id="message" name="message"></textarea>
-        </fieldset>
-        <?php require_once './contact.php'; ?>
-        <button class="btn btn-contact" type="submit" value="contact" name="contact">Submit</button>
+        </div>
+        <div class="input">
+          <label for="message"> Message: </label>
+          <textarea placeholder="Type here..." id="message" name="message" cols="25" rows="10"></textarea>
+        </div>
+        <button type="submit" value="contact" name="contact">Submit</button>
       </form>
+      <?php include './contact.php'; ?>
     </div>
     </div>
   </section>

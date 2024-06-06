@@ -3,14 +3,11 @@
 const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_ENTER = 13;
-const KEY_BACKSPACE = 8;
 
 const departureInput = $('input[name="departure"]');
 const departureList = $("#departure");
 const destinationInput = $('input[name="destination"]');
 const destinationList = $("#destination");
-const routeInput = $('input[name="routes"]');
-const routeInputList = $("#routes");
 
 // Timeout ID for hiding lists
 let timeoutId;
@@ -18,17 +15,14 @@ let timeoutId;
 // Add event listeners for input fields
 addInputEventListeners(departureInput, departureList);
 addInputEventListeners(destinationInput, destinationList);
-addInputEventListeners(routeInput, routeInputList);
 
 // Add click event listeners to list items
 addListItemClickListeners(departureList, departureInput);
 addListItemClickListeners(destinationList, destinationInput);
-addListItemClickListeners(routeInputList, routeInput);
 
 // Add keydown event listeners for navigating lists
 addListNavigationKeydownListeners(departureInput, departureList);
 addListNavigationKeydownListeners(destinationInput, destinationList);
-addListNavigationKeydownListeners(routeInput, routeInputList);
 
 // Prevent form submission on Enter key press
 preventFormSubmissionOnEnter();
@@ -51,7 +45,7 @@ function addInputEventListeners(input, list) {
   input.on("blur", () => scheduleHideList(list));
 
   input.on("keydown", function (e) {
-    if (e.keyCode === KEY_BACKSPACE) {
+    if (e.keyCode === 8) {
       // 8 is the key code for the backspace key
       showList(list);
     }
@@ -176,65 +170,56 @@ function selectActiveItem(e, visibleItems, input, list) {
 }
 
 function preventFormSubmissionOnEnter() {
-  $("form").on("keydown", function (e) {
+  const form = $("form");
+
+  form.on("keydown", (e) => {
     if (e.keyCode === KEY_ENTER) {
-      $(this)
-        .find("input")
-        .each(function () {
-          if ($(this).val() === "") {
-            e.preventDefault();
-            return false;
-          }
-        });
+      if (departureInput.val() === "" || destinationInput.val() === "") {
+        e.preventDefault();
+      }
     }
   });
 }
 
 // ---------- End of Dropdown list script ----------
-$("form").on("submit", function (e) {
-  e.preventDefault();
-});
+
 // route-finder form prevent default
-$("#showFair").on("submit", function (e) {
+$("#route-finder").on("submit", function (e) {
+  e.preventDefault();
   const departureInput = $('input[name="departure"]');
   const departureList = $("#departure");
-  const departure = departureInput.val().trim();
-  const departureInputFieldset = departureInput.parent();
-
   const destinationInput = $('input[name="destination"]');
   const destinationList = $("#destination");
-  const destination = destinationInput.val().trim();
-  const destinationInputFieldset = destinationInput.parent();
-
-  const inputBinder = $(".input-binder");
-  const formParent = $(this).parent();
+  const departure = departureInput.val();
+  const destination = destinationInput.val();
+  const routeFinder = $("#route-finder");
 
   // if departureInput parent has error message, remove it
-  departureInputFieldset.css("border", "0.2rem solid orange");
-  destinationInputFieldset.css("border", "0.2rem solid orange");
-  if (formParent.find(".errorEach").length) {
-    formParent.find(".errorEach").remove();
+  departureInput.css("border", "0.2rem solid orange");
+  destinationInput.css("border", "0.2rem solid orange");
+  if (routeFinder.find(".errorEach").length) {
+    routeFinder.find(".errorEach").remove();
   }
 
   if (!destination || !departure) {
     if (!departure && !destination) {
       const error = `<p class="errorEach" >যাত্রাস্থান ও গন্তব্যস্থল পূরণ করুন</p>`;
-      departureInputFieldset.css("border", "0.2rem solid red");
-      destinationInputFieldset.css("border", "0.2rem solid red");
+      departureInput.css("border", "0.2rem solid red");
+      destinationInput.css("border", "0.2rem solid red");
       // append error message after destination input
-      inputBinder.after(error);
+      destinationInput.parent().after(error);
       return;
     } else if (!departure) {
       const error = `<p class="errorEach" >যাত্রাস্থান পূরণ করুন</p>`;
-      departureInputFieldset.css("border", "0.2rem solid red");
+      departureInput.css("border", "0.2rem solid red");
       // append error message after departure input
-      inputBinder.after(error);
+      destinationInput.parent().after(error);
       return;
     } else if (!destination) {
       const error = `<p class="errorEach" >গন্তব্যস্থল পূরণ করুন</p>`;
-      destinationInputFieldset.css("border", "0.2rem solid red");
+      destinationInput.css("border", "0.2rem solid red");
       // append error message after destination input
-      inputBinder.after(error);
+      destinationInput.parent().after(error);
       return;
     } else {
       alert("Route found!");
@@ -242,10 +227,10 @@ $("#showFair").on("submit", function (e) {
   } else {
     if (departure === destination) {
       const error = `<p class="errorEach" >দুঃখিত! যাত্রাস্থল ও গন্তব্যস্থল একই হতে পারেনা।</p>`;
-      departureInputFieldset.css("border", "0.2rem solid red");
-      destinationInputFieldset.css("border", "0.2rem solid red");
+      departureInput.css("border", "0.2rem solid red");
+      destinationInput.css("border", "0.2rem solid red");
       // append error message after destination input
-      inputBinder.after(error);
+      destinationInput.parent().after(error);
       return;
     } else {
       // check if departure and destination value in the lists
@@ -267,15 +252,15 @@ $("#showFair").on("submit", function (e) {
       }
       if (!departureFound) {
         const error = `<p class="errorEach" >আপনার যাত্রাস্থান পাওয়া যায়নি!</p>`;
-        departureInputFieldset.css("border", "0.2rem solid red");
+        departureInput.css("border", "0.2rem solid red");
         // append error message after departure input
-        inputBinder.after(error);
+        destinationInput.parent().after(error);
       }
       if (!destinationFound) {
         const error = `<p class="errorEach" >আপনার গন্তব্যস্থল পাওয়া যায়নি!</p>`;
-        destinationInputFieldset.css("border", "0.2rem solid red");
+        destinationInput.css("border", "0.2rem solid red");
         // append error message after destination input
-        inputBinder.after(error);
+        destinationInput.parent().after(error);
       }
       if (departureFound && destinationFound) {
         const searchData = {
@@ -293,7 +278,7 @@ $("#showFair").on("submit", function (e) {
             // This function will be called when the request is successful
             console.log("Search Request Submitted Successfully:");
             // insert the response into the #searchResult div
-            document.getElementById("showFairResult").innerHTML = response;
+            document.getElementById("searchResult").innerHTML = response;
           },
           error: function (jqXHR, textStatus, errorThrown) {
             // This function will be called if the request fails
@@ -302,120 +287,5 @@ $("#showFair").on("submit", function (e) {
         });
       }
     }
-  }
-});
-$("#route-finder #showRoute").on("submit", function (e) {
-  const routeInput = $('input[name="routes"]');
-  const routeInputList = $("#routes");
-  const routeInputFieldset = routeInput.parent();
-  const form = $("#route-finder #showRoute");
-  const routeNo = routeInput.val().trim();
-  const formParent = $(this).parent();
-
-  // if departureInput parent has error message, remove it
-  routeInputFieldset.css("border", "0.2rem solid orange");
-  if (formParent.find(".errorEach").length) {
-    formParent.find(".errorEach").remove();
-  }
-
-  if (!routeNo) {
-    const error = `<p class="errorEach" >রুট নং পূরণ করুন</p>`;
-    routeInputFieldset.css("border", "0.2rem solid red");
-    // append error message after destination input
-    form.append(error);
-    return;
-  } else {
-    // check if departure and destination value in the lists
-    const routeInputListItems = routeInputList.find("li");
-    let routeFound = false;
-    for (let i = 0; i < routeInputListItems.length; i++) {
-      if (routeInputListItems[i].textContent === routeNo) {
-        routeFound = true;
-        break;
-      }
-    }
-    if (!routeFound) {
-      const error = `<p class="errorEach" >আপনার রুট পাওয়া যায়নি!</p>`;
-      routeInputFieldset.css("border", "0.2rem solid red");
-      // append error message after departure input
-      form.append(error);
-    }
-    if (routeFound) {
-      const searchRoute = {
-        searchRoute: true,
-        routeNo: routeNo,
-      };
-      $.ajax({
-        url: "./search.php",
-        method: "POST",
-        data: {
-          searchRoute: JSON.stringify(searchRoute), // Convert the allRoutes object to a JSON string
-        },
-        success: function (response) {
-          // This function will be called when the request is successful
-          console.log("Search Route Request Submitted Successfully:");
-          // insert the response into the #searchResult div
-          document.getElementById("showRouteResult").innerHTML = response;
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          // This function will be called if the request fails
-          console.error(textStatus, errorThrown);
-        },
-      });
-    }
-  }
-});
-
-$("#contactForm").on("submit", function (e) {
-  const emailInput = $('input[name="email"]');
-  const email = emailInput.val().trim();
-  const emailInputFieldset = emailInput.parent();
-  const messageInput = $('textarea[name="message"]');
-  const message = messageInput.val().trim();
-  const messageInputFieldset = messageInput.parent();
-  const form = $("#contactForm");
-  const formParent = $(this).parent();
-
-  // if departureInput parent has error message, remove it
-  emailInputFieldset.css("border", "0.2rem solid orange");
-  if (formParent.find(".errorEach").length) {
-    formParent.find(".errorEach").remove();
-  }
-
-  if (!email) {
-    const error = `<p class="errorEach" >ইমেইল প্রদান করুন</p>`;
-    emailInputFieldset.css("border", "0.2rem solid red");
-    // append error message after destination input
-    emailInputFieldset.after(error);
-  }
-  if (!message) {
-    const error = `<p class="errorEach" >মেসেজ প্রদান করুন</p>`;
-    messageInputFieldset.css("border", "0.2rem solid red");
-    // append error message after destination input
-    messageInputFieldset.after(error);
-  }
-  if (email && message) {
-    const sendMessage = {
-      sendMessage: true,
-      email: email,
-      message: message,
-    };
-    $.ajax({
-      url: "./contact.php",
-      method: "POST",
-      data: {
-        sendMessage: JSON.stringify(sendMessage),
-      },
-      success: function (response) {
-        // This function will be called when the request is successful
-        console.log("Message Sent Successfully:");
-        // insert the response into the #searchResult div
-        form.append(response);
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        // This function will be called if the request fails
-        console.error(textStatus, errorThrown);
-      },
-    });
   }
 });

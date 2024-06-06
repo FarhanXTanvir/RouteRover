@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "super",
     "super.php",
   ];
+  // const services = ["eticket", "reserveBus", "index#route-finder"];
 
   endings.forEach((ending) => {
     if (currentUrl.endsWith(ending)) {
@@ -24,10 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
       currentUrl = currentUrl.replace(ending + "#contact", "index#contact");
     }
   });
+
   if (currentUrl.endsWith("/")) {
     currentUrl += "index";
   }
-
   // Remove 'active' class from all menu items
   menuItems.forEach((menuItem) => {
     menuItem.classList.remove("active");
@@ -70,7 +71,7 @@ function toggleNav(matches) {
   }
 }
 
-const mediaQuery = window.matchMedia("(max-width: 750px)");
+const mediaQuery = window.matchMedia("(max-width: 870px)");
 mediaQuery.addEventListener("change", (e) => toggleNav(e.matches));
 toggleNav(mediaQuery.matches);
 
@@ -91,6 +92,19 @@ window.addEventListener("resize", function () {
 document.addEventListener("DOMContentLoaded", () => {
   toggleNav();
 }); */
+
+// h1 Dropdown menu
+const dropdown = document.querySelector(".dropdown");
+const dropdownHeader = dropdown.querySelector(".dropdown-header");
+const caret = dropdown.querySelector(".caret");
+const dropdownList = dropdown.querySelector(".dropdown-list");
+const options = dropdown.querySelectorAll(".dropdownList li");
+// const selected = dropdown.querySelector(".selected");
+dropdownHeader.addEventListener("click", () => {
+  // select.classList.toggle("select-clicked");
+  caret.classList.toggle("caret-rotate");
+  dropdownList.classList.toggle("hidden");
+});
 
 // h1 || @section Window Scroll Event |
 // Back to top button

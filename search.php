@@ -1,4 +1,16 @@
 <?php
+function calculateStudentFare($fareValue)
+{
+  $find = array('০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯');
+  $replace = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+  $fareValue = str_replace($find, $replace, $fareValue);
+  $fareValue = (int) $fareValue;
+  $studentFare = $fareValue * 0.6;
+  $studentFare = str_replace($replace, $find, $studentFare);
+
+  return $studentFare;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['searchData'])) {
     $searchData = json_decode($_POST["searchData"], true);
@@ -42,15 +54,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
       $searchResult = <<<FT
-            <span class="dd"> $departure => $destination </span>
+            <span class="dd"> $departure <i class="fa-solid fa-right-long"></i> $destination </span>
             <table class="table">
-            <tr><th>রুট নং</th><th>ভাড়া</th></tr> 
+            <tr><th>রুট নং</th><th>ভাড়া</th><th>শিক্ষার্থীর ভাড়া</th></tr> 
           FT;
       foreach ($routeNo as $route) {
         $fareValue = isset($fare["রুট" . $route]) ? $fare["রুট" . $route] : 'N/A';
-        $searchResult .= "<tr class='tr'><td><a href='#'>" . $route . "</a></td><td>" . $fareValue . " টাকা </td></tr>";
+        // 
+        $studentFare = calculateStudentFare($fareValue);
+        $searchResult .= "<tr class='tr'><td><a href='#'>" . $route . "</a></td><td>" . $fareValue . " টাকা </td><td>" . $studentFare . " টাকা </td></tr>";
       }
       $searchResult .= "</table>";
+      $searchResult .= "
+      <div class='btnsBinder'>
+        <a href='./eticket'><button class='btn btn1'>Book a Ticket</button></a>
+        <a href='./reserveBus'><button class='btn btn2'>Reserve a Local Trip</button></a>
+      </div>";
     } else {
       echo "
       <div class='error'>
@@ -61,6 +80,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Display the search results in a table
+    if ($searchResult !== " ") {
+      echo $searchResult;
+    }
+  } else if (isset($_POST['searchRoute'])) {
+    $searchRoute = json_decode($_POST["searchRoute"], true);
+    $searchResult = " ";
+    // Get the routeNo from the form data
+    $routeNo = trim($searchRoute['routeNo']);
+    // Find the route numbers for the departure and destination
+    $jsonRoutes = json_decode(file_get_contents('script/routes.json'), true);
+    $route = $jsonRoutes[$routeNo];
+    $searchResult .= "<div class='locationContainer'>";
+    foreach ($route as $location) {
+      $searchResult .= "<span class='location'>" . $location . "</span>";
+    }
+    $searchResult .= "</div>";
     if ($searchResult !== " ") {
       echo $searchResult;
     }
